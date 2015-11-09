@@ -1,14 +1,8 @@
 views and routes are bootstrap from microsoft azure webapp flask.
 
-Tutorial
-------------
-http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
-
 
 Installation
 ------------
-https://docs.google.com/document/d/1ZJKfaVlZyUhG5wEuxDWRR2Y5-lWhjPNvSrp9z2cknvw/edit
-
 
 The tutorial referenced above explains how to setup a virtual environment with all the required modules.
 
