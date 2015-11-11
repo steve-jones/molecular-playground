@@ -1,0 +1,12 @@
+Installation
+------------
+
+Before you can run this test you must donwload python 2.7,
+postgres 9.3, and psycopg2 from initd.org/psycopg/download/.
+This library is what allows us to communicate to postgres
+through python.
+
+Tutorial
+------------
+The psycopg2 library will allow you to connect to a database
+and execute postgres commands such as create, insert, and delete from a table to name a few. In test.py I open a connection to the postgres db called test and then i call a function to create a table if it doesn't already exist, insert data into that table and print the current values of that table. 
