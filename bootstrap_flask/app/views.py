@@ -41,7 +41,8 @@ def about():
 def test():
     """Renders the about page."""
     return render_template(
-        'bootstrap.html'
+        'bootstrap.html',
+        userdata= {'hey': 10, "yo":"sdgdsgdsgdsg"}
     )
 
 @app.route('/test1')
@@ -49,4 +50,8 @@ def test1():
     """Renders the about page."""
     return "hello eveyone"
 
+@app.route('/p')
+def p():
+    """Renders the about page."""
+    return "hey"
 
