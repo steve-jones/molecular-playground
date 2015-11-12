@@ -1,6 +1,6 @@
 So to install this, you should first install the Mono runtime: http://www.mono-project.com/download/
 
-Then also install MonoDevlop (XarminStudio): http://www.monodevelop.com/download/
+Then also install MonoDevlop (XamarinStudio): http://www.monodevelop.com/download/
 
 You will also need Postgres installed and have a database set up. I named my database test with the username jim and password test2. I have a single table called Table1 in it with a primary key of type int called ID, a Text field called NAME, and an int field called AGE. The Postgres commands should be something like:
 CREATE DATABASE test;

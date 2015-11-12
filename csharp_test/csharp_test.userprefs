@@ -2,9 +2,9 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="csharp_test/Default.aspx">
     <Files>
-      <File FileName="csharp_test/Default.aspx" Line="9" Column="9" />
-      <File FileName="csharp_test/Default.aspx.cs" Line="13" Column="28" />
-      <File FileName="csharp_test/DatabaseReader.cs" Line="12" Column="16" />
+      <File FileName="csharp_test/Default.aspx" Line="11" Column="1" />
+      <File FileName="csharp_test/Default.aspx.cs" Line="1" Column="1" />
+      <File FileName="csharp_test/DatabaseReader.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
