@@ -1,9 +1,9 @@
 ﻿<Properties StartupItem="csharp_test/csharp_test.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="csharp_test/DatabaseReader.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="csharp_test/Default.aspx">
     <Files>
-      <File FileName="csharp_test/Default.aspx" Line="7" Column="9" />
-      <File FileName="csharp_test/Default.aspx.cs" Line="12" Column="4" />
+      <File FileName="csharp_test/Default.aspx" Line="9" Column="9" />
+      <File FileName="csharp_test/Default.aspx.cs" Line="13" Column="28" />
       <File FileName="csharp_test/DatabaseReader.cs" Line="12" Column="16" />
     </Files>
   </MonoDevelop.Ide.Workbench>

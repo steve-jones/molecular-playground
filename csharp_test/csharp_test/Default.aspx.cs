@@ -10,8 +10,14 @@ namespace csharp_test
 	{
 		public void button1Clicked(object sender, EventArgs args)
 		{
-			label1.Text = DatabaseReader.ExecuteQuery("SELECT NAME FROM Table1");
-			button1.Text = "Button clicked";
+			if (textBox1.Text == "")
+			{
+				label1.Text = DatabaseReader.ExecuteQuery("SELECT NAME FROM Table1");
+			}
+			else
+			{
+				label1.Text = DatabaseReader.ExecuteQuery(textBox1.Text);
+			}
 		}
 	}
 }

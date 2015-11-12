@@ -15,6 +15,10 @@ namespace csharp_test {
 		
 		protected System.Web.UI.HtmlControls.HtmlForm form1;
 		
+		protected System.Web.UI.WebControls.Label instructions;
+		
+		protected System.Web.UI.WebControls.TextBox textBox1;
+		
 		protected System.Web.UI.WebControls.Button button1;
 		
 		protected System.Web.UI.WebControls.Label label1;
