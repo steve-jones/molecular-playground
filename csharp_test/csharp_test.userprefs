@@ -1,0 +1,17 @@
+﻿<Properties StartupItem="csharp_test/csharp_test.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="csharp_test/About.aspx.cs">
+    <Files>
+      <File FileName="csharp_test/Default.aspx" Line="5" Column="113" />
+      <File FileName="csharp_test/Site.master" Line="40" Column="60" />
+      <File FileName="csharp_test/Site.master.cs" Line="1" Column="1" />
+      <File FileName="csharp_test/Default.aspx.cs" Line="14" Column="15" />
+      <File FileName="csharp_test/About.aspx" Line="4" Column="34" />
+      <File FileName="csharp_test/About.aspx.cs" Line="8" Column="2" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
