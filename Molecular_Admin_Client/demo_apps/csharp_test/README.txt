@@ -17,4 +17,4 @@ And that should do it.
 
 
 
-To run the site, open the solution (.sln) file in Xarmin studio, open up the Default.aspx document in the editor and press the start button. It should launch the page in your default browser and you should be good to go.
+To run the site, open the solution (.sln) file in Xamarin Studio, open up the Default.aspx document in the editor and press the start button. It should launch the page in your default browser and you should be good to go.
