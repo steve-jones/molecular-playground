@@ -1,5 +1,5 @@
 ####gathered some research on frameworks online in this summary
-google trend : https://www.google.com/trends/explore#cat=0-5&q=%2Fm%2F06y_qx%2C%20%2Fm%2F0dgs72v%2C%20%2Fm%2F011yn%2C%20%2Fm%2F0bbxf89%2C%20loopback.js&date=today%2012-m&cmpt=q&tz=Etc%2FGMT%2B5
+google trend : https://www.google.com/trends/explore#date=today+12-m&cmpt=q&q=/m/06y_qx,+/m/0dgs72v,+/m/011yn,+/m/0bbxf89,+loopback.js&cat=0-5&geo=US
 
 general usage: https://thomasbandt.com/is-nodejs-better-than-aspnet
 codes compare: http://www.haneycodes.net/to-node-js-or-not-to-node-js/
