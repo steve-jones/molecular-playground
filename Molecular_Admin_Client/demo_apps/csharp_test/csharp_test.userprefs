@@ -1,10 +1,11 @@
 ﻿<Properties StartupItem="csharp_test/csharp_test.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="csharp_test/Default.aspx">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="chromium-browser" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="csharp_test/test.aspx">
     <Files>
-      <File FileName="csharp_test/Default.aspx" Line="11" Column="1" />
-      <File FileName="csharp_test/Default.aspx.cs" Line="1" Column="1" />
-      <File FileName="csharp_test/DatabaseReader.cs" Line="1" Column="1" />
+      <File FileName="csharp_test/Default.aspx" Line="4" Column="26" />
+      <File FileName="csharp_test/Default.aspx.cs" Line="5" Column="14" />
+      <File FileName="csharp_test/About.aspx" Line="9" Column="1" />
+      <File FileName="csharp_test/test.aspx" Line="1" Column="54" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

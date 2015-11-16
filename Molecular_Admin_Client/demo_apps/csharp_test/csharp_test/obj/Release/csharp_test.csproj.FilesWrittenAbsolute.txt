@@ -1,0 +1,8 @@
+/home/student/cs320/Molecular-Playground/Molecular_Admin_Client/demo_apps/csharp_test/csharp_test/obj/Release/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/home/student/cs320/Molecular-Playground/Molecular_Admin_Client/demo_apps/csharp_test/csharp_test/bin/csharp_test.dll.mdb
+/home/student/cs320/Molecular-Playground/Molecular_Admin_Client/demo_apps/csharp_test/csharp_test/bin/csharp_test.dll
+/home/student/cs320/Molecular-Playground/Molecular_Admin_Client/demo_apps/csharp_test/csharp_test/obj/Release/csharp_test.dll
+/home/student/cs320/Molecular-Playground/Molecular_Admin_Client/demo_apps/csharp_test/csharp_test/obj/Release/csharp_test.dll.mdb
+/home/student/cs320/Molecular-Playground/Molecular_Admin_Client/demo_apps/csharp_test/csharp_test/bin/EntityFramework.dll
+/home/student/cs320/Molecular-Playground/Molecular_Admin_Client/demo_apps/csharp_test/csharp_test/bin/EntityFramework.SqlServer.dll
+/home/student/cs320/Molecular-Playground/Molecular_Admin_Client/demo_apps/csharp_test/csharp_test/bin/Npgsql.dll
