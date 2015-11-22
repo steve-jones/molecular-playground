@@ -1,0 +1,52 @@
+{
+    "name": "Software Systems",
+    "children": [{
+        "name": "121",
+        "children": [{
+            "name": "187",
+            "children": [{
+                "name": "220",
+                "children": [{
+                    "name": "320"
+                    }]
+                },{
+                "name": "230",
+                "children": [{
+                    "name": "377"
+                    }]
+                },{
+                "name": "240"
+                },{
+                "name": "250",
+                "children": [{
+                    "name":"311",
+                    "children": [{
+                        "name": "445"
+                        }]
+                    }]
+            	},{
+            	"name": "electives",
+                "children": [{
+                	"name": ">300"
+                	},{
+                	"name": ">300"
+                }]
+            },{
+            	"name": "select 2",
+            	"children": [{
+            		"name":"325"
+            		},{
+            		"name":"453"
+            		},{
+            		"name":"460"
+            		},{
+            		"name":"466"
+            		},{
+            		"name":"535"
+            		},{
+            		"name":"677"
+            		}]
+            	}]
+        }]
+    }]
+}

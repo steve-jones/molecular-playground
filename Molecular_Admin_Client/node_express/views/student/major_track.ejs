@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <link type="text/css" rel="stylesheet" href="../stylesheets/d3/style.css"/>
+    <script type="text/javascript" src="../javascripts/d3/d3.js"></script>
+    <script type="text/javascript" src="../javascripts/d3/d3.layout.js"></script>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/menubar_style.css' />
+    <link rel="import" href='../header.html'>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="../javascripts/content_fadein.js"></script>
+    <style type="text/css">
+
+.node circle {
+  cursor: pointer;
+  fill: #fff;
+  stroke: royalblue;
+  stroke-width: 1.6px;
+}
+
+.node text {
+  cursor: pointer;
+  stroke: lightgreen;
+  stroke-width: 1px;
+  font-size: 12px;
+  font-family: "ubuntu";
+}
+
+// how to use jquery to add a underline?
+.node text.attr("text-anchor",end){
+	text-decoration:underline);
+}
+
+
+path.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 5px;
+}
+    </style>
+  </head>
+
+
+
+
+  <body>
+
+<div id="header"></div>
+  <script>
+	var link = document.querySelector('link[rel="import"]');
+    var content = link.import;
+    // Grab DOM from warning.html's document.
+    var el = content.querySelector('#headerbanner');
+    document.body.appendChild(el.cloneNode(true));
+	
+	var el2 = content.querySelector('#student_menu');
+  	document.body.appendChild(el2.cloneNode(true));
+  </script>
+  
+
+<div id ="content" class = "contentview">
+	<div id="hintm">
+	<h1>CS Track Requirements</h1>
+	Hi <%= users.id %> from <%= users.schoolorg %> in <%= users.trackid %> track!
+
+	<br>We will in the future display based on your major.
+	<br>
+	<br>You may use the dropdown menu below to see other options
+	<br>
+
+	<select id ="choice">
+	 <option value="gencs">General CS</option>
+	 <option value="softeng">Software Engineering</option>
+	 <option value="robotics">Robotics</option>
+	 <option value="ai">AI</option>
+	 <option value="comparch">Computer Architecture</option>
+	 <option value="network">Networking</option>
+	 <option value="softsys">Software Systems</option>
+	 <option value="comp">Compilers</option>
+	 <option value="throfcomp">Theory of Computation</option>
+	 <option value="sec">Security</option>
+    	 <option value="data">Data Mining</option>
+       </select>
+       <br>
+</div>
+
+
+<div id="body">
+
+    <script type="text/javascript">
+//select views
+var temp = '<%= users.trackid %>';
+var line;
+console.log(temp);
+if(temp == 'Security &amp; Privacy'){
+  $("select").val("sec");
+  line = "../uploads/security.json";
+}
+else if(temp == 'Software Engineering'){
+  $("select").val("softeng");
+  line = "../uploads/softeng.json";
+}
+else if(temp == 'Artificial Intelligence'){
+  $("select").val("ai");
+  line = "../uploads/ai.json";
+}
+else if(temp == 'General Computer Science'){
+  $("select").val("gencs");
+  line = "../uploads/gencs.json";
+}
+else if(temp == 'Robotics, Vision, and Graphics'){
+  $("select").val("robotics");
+  line = "../uploads/robotics.json";
+}
+else if(temp == 'Computer Architecture'){
+  $("select").val("comparch");
+  line = "../uploads/comparch.json";
+}
+else if(temp == 'Networking'){
+  $("select").val("network");
+  line = "../uploads/network.json";
+}
+else if(temp == 'Software Systems'){
+  $("select").val("softsys");
+  line = "../uploads/softsys.json";
+}
+else if(temp == 'Programming Languages &amp; Compilers'){
+  $("select").val("comp");
+  line = "../uploads/compiler.json";
+}
+else if(temp == 'Theory of Computation'){
+  $("select").val("throfcomp");
+  line = "../uploads/computation.json";
+}
+else{
+  $("select").val("data");
+  line = "../uploads/search.json";
+}
+
+  //need to load correct value for person on load
+
+$("select").change(function(){
+  if($("select").val() === "softeng")
+    line = "../uploads/softeng.json";
+  else if($("select").val() === "ai")
+    line = "../uploads/ai.json";
+  else if($("select").val() === "robotics")
+    line = "../uploads/robotics.json";
+  else if($("select").val() === "comparch")
+    line = "../uploads/comparch.json";
+  else if($("select").val() === "network")
+    line = "../uploads/network.json";
+  else if($("select").val() === "softsys")
+    line = "../uploads/softsys.json";
+  else if($("select").val() === "comp")
+    line = "../uploads/compiler.json";
+  else if($("select").val() === "throfcomp")
+    line = "../uploads/computation.json";
+  else if($("select").val() === "sec")
+    line = "../uploads/security.json";
+  else if($("select").val() === "data")
+    line = "../uploads/search.json";
+  else
+    line = "../uploads/gencs.json";
+
+d3.json(line, function(json) {
+  root = json;
+  root.x0 = h / 2;
+  root.y0 = 0;
+
+  function toggleAll(d) {
+    if (d.children) {
+      d.children.forEach(toggleAll);
+      toggle(d);
+    }
+  }
+  
+  update(root);
+});
+});
+
+
+// declear variables
+var m = [0, 0, 50, 100],
+    w = 1000 - m[1] - m[3],
+    h = 400 - m[0] - m[2],
+    i = 0,
+    root;
+
+var tree = d3.layout.tree()
+    .size([h, w]);
+
+var diagonal = d3.svg.diagonal()
+    .projection(function(d) { return [d.y, d.x]; });
+
+var vis = d3.select("#body").append("svg:svg")
+    .attr("width", w + m[1] + m[3])
+    .attr("height", h + m[0] + m[2])
+  .append("svg:g")
+    .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+
+
+
+//initialize tree
+d3.json(line, function(json) {
+  root = json;
+  root.x0 = h / 2;
+  root.y0 = 0;
+
+  function toggleAll(d) {
+    if (d.children) {
+      d.children.forEach(toggleAll);
+      toggle(d);
+    }
+  }
+
+  // Initialize the display to show a few nodes.
+  //
+  root.children.forEach(toggleAll);
+	toggle(root.children[0]);
+	toggle(root.children[0].children[0]);
+	
+update(root);
+});
+
+
+function update(source) {
+  var duration = d3.event && d3.event.altKey ? 5000 : 500;
+
+  // Compute the new tree layout.
+  var nodes = tree.nodes(root).reverse();
+
+  // Normalize for fixed-depth.
+  nodes.forEach(function(d) { d.y = d.depth * 120; }); // << change spacing
+
+  // Update the nodes…
+  var node = vis.selectAll("g.node")
+      .data(nodes, function(d) { return d.id || (d.id = ++i); });
+
+
+
+  // Enter any new nodes at the parent's previous position.
+  var nodeEnter = node.enter().append("svg:g")
+      .attr("class", "node")
+      .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
+      .on("click", function(d) { toggle(d); update(d); });
+
+
+
+  nodeEnter.append("svg:circle")
+      .attr("r", 1e-6)
+      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+
+
+  nodeEnter.append("svg:text")
+      .attr("x", function(d) { return d.children ? 0 : 10; })
+      .attr("y", function(d) { return d.children ? -15 : 0; })
+      .attr("dy", ".35em")
+      .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
+      .text(function(d) { return d.name; })
+      .style("fill-opacity", 1e-6);
+
+
+
+  // Transition nodes to their new position.
+  var nodeUpdate = node.transition()
+      .duration(duration)
+      .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+
+  nodeUpdate.select("circle")
+      .attr("r", 4.5)
+      .style("fill", function(d) { return d._children ? "yellow" : "#fff"; });
+
+  nodeUpdate.select("text")
+      .attr("x", function(d) { return d.children ? 0 : 10; })
+      .attr("y", function(d) { return d.children ? -15 : 0; })
+      .style("fill-opacity", 1)
+      .attr("text-anchor", function(d) { return d.children ? "end" : "start"; });
+
+  // Transition exiting nodes to the parent's new position.
+  var nodeExit = node.exit().transition()
+      .duration(duration)
+      .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
+      .remove();
+
+  nodeExit.select("circle")
+      .attr("r", 1e-6);
+
+  nodeExit.select("text")
+      .style("fill-opacity", 1e-6);
+
+  // Update the links…
+  var link = vis.selectAll("path.link")
+      .data(tree.links(nodes), function(d) { return d.target.id; });
+
+  // Enter any new links at the parent's previous position.
+  link.enter().insert("svg:path", "g")
+      .attr("class", "link")
+      .attr("d", function(d) {
+        var o = {x: source.x0, y: source.y0};
+        return diagonal({source: o, target: o});
+      })
+    .transition()
+      .duration(duration)
+      .attr("d", diagonal);
+
+  // Transition links to their new position.
+  link.transition()
+      .duration(duration)
+      .attr("d", diagonal);
+
+  // Transition exiting nodes to the parent's new position.
+  link.exit().transition()
+      .duration(duration)
+      .attr("d", function(d) {
+        var o = {x: source.x, y: source.y};
+        return diagonal({source: o, target: o});
+      })
+      .remove();
+
+  // Stash the old positions for transition.
+	  nodes.forEach(function(d) {
+	    d.x0 = d.x;
+	    d.y0 = d.y;
+	  });
+	}
+	
+	// Toggle children.
+	function toggle(d) {
+	  if (d.children) {
+	    d._children = d.children;
+	    d.children = null;
+	  } else {
+	    d.children = d._children;
+	    d._children = null;
+	  }
+	}
+
+    </script>
+</div>
+</div>
+
+
+  </body>
+</html>

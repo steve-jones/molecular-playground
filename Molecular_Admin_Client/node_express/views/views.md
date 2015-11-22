@@ -1,0 +1,12 @@
+#List of views
+- Login page
+- Student main page
+- Admin main page
+- Admin student info page
+- Student course list page (displays courses, when they are offered, etc)
+	- course description lightbox
+- Gen ed requirements page
+- User settings page
+- Course enrollment page(s) (if time)
+	- query for classes page
+	- shopping cart/enrolled/suggested page

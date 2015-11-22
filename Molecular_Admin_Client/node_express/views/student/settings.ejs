@@ -1,0 +1,84 @@
+
+ <!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+    	<link rel='stylesheet' href='/stylesheets/menubar_style.css' />
+	<link rel="import" href='../header.html'>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="../javascripts/content_fadein.js"></script>
+  </head>
+
+  <body>
+
+<div id="menuleft">
+<ul id="tabs">
+<li>
+<a href = "main">
+Home
+<a href = "major_track">
+Track
+</a>
+</li>
+<li>
+<a href = "class">
+My Classes
+</a>
+</li>
+<li>
+<a href = "geneds">
+GenEd Requirements
+</a>
+</li>
+<li>
+<a href = "courses">
+List of courses
+</a>
+</li>
+</ul>
+</div>
+<div id="menuright">
+<ul id="tabs">
+<li>
+<a href = "settings">
+Settings
+</a>
+</li>
+<li>
+<a href = "../logout">
+Logout
+</a>
+</li>
+</ul>
+</div>
+</div> 
+  
+<div id="header"></div>
+  <script>
+var link = document.querySelector('link[rel="import"]').import;
+    var content = link.import;
+    // Grab DOM from warning.html's document.
+    var el = content.querySelector('#headerbanner').import;
+    document.body.appendChild(el.cloneNode(true));
+	
+	var el2 = content.querySelector('#student_menu').import;
+  	document.body.appendChild(el2.cloneNode(true));
+  </script>
+
+
+
+
+<div id = "content" class = "contentview">
+<p><h1>Settings</h1>
+<h3>
+<br>   
+<br>
+
+
+</div>
+
+
+
+ </body>
+</html>

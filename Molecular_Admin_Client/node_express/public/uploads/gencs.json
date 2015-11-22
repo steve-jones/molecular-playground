@@ -1,0 +1,40 @@
+{
+    "name": "General Compsci",
+    "children": [{
+        "name": "121",
+        "children": [{
+            "name": "187",
+            "children": [{
+                "name": "220",
+                "children":[{
+                    "name":"383"
+                    }]
+                },{
+                "name": "230",
+                "children": [{
+                    "name":"377"
+                    }]
+                },{
+                "name": "240"
+                },{
+                "name": "250",
+                "children": [{
+                    "name":"311"
+                    }]
+                },{
+                "name": "electives",
+                "children": [{
+                	"name": ">300"
+                	},{
+                	"name": ">300"	
+                	},{
+                	"name": ">400"
+                	},{
+                	"name": ">400"
+                	},{
+                	"name": ">400"
+                	}]
+            }]
+        }]
+    }]
+}
