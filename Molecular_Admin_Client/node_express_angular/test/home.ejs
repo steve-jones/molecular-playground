@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%=title %> <%= username%></h1>
+    <p><%=error %></p>
+
+    <ul>
+      <% for(var i = 0; i < listOfModules.length; i++) { %>
+	<form action="/users/currentHomeModule" method="get">
+	   <input type="hidden" name='planner'
+	   value=<%= listOfModules[i].planner %>>
+	   <input type="submit" class="linkButton" 
+	   value=<%= listOfModules[i].planner %>>
+	</form><br>
+        <form action="/users/removeHomeModule" method="get">
+           <input type="hidden" name='planner'
+	   value=<%= listOfModules[i].planner %>><br><br>
+           <input type="submit" value="Remove Module"> <br><br>
+        </form> <br>
+
+      <%  }  %>
+    </ul>
+    
+     
+    <form action="/users/addHomeModule" method="get">
+      Add Planner:<br> <input type="text" name="planner"><br><br>
+      <input type="submit" value="Add Module"> <br><br>
+    </form> <br>	
+    <p><a href="/logout">Logout</a>
+    
+  </body>
+</html>

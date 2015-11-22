@@ -1,0 +1,84 @@
+//initialize mongodb and get the database of users
+//every user will have a username, password, email and a uid that we 
+//will set the value of
+
+var mongo = require('mongodb');
+var Server = mongo.Server;
+var Db = mongo.Db;
+var server = new Server('localhost', 27017, {auto_reconnect: true});
+var db = new Db('users', server);
+
+
+//this will store everyone who is online
+var online = {};
+
+exports.addOnline = function(user){
+  online[user.uid] = user; 
+}
+
+exports.removeOnline = function(user){
+  delete online[user.uid];
+}
+
+exports.isOnline = function(user, cb){
+  if(user === undefined || user !== online[user.uid]){
+    cb(undefined);
+  }
+  else{
+    cb(user);
+  }
+}
+///////////////////////////this one
+//this will confirm whether a user exists or not
+
+exports.isUser = function (){
+
+db.open(function(err, db) {
+  if(!err) {
+    console.log("We are connected");
+    db.collection('users', function(err, collectionref) { 
+    var myDoc = {"username":"raymond", "password":"password"};
+      collectionref.insert(myDoc, function (err, result) {
+ 
+
+    });
+  }
+});  
+ 
+}
+//this should be called to add user to users database
+exports.addNewUser = function (username, password, email){
+
+}
+//this should be called to add a database that will store all of the users
+//planners such as cs 326, cs 250 we should also verify that two
+//planners of the exact same name haven't been added
+exports.addHomeModule = function (user, nameOfModule) {
+
+}
+
+//this will remove a planner such as cs 326 and cs 250
+exports.removeHomeModule = function (user, nameOfModule) {
+
+}
+
+//this should be called to create a new page module database that is specific
+//to a user and one of their planners. The newPageModule will be the name of
+//the new database and the pageModuleData will be the data you store in that
+//newPageModule such as any notes you have or maybe a link. In addition,
+//this should make sure that the module hasn't already been added   
+exports.addPageModule = function (user, nameOfModule, newPageModule, 
+	pageModuleData) {
+
+}
+//this should be called to edit a pageModule with the new pageModule.
+exports.editPageModule = function (user, nameOfModule, pageModule, 
+	pageModuleData){
+
+}
+
+//this should remove a specified pageModule and all data associated with it 
+exports.removePageModule = function (user, nameOfModule, pageModule){
+  
+}
+

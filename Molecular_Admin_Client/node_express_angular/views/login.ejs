@@ -1,0 +1,15 @@
+
+    <link rel="import" href="/headerLogin.ejs">
+     <img src="file:///home/vagrant/shared/Plannit-logo.png">
+    <p>Welcome to <%= title %></p>
+        <p><%= message%></p>
+	<form method="get" action="/login/auth">
+      	 User Name: <input type="text" name="username"> <br>
+      	 Password:  <input type="password" name="password"> <br>
+      	 <input type="submit" value="Login">
+    	</form>
+
+        <p>New to Plannit? Sign up <a href="/login/newUser"> here</a></p>
+  </body>
+</html>
+  

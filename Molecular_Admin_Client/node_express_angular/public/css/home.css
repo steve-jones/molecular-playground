@@ -1,0 +1,83 @@
+body {
+  background-color: #E1F5FE;
+}
+
+.main {
+}
+
+.nav {
+  
+}
+
+.md-toolbar-tools {
+  background-color: #0288D1;
+  position: fixed;
+  top: 0px;
+}
+
+.md-primary {
+  color: white;
+}
+
+#headerTitle {
+  color: white;
+}
+
+#welcomeMsg {
+  text-align: center;
+  position: relative;
+  top: 30px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+#welcomeMsg>h1 {
+  font-size: 350%;
+}
+
+#holder_addBtn {
+  float: left;
+  text-align: center;
+  position: relative;
+  top: 30px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 300px;
+  margin: auto;
+}
+
+.btn_addPlanner {
+  width: 160px;
+  height: 40px;
+  background-color: #0288D1;
+}
+
+.listPanel {
+  top: 50px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 500px;
+  height: auto;
+  padding: 10px;
+  background-color: white;
+  position: relative;
+}
+
+#img_indexBack {
+  width: 800;
+  height: 400;
+}
+
+#p_logo {
+  width: 45px;
+  height: 40px;
+}
+
+#headerLogo {
+  float: left;
+  display: inline;
+}

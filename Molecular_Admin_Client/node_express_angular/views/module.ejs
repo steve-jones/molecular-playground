@@ -1,0 +1,210 @@
+<!--this page will render any given module such as cs 326 cs 250 ect
+this means this file should also display all modules associated with
+that class or whatever the users planner is-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%=planner %></title>
+  </head>
+ <center>
+  <body bgcolor="ECFBFF">
+    <div style="background-color:#2A88F3;  margin-top: 0px">
+    <h1><%=planner %></h1>
+    </div>
+
+    
+    <h1>Add a Module </h1>
+    <p><%=message%></p>
+    <select name="Module" form="Module">
+      <option value="Notes">Notes</option>
+      <option value="Budget">Budget</option>
+      <option value="UpcomingEvents">Upcoming Events</option>
+      <option value="UsefulLinks">Useful Links</option>
+    </select><br><br>
+    <form action="/users/addPageModule" id="Module">
+       <input type="submit">
+    </form><br><br>
+
+    <% for(var i = 0; i < listOfModules.length; i++) { %>
+	<div style="border:1px solid #000; margin-bottom: 5px; margin-left:
+	50px; margin-right:50px; background-color:#FFFFFF;">
+      <h1><%=listOfModules[i].module %></h1>
+
+      <%if(listOfModules[i].module === 'Notes'){ %>
+
+	    <%if(data !== null && data[0] !== undefined && 
+		data[0][0] !== undefined){%>
+	      <p><center><%=data[0][0].text%></center></p>
+	    <%}%>
+  
+	   <form action="/users/editPageModule" id="Notes" >
+	        <input type="hidden" name="Module" value="Notes">
+		<input type="text" name="comment">
+	        <input type="submit" value="Finish Editing">
+  	      </form><br><br>
+       
+     <%}%>
+
+
+        <%if(listOfModules[i].module === 'Budget'){ %>
+
+	    <%if(data !== null && data[3] !== undefined && 
+		data[3][0] !== undefined){%>
+	      <p><%=data[3][0].text%></p>
+	    <%}%>
+   
+
+	   <form action="/users/editPageModule" id="Budget" >
+	        <input type="hidden" name="Module" value="Budget">
+		<input type="text" name="comment">
+	        <input type="submit" value="Finish Editing">
+  	      </form><br><br>
+      
+        <%}%>
+
+
+      <%if(listOfModules[i].module === 'UsefulLinks'){ %>
+	 <%if(data !== undefined && data[2]!== undefined){%>
+	   <%for(var j = 0; j < data[2].length; j++){%>
+	     <%if(data[2][j] !== undefined){%>
+	      <br>
+	      <li><a href=<%=data[2][j].link%>><%=data[2][j].link%></a></li>
+	      <br>
+	      <form action="/users/removeModuleData">
+               <input type="hidden" name ="Module"
+                value='UsefulLinks'>
+		<input type="hidden" name="entry" value=<%=data[2][j].link%>>
+               <input type="submit" value="Remove Link">
+              </form>
+	    <%}%>
+	   <%}%>
+	 <%}%>
+	<br>
+
+	<form  action="/users/addModuleData" id="UsefulLinks" >
+	<input type="hidden" name="Module" value="UsefulLinks">
+	Useful Links: <input type="text" name="data" value="http://">
+	<input type="submit" value="Add">
+	</form><br>
+
+
+        <%}%>
+
+
+
+        <%if(listOfModules[i].module === 'UpcomingEvents'){ %>
+               
+
+	    <%if(data !== null && data[1] !== undefined){%> 
+	      <%for(var j = 0; j < data[1].length; j++){%>
+		<%if(data[1][j] !== undefined){%>
+		<br>
+	      	  <li><%=data[1][j].month%>/<%=data[1][j].day%>/
+			<%=data[1][j].year%> <b>Time</b> <%=data[1][j].time%>
+			<b>Description</b> <%=data[1][j].info%></li>
+		<br>
+                <form action="/users/removeModuleData">
+                 <input type="hidden" name ="Module"
+                  value='UpcomingEvents'>
+                  <input type="hidden" name="Info" value=<%=data[1][j].info%>>
+ 		 <input type="hidden" name="Month" value=<%=data[1][j].month%>>
+ 		 <input type="hidden" name="Day" value=<%=data[1][j].day%>>
+ 		 <input type="hidden" name="Year" value=<%=data[1][j].year%>>
+		 <input type="hidden" name="Time" value=<%=data[1][j].time%>>
+                 <input type="submit" value="Remove Event">
+                </form>
+
+		<%}%>
+	      <%}%>
+	    <%}%>
+	<br>
+
+	<select name="Month" form="UpcomingEvents">
+	 <option value=undefined> - Month - </option>
+	 <option value="1">January</option>
+	 <option value="2">Febuary</option>
+	 <option value="3">March</option>
+	 <option value="4">April</option>
+	 <option value="5">May</option>
+	 <option value="6">June</option>
+	 <option value="7">July</option>
+	 <option value="8">August</option>
+	 <option value="9">September</option>
+	 <option value="10">October</option>
+	 <option value="11">November</option>
+	 <option value="12">December</option>
+	</select>
+
+<select name="Day" form="UpcomingEvents">
+	<option value=undefined> - Day - </option>
+	<option value="1">1</option>
+	<option value="2">2</option>
+	<option value="3">3</option>
+	<option value="4">4</option>
+	<option value="5">5</option>
+	<option value="6">6</option>
+	<option value="7">7</option>
+	<option value="8">8</option>
+	<option value="9">9</option>
+	<option value="10">10</option>
+	<option value="11">11</option>
+	<option value="12">12</option>
+	<option value="13">13</option>
+	<option value="14">14</option>
+	<option value="15">15</option>
+	<option value="16">16</option>
+	<option value="17">17</option>
+	<option value="18">18</option>
+	<option value="19">19</option>
+	<option value="20">20</option>
+	<option value="21">21</option>
+	<option value="22">22</option>
+	<option value="23">23</option>
+	<option value="24">24</option>
+	<option value="25">25</option>
+	<option value="26">26</option>
+	<option value="27">27</option>
+	<option value="28">28</option>
+	<option value="29">29</option>
+	<option value="30">30</option>
+	<option value="31">31</option>
+</select>
+
+<select name="Year" form="UpcomingEvents">
+	<option value=undefined> - Year - </option>
+	<option value="2015">2015</option>
+	<option value="2016">2016</option>
+	<option value="2017">2017</option>
+	<option value="2018">2018</option>
+	<option value="2019">2019</option>
+	
+</select>
+
+	<form action="/users/addModuleData" id="UpcomingEvents" >
+	<input type="hidden" name="Module" value="UpcomingEvents">
+	<p><b>Time:</b></p>
+	<input type="text" name="Time"><br>
+	<p><b>Event Description:</b></p>
+	<input type="text" name="Info"><br></br>
+	<p><b><%=upcomingMessage%></b></p>
+	<input type="submit" value"Submit">
+	</form>
+	<br>
+
+        <%}%>
+
+	<form action="/users/removePageModule">
+           <input type="hidden" name ="Module"
+                value=<%=listOfModules[i].module%>>
+           <input type="submit" value="Remove <%=listOfModules[i].module%>">
+        </form>
+	<br>
+	</div>
+   <% } %>	
+
+    <a href="/users/home">Back to Home</a><br>
+    <a href="/logout">Logout</a>
+  </body>
+</center>
+</html>
+
