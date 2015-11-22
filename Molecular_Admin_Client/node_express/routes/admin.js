@@ -10,12 +10,15 @@ var online = userlib.online;
 
 
 // Use 3rd party middleware:
+/*
 router.use(multer({ dest : './public/uploads/',
 	         rename : function (fieldname, filename) {
 		   return filename.replace(/\W+/g, '-').toLowerCase() + 
 		     Date.now();
 		 }
 	       }));
+*/
+
 
 // This is how we do file uploads:
 router.post('/upload', function (req, res) {
