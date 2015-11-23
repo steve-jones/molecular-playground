@@ -17,7 +17,7 @@
 	<link rel="stylesheet" href="/css/font-awesome.min.css">
 
     <script src="/js/jquery.min.js"></script>
-	<script src="/js/modernizr.custom.js"></script>
+	<script src="/js/modernizr.custom.js"></script>		<!--missing - Phil??-->
 
 
 
@@ -33,13 +33,17 @@
 
   <body data-spy="scroll" data-offset="0" data-target="#theMenu"   >
 
-	<!-- Menu -->
+	<!-- Menu 		should seperate this as a partial, then use render-partial to pull it in		--> 
 	<nav class="menu" id="theMenu">
 		<div class="menu-wrap">
 			<h1 class="logo"><a href="index.html#home">Playground</a></h1>
 			<i class="icon-remove menu-close"></i>
 			<a href="#home" class="smoothScroll">Home</a>
+			<a href="#login" class="smoothScroll">Login</a>
+			<a href="#signup" class="smoothScroll">Signup-as Authors</a>
 			<a href="#about" class="smoothScroll">About</a>
+      
+
       <a href="edit" class="smoothScroll">Edit Installations</a> <!-- overview: implemeenting relative routed -->
 			<a href="#"><i class="icon-facebook"></i></a>
 			<a href="#"><i class="icon-twitter"></i></a>
@@ -74,6 +78,39 @@
 		</div><!-- /container -->
 	</div><!-- /headerwrap -->
 
+
+	<!-- ========== other scoll SECTION ========== -->
+
+
+
+<section id="login" name="login"></section>
+<div id="f">
+		<div class="container">
+			<div class="row">
+				<h3>Login</h3>
+				<p class="centered"><i class="icon icon-circle"></i><i class="icon icon-circle"></i><i class="icon icon-circle"></i></p>
+
+				<!-- INTRO INFORMATIO-->
+				<div class="col-lg-6 col-lg-offset-3">
+				</div>
+			</div>
+		</div><!-- /container -->
+	</div><!-- /f -->
+
+
+<section id="signup" name="signup"></section>
+<div id="f">
+		<div class="container">
+			<div class="row">
+				<h3>Signup</h3>
+				<p class="centered"><i class="icon icon-circle"></i><i class="icon icon-circle"></i><i class="icon icon-circle"></i></p>
+
+				<!-- INTRO INFORMATIO-->
+				<div class="col-lg-6 col-lg-offset-3">
+				</div>
+			</div>
+		</div><!-- /container -->
+	</div><!-- /f -->
 
 
 	<!-- ========== ABOUT SECTION ========== -->
