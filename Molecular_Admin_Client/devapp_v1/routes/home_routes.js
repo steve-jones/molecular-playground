@@ -3,9 +3,7 @@ var router = express.Router();
 
 var m = require('../lib/postgres');
 
-// # User Server-Side Routes
-
-//middleware
+//Server-Side stats middleware
 router.use(function (req, res, next) { 
 	console.log();
   console.log('Time:', Date(Date.now()));
@@ -13,20 +11,24 @@ router.use(function (req, res, next) {
 });
 
 
-router.get('/', function(req, res) {
-      	    res.send("hey");
- 
-});
-
-
+/*Server-Side routes middleware
+        overview: render_template() usgae: api
+        render_template( name_of_.html_page [ OPTIONAL PARAM: , variable name to locate within the html page])
+    
+*/
 // ## main
 // The main user view.
-//router.get('/', function(req, res) {
-//      	    res.render('frontpage/homepage', { title   : 'Homepage',
-//                               message : 'Welcome to inSpire'
-//                               });
-//});
-
+router.get('/', function(req, res) {
+      	    res.render('index', { title   : 'Homepage',message : 'Welcome to inSpire'});
+});
+router.get('/edit', function(req, res) {
+            res.render('base1', {overview : 'overview: this string is static. the json below is dynamic. '
+              +'the data seen below is as a result of the route handler using a function from our file psqldb '
+              +'which enables us to make calls to our PostgreSQL in the cloud. The result of this method call '
+              +'is an array of json. This json is then passed to the render_template function to be sent client-side.  '
+              +'PS. Sry for the wierd json data, it\'s information being fetched from one of my personal dbs :)'
+              });
+});
 
 
 // ## login
