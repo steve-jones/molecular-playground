@@ -1,0 +1,70 @@
+
+ <!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+    	<link rel='stylesheet' href='/stylesheets/menubar_style.css' />
+	<link rel="import" href='../header.html'>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="../javascripts/content_fadein.js"></script>
+  </head>
+
+  <body>
+  
+<div id="header"></div>
+  <script>
+var link = document.querySelector('link[rel="import"]');
+    var content = link.import;
+    // Grab DOM from warning.html's document.
+    var el = content.querySelector('#headerbanner');
+    document.body.appendChild(el.cloneNode(true));
+	
+	var el2 = content.querySelector('#front_menu');
+  	document.body.appendChild(el2.cloneNode(true));
+  </script>
+
+<div id = "content" class = "contentview">
+<p><h1>Video Tutorial</h1>
+<h3> link1</h3>
+<br>   
+<br>
+<h3> link2</h3>
+<br>   
+<br>
+<h3> link3</h3>
+
+
+<p><h1>How to use Inspire</h1>
+
+After logging in to Inspire, or creating a profile, you will be brought to the "Student Main" page.
+
+At the top of the page, you will see a toolbar with links titled "Student Main", "Graduation Requirements", "My Classes", "GenEd Requirements", and "List of Courses".
+
+<h3>Student Main</h3> 
+The "Student Main" link brings you to the main page of inspire.
+
+<h3>Graduation Requirements</h3>
+The "Graduation Requirements" link will bring you to the graduation requirements page, where you can view the courses and prereqs for each of the eleven Computer Science tracks.
+
+After Selecting a track, an expandable tree will be displayed which will allow you to easily see in which order you must take your courses to fufill your specific graduation requirements.
+
+<h3>My Classes</h3>
+The "My Classes" link will direct you to a page displaying your username, what courses you plan to take, what semester you plan to take them in, and the course prereqs. 
+
+<h3>GenEd Requirements</h3>
+The "GenEd Requirements" link will direct you to a page displaying courses that will fufill general education courses required by the University.
+
+<h3>List of Courses</h3>
+The "List of Courses" link will direct you to a page that displays all computer science courses being offered.  The page displays such information as: the course number, course name, any prerequisites for the course, the semester the course is being offered, and the course instructor.  This page also allows you to enroll in a chosen class by clicking the "Enroll" button for that class.
+ 
+ 
+ 
+ 
+ 
+</div>
+ 
+ 
+ 
+ </body>
+</html>

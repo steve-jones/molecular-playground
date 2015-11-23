@@ -1,0 +1,60 @@
+{
+    "name": "Theory of Computation",
+    "children": [{
+        "name": "121",
+        "children": [{
+            "name": "187",
+            "children": [{
+                "name": "220",
+                "children": [{
+                    "name": "320"
+                    }]
+                },{
+                "name": "230"
+                },{
+                "name": "240"
+                },{
+                "name": "250",
+                "children": [{
+                    "name":"311",
+                    "children": [{
+                        "name":"501"
+                        }]
+                    }]
+            	},{
+            	"name": "electives",
+                "children": [{
+                	"name": ">300"
+                	},{
+                	"name": ">300"
+                	}]
+            	},{
+            	"name": "select 1",
+            	"children": [{
+            		"name":"377"
+            		},{
+            		"name":"445"
+            		},{
+            		"name":"453"
+            		},{
+            		"name":"535"
+            		}]
+            	},{
+            	"name": "select 2",
+            	"children": [{
+            		"name":"513"
+            		},{
+            		"name":"575"
+            		},{
+            		"name":"601"
+            		},{
+            		"name":"611"
+            		},{
+            		"name":"496"
+            		},{
+            		"name":"Math 411"
+            		}]
+            	}]
+        }]
+    }]
+}
