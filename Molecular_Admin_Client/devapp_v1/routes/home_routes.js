@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var userlib = require('../lib/user');
-var m = require('../lib/db');
+var m = require('../lib/postgres');
 
 // # User Server-Side Routes
 
@@ -13,6 +12,20 @@ router.use(function (req, res, next) {
   next();
 });
 
+
+router.get('/', function(req, res) {
+      	    res.send("hey");
+ 
+});
+
+
+// ## main
+// The main user view.
+//router.get('/', function(req, res) {
+//      	    res.render('frontpage/homepage', { title   : 'Homepage',
+//                               message : 'Welcome to inSpire'
+//                               });
+//});
 
 
 
@@ -105,19 +118,6 @@ router.post('/auth', function(req, res) {
   }
 });
 
-// routes for changing settings.
-router.get('/settings', function(req, res) {
-	var user = req.session.user;
-  	if (user === undefined) {
-    	req.flash('auth', 'Not logged in!');
-    	res.redirect('/login');
-	}
-	else{
-    	res.render('frontpage/settings', { title   : 'New page to be made',
-                         	users : user, 
-				message : 'none yet'});
-	}
-});
 
 
 // ## logout
@@ -178,25 +178,6 @@ var user = req.session.user ||username;
     }); 
   
 });
-
-// video tutorial
-router.get('/info', function(req, res) {
-      	    res.render('frontpage/info', { title   : 'How inSpire Works',
-                               message : 'Welcome to inSpire'
-                               });
- 
-});
-
-
-// ## main
-// The main user view.
-router.get('/', function(req, res) {
-      	    res.render('frontpage/homepage', { title   : 'Homepage',
-                               message : 'Welcome to inSpire'
-                               });
- 
-});
-
 
 
 module.exports = router;
