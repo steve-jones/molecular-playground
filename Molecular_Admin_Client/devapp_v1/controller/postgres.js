@@ -3,7 +3,7 @@ var fs = require('fs');
 
 
 //blank db link created for this project on my account -Yong
-var connString = 'postgres://test:12345678@ct2bdiqosbcm.us-east-1.rds.amazonaws.com:5432/test'
+//var connString = 'postgres://test:12345678@ct2bdiqosbcm.us-east-1.rds.amazonaws.com:5432/test'
 
 //using terminal to connect for debugging
 //psql --host=test.ct2bdiqosbcm.us-east-1.rds.amazonaws.com --port=5432 --username=test --password --dbname=test
@@ -11,7 +11,7 @@ var connString = 'postgres://test:12345678@ct2bdiqosbcm.us-east-1.rds.amazonaws.
 
 //local db , turn this on if you want to work offline
 // you will need to load the local db script first
-//var connString = 'postgres://test:password@localhost/molecular_db';
+var connString = 'postgres://test:password@localhost/molecular_db';
 
 
 //==========================================================
@@ -20,15 +20,6 @@ var connString = 'postgres://test:12345678@ct2bdiqosbcm.us-east-1.rds.amazonaws.
 
 //Enrolls a student in a course for a given term
 exports.enroll = enroll;
-
-//Populate the students based on csv data
-exports.populateStudents = populateStudents;
-
-//Populates the course catalog based on csv data
-exports.populateCoursesAndPrereqs = populateCoursesAndPrereqs;
-
-//Returns all students in database
-exports.getAllfromTable = getAllfromTable;
 
 //Adds user to database
 //User info specified by arguments, gpa initialized to 0.0
@@ -51,11 +42,25 @@ exports.getPrereqs = getPrereqs;
 
 
 //========================================================
+exports.getRecords = function(city, callback) {
+  var sql = "SELECT name FROM users WHERE city=?";
+  // get a connection from the pool
+  pool.getConnection(function(err, connection) {
+    if(err) { console.log(err); callback(true); return; }
+    // make the query
+    connection.query(sql, [city], function(err, results) {
+      connection.release();
+      if(err) { console.log(err); callback(true); return; }
+      callback(false, results);
+    });
+  });
+};
 
 //Enrolls a student in a course for a given term
 function enroll(studentid, courseid, term, instructor, callback) {
-  pg.connect(connString, function (err, client, done) {
+  pg.connect(connString, function (err, callback) {
     if(err) {
+	console.log("error in retrieving")
       callback('Server Error: ' + err);
     }
     else {
@@ -65,8 +70,7 @@ function enroll(studentid, courseid, term, instructor, callback) {
         + term + '\', \''
         + instructor + '\');'
       , function(err, result) {
-        done();
-        client.end();
+       client.release();
         if(err) {
           callback(err);
         }
@@ -78,127 +82,7 @@ function enroll(studentid, courseid, term, instructor, callback) {
   }); 
 }
 
-//Populate the students based on csv data
-function populateStudents(callback) {
-  //Read in csv file...
-  fs.readFile('./lib/db/studentTracks.csv', 'utf8', function(err, data) {
-    if(err) {
-      return console.log(err);
-    }
-    else {
-      //If success, process the csv data and post to database...
-          var entries = data.split("\n");
-          var counter = entries.length;
 
-          for(var i in entries) {
-            counter--; 
-            console.log("COUNTER: " + counter + "\n");
-            var values = entries[i].split(",");
-
-            var studentid = values[0];
-            console.log('ID: ' + studentid + '\n');
-            var password = values[1];
-            console.log('PASSWORD: ' + password + '\n');
-            var fname = values[2];
-            console.log('FNAME: ' + fname + '\n');
-            var lname = values[3];
-            console.log('LNAME: ' + lname + '\n');
-            var year = values[4];
-            console.log('YEAR: ' + year + '\n');
-            var school = values[5];
-            console.log('SCHOOL: ' + school + '\n');
-            var gpa = values[6];
-            console.log('GPA: ' + gpa + '\n');
-            var track = values[7];
-            console.log('TRACK: ' + track + '\n\n\n\n');
- 
-            addNewUser(studentid, password, fname, lname, year, school, gpa, track, 
-              function(err, data) {
-                if(err) {
-                  console.log("STUDENT ADD ERROR: " + err);
-                }
-                else {
-                  console.log("New student from csv added");
-                }
-              }, counter);
-        
-          }
-    }
-  });
-}
-
-//Populates the course catalog based on csv data
-function populateCoursesAndPrereqs(callback) {
-  //Read in csv file...
-  fs.readFile('./lib/db/Courses.csv', 'utf8', function(err, data) {
-    if(err) {
-      return console.log(err);
-      response.end();
-    }
-    else {
-          //If success, process csv data and post to database...
-          var entries = data.split("\n");
-          var counter = entries.length;
-
-          for(var i in entries) {
-            counter--; 
-            var values = entries[i].split(",");
-
-            var coursenumber = values[0];
-            var name = values[1];
-            var credits = values[2];
-            var prereqs = values[3];
-            var term = values[4];
-            var instructor = values[5];
- 
-            addNewCourse(coursenumber, name, credits, term, instructor, prereqs, 
-              function(err, data) {
-                if(err) {
-                  console.log("COURSE ADD ERROR: " + err);
-                }
-                else {
-                  console.log("New course from csv added");
-                }
-              }, counter); 
-        
-          }
-    }
-  });
-}
-
-//Returns all data from a table in database
-function getAllfromTable(table,callback) {
-  var querystring='';
-  if(table === undefined || table === 'coursecatalog'){
-  querystring ='select * from coursecatalog;' ;
-  }
-  else if(table === 'students'){
-  querystring ='select * from students;' ;
-  }
-  else if(table === 'admins'){
-  querystring ='select * from admins;' ;
-  }
-
-  pg.connect(connString, function (err, client, done) {
-    if (err) {
-      callback(err);
-    }
-    else {
-      client.query(querystring, function (err, result) {
-        done();
-        client.end();
-        if (err) {
-          callback(err);
-        }
-        else {
-          console.log(data);
-          var data = JSON.stringify(result.rows);
-          callback(undefined, data);
-        }
-      });
-    }
-  });
-}
 
 
 

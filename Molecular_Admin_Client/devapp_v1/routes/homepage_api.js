@@ -12,16 +12,41 @@ router.use(function (req, res, next) {
 
 // ## main
 // The main user view.
+
 router.get('/', function(req, res) {
-      	    res.render('index', { title   : 'Homepage',message : 'Welcome to inSpire'});
+
+	var user_obj = req.session.user;
+	m.getCourse('CS121',function(err,data){
+		if(err)
+			console.log("course not found\n");
+		else{
+			testdata = JSON.parse(data);
+			console.log(testdata);
+					
+      	    		res.render('index', { userinfo   : user_obj, testdata: testdata});
+		}
+	
+	}); 
+	
 });
+
+router.post('/authenticate', function(req, res) {
+	
+});
+
+router.post('/login', function(req,res) {
+
+});
+
+router.post('/logout', function(req,res) {
+
+});
+
+
+
+
 router.get('/edit', function(req, res) {
-            res.render('base1', {overview : 'overview: this string is static. the json below is dynamic. '
-              +'the data seen below is as a result of the route handler using a function from our file psqldb '
-              +'which enables us to make calls to our PostgreSQL in the cloud. The result of this method call '
-              +'is an array of json. This json is then passed to the render_template function to be sent client-side.  '
-              +'PS. Sry for the wierd json data, it\'s information being fetched from one of my personal dbs :)'
-              });
+            res.render('base1');
 });
 
 module.exports = router;

@@ -11,7 +11,7 @@ var bodyParser		= require('body-parser');
 
 
 // Our user-defined routes/middleware:
-var home_routes       	= require('./routes/homepage_api');
+var homepage_api       	= require('./routes/homepage_api');
 
 // Business layer components
 var installation_api = require('./routes/installation_api');
