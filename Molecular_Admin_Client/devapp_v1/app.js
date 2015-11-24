@@ -17,6 +17,10 @@ var bodyParser		= require('body-parser');
 
 // Our user-defined routes/middleware:
 var home_routes       	= require('./routes/home_routes');
+var molecule_routes       	= require('./routes/molecule_routes');
+var playlist_routes       	= require('./routes/playlist_routes');
+var installation_routes       	= require('./routes/installtion_routes');
+
 // Create the express application:
 var app			= express();
 
@@ -46,6 +50,9 @@ app.use(flash());
 // ADDITION:
 // Using our routes/middleware:
 app.use('/', home_routes);
+app.use('/playlist/', playlist_routes);
+app.use('/molecule/', molecule_routes);
+app.use('/installation/', installation_routes);
 
 
 
