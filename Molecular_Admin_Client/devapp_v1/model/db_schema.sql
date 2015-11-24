@@ -1,10 +1,10 @@
 
-psql drop database if exists molecular_db;
-psql create database molecular_db;
+drop database if exists molecular_db;
+create database molecular_db;
 \c molecular_db;
 
-psql drop user if exists test;
-psql create user test with password 'password' createdb;
+drop user if exists test;
+create user test with password 'password' createdb;
 
 drop table if exists students cascade;
 drop table if exists coursecatalog cascade;

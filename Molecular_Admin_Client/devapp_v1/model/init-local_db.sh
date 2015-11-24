@@ -2,6 +2,8 @@
 ## run it from this directory same location as the files.
 ## $  sh init-local_db.sh 
 
+
+echo Dropping old db and recreate
 psql -f ./db_schema.sql
 echo Finished loading database
 echo
