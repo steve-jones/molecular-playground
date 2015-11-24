@@ -1,54 +1,43 @@
-var express		= require('express');
-
-// ADDITION:
-// Requiring session library:
-var session		= require('express-session');
-
-// ADDITION:
-// Requiring flash library:
-var flash		= require('connect-flash');
+var express	= require('express');
+var session	= require('express-session');
+var flash = require('connect-flash');
 
 // These are the regular express built-in middleware:
-var path		= require('path');
-var favicon		= require('serve-favicon');
+var path = require('path');
+var favicon	= require('serve-favicon');
 var logger		= require('morgan');
 var cookieParser	= require('cookie-parser');
 var bodyParser		= require('body-parser');
 
-// Our user-defined routes/middleware:
-var home_routes       	= require('./routes/home_routes');
-// Create the express application:
-var app			= express();
+// Business layer components
+var installation_api = require('./routes/installation_api.js');
+var molecule_api = require('./routes/molecule_api.js');
+var playlist_api = require('./routes/playlist_api.js');
+var user_api = require('./routes/user_api.js');
 
+// Create the express application:
+var app = express();
 
 // Setup the view engine:
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// Add favicon support:
 app.use(favicon(__dirname + '/public/favicon.ico'));
-
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-// ADDITION:
-// Added session support
 app.use(session({ secret : 'octocat',
                   saveUninitialized : true,
                   resave : true }));
-// ADDITION:
-// Added flash support:
 app.use(flash());
 
-// ADDITION:
-// Using our routes/middleware:
-app.use('/', home_routes);
-
-
-
+app.use('/', require('./routes/index.js'));
+app.use('/installation', installation_api);
+app.use('/molecule', molecule_api);
+app.use('/playlist', playlist_api);
+app.use('/user', user_api);
 
 //start up the server by loading database in !!!//
 var sys = require('sys')
