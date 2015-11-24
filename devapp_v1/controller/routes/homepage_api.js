@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var m = require('../controller/auth');
+var m = require('../../model/auth');
 
 //Server-Side stats middleware
 router.use(function (req, res, next) {

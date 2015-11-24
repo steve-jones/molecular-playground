@@ -1,9 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-module.exports = router;
-
-router.post('/createmolecule', function(req,res) {
+router.post('/createplaylist', function(req,res) {
 	var user = req.session.user;
 	  	if (user === undefined || user.role !=='global_admin') {
 		    	req.flash('auth', 'Not logged in!');
@@ -11,3 +9,8 @@ router.post('/createmolecule', function(req,res) {
 		}
 		else{}
 });
+
+
+
+
+module.exports = router;
