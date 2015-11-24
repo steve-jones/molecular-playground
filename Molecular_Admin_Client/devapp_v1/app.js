@@ -1,60 +1,52 @@
-var express		= require('express');
-
-// ADDITION:
-// Requiring session library:
-var session		= require('express-session');
-
-// ADDITION:
-// Requiring flash library:
-var flash		= require('connect-flash');
+var express	= require('express');
+var session	= require('express-session');
+var flash = require('connect-flash');
 
 // These are the regular express built-in middleware:
-var path		= require('path');
-var favicon		= require('serve-favicon');
+var path = require('path');
+var favicon	= require('serve-favicon');
 var logger		= require('morgan');
 var cookieParser	= require('cookie-parser');
 var bodyParser		= require('body-parser');
 
+
 // Our user-defined routes/middleware:
-var home_routes       	= require('./routes/home_routes');
-var molecule_routes       	= require('./routes/molecule_routes');
-var playlist_routes       	= require('./routes/playlist_routes');
-var installation_routes       	= require('./routes/installtion_routes');
+var home_routes       	= require('./routes/homepage_api');
+
+// Business layer components
+var installation_api = require('./routes/installation_api');
+var molecule_api = require('./routes/molecule_api');
+var playlist_api = require('./routes/playlist_api');
+var user_api = require('./routes/user_api');
+
 
 // Create the express application:
-var app			= express();
-
+var app = express();
 
 // Setup the view engine:
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// Add favicon support:
 app.use(favicon(__dirname + '/public/favicon.ico'));
-
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-// ADDITION:
-// Added session support
 app.use(session({ secret : 'octocat',
                   saveUninitialized : true,
                   resave : true }));
-// ADDITION:
-// Added flash support:
 app.use(flash());
+
 
 // ADDITION:
 // Using our routes/middleware:
-app.use('/', home_routes);
-app.use('/playlist/', playlist_routes);
-app.use('/molecule/', molecule_routes);
-app.use('/installation/', installation_routes);
+app.use('/', homepage_api);
 
-
+app.use('/installation', installation_api);
+app.use('/molecule', molecule_api);
+app.use('/playlist', playlist_api);
+app.use('/user', user_api);
 
 
 //start up the server by loading database in !!!//
