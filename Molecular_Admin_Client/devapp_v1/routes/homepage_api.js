@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var m = require('../controller/postgres');
+var m = require('../controller/auth');
 
 //Server-Side stats middleware
 router.use(function (req, res, next) {
@@ -42,11 +42,5 @@ router.post('/logout', function(req,res) {
 
 });
 
-
-
-
-router.get('/edit', function(req, res) {
-            res.render('base1');
-});
 
 module.exports = router;
