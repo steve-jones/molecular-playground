@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var m = require('../lib/postgres');
+var m = require('../controller/postgres');
 
 //Server-Side stats middleware
 router.use(function (req, res, next) { 
