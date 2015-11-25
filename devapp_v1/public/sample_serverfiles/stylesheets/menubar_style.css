@@ -1,0 +1,19 @@
+
+#header_image{position:fixed; top:10px; width:160px;}
+#header_quote{position:fixed; top:10px; width:100%; text-align:center;display:none;}
+.header_menu{position:fixed; top:50px; }
+	.menuright{position:fixed; top:50px; right:10px;}
+
+//later in their settings load their own styles.
+//defaults styles will be in teh style.css
+
+
+// tabs styles
+div.tabContent { border: 1px solid #c9c3ba; padding: 0.5em; background-color: #f1f0ee; }
+div.tabContent.hide { display: none; }
+
+ul#tabs { list-style-type: none;  padding: 0 0 0.3em 0; }
+ul#tabs li { display: inline;}
+ul#tabs li a { color: #42454a; background-color: #dedbde; border: 1px solid #c9c3ba; border-bottom: none; padding: 0.3em; text-decoration: none; }
+ul#tabs li a:hover { background-color: #f1f0ee; }
+ul#tabs li a.selected { color: #000; background-color: #f1f0ee; font-weight: bold; padding: 0.7em 0.3em 0.38em 0.3em; }

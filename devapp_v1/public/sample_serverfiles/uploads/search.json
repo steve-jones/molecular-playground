@@ -1,0 +1,41 @@
+{
+    "name": "Search & Data Mining",
+    "children": [{
+        "name": "121",
+        "children": [{
+            "name": "187",
+            "children": [{
+                "name": "220",
+                "children": [{
+                    "name": "320"
+                    },{
+                    "name": "585"
+                    }]
+                },{
+                "name": "230"
+                },{
+                "name": "240",
+                "children": [{
+                    "name": "446"
+                    }]
+                },{
+                "name": "250",
+                "children": [{
+                    "name":"311",
+                    "children": [{
+                        "name": "445"
+                        }]
+                    },{
+                    "name":"348"
+                    }]
+                },{
+                "name": "electives",
+                "children": [{
+                	"name": ">300"
+                	},{
+                	"name": ">300"
+                }]
+            }]
+        }]
+    }]
+}
