@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+var m = require('../model/user_functions');
 
 router.post('/createuser', function(req,res) {
 	var user = req.session.user;

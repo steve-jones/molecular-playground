@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var m = require('../model/auth');
+var m = require('../../model/auth');
 
 //Server-Side stats middleware
 router.use(function (req, res, next) {
@@ -28,27 +28,6 @@ router.get('/', function(req, res) {
 	
 	}); 
 	
-});
-
-router.get('/edit', function(req, res) {
-	var user_obj = req.session.user;
-	res.render('edit', { userinfo   : user_obj});
-});
-router.get('/about', function(req, res) {
-	var user_obj = req.session.user;
-	res.render('about', { userinfo   : user_obj});
-});
-
-router.post('/authenticate', function(req, res) {
-	
-});
-
-router.post('/login', function(req,res) {
-
-});
-
-router.post('/logout', function(req,res) {
-
 });
 
 

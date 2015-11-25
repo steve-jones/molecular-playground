@@ -11,13 +11,13 @@ var bodyParser		= require('body-parser');
 
 
 // Our user-defined routes/middleware:
-var homepage_api       	= require('./controller/routes/homepage_api');
+var homepage_api       	= require('./routes/homepage_api');
 
 // Business layer components
-var installation_api = require('./controller/routes/installation_api');
-var molecule_api = require('./controller/routes/molecule_api');
-var playlist_api = require('./controller/routes/playlist_api');
-var user_api = require('./controller/routes/user_api');
+var installation_api = require('./routes/installation_api');
+var molecule_api = require('./routes/molecule_api');
+var playlist_api = require('./routes/playlist_api');
+var user_api = require('./routes/user_api');
 
 
 // Create the express application:
