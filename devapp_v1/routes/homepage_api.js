@@ -23,7 +23,7 @@ router.get('/', function(req, res) {
 			testdata = JSON.parse(data);
 			console.log(testdata);
 					
-      	    		res.render('index', { userinfo   : user_obj, testdata: testdata});
+      	    		res.render('home_page', { userinfo   : user_obj, testdata: testdata});
 		}
 	
 	}); 
