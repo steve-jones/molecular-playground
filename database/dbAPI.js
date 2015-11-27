@@ -2,14 +2,54 @@
 var dbReader = require('./databaseReader.js');
 
 module.exports = {
+	//users
 	createUser : function(firstName, lastName, username, password, email, role) {
-			createUserParameterCheck(firstName, lastName, username, password, email, role);
-			parameters = [firstName, lastName, username, password, email, role];
-			dbReader.executeFunction('add_user', parameters); 
+		createUserParameterCheck(firstName, lastName, username, password, email, role);
+		parameters = [firstName, lastName, username, password, email, role];
+		dbReader.executeFunction('add_user', parameters); 
 
-			// TODO: Throw exception if user already exists (email duplicate)
-			// TODO: Throw exception for invalid role
+		// TODO: Throw exception if user already exists (email duplicate)
+		// TODO: Throw exception for invalid role
 	}
+	//updateProfile
+	//parameters can be null and update_profile in progress
+	updateProfile : function (firstName, lastName, username, password, email, role) {
+		parameters = [firstName, lastName, username, password, email, role];
+		dbReader.executeFunction('update_profile', parameters); 
+	}
+	
+	//manageDelegates 
+		//add,edit and remove local delegate
+	
+	//global admin
+		//displayInstallationsStats(all)
+		//addInstallation({installation data})
+		//deleteInstallations(installation_id)
+		//disableInstallation(installation_id)
+		//deleteUser(user_id)
+		//disableUser(user_id)
+	
+	//installation
+		//manage, get installation details
+	
+	//molecule
+		//getMolecules(all)
+		//getMolecules(User.id)
+		//uploadMolecules(molecule,script)
+		//getPendingRequests(all)
+		//approveNewMolecule(Molecule)
+	
+	//playlist
+		//getPlaylists
+		//getSpecificPlaylist(Playlist)
+		//createPlaylist(molecule, approved)
+		//createPlaylist()
+		//addToPlaylist(molecule, Playlist)
+		//removePlaylist(Playlist)
+		//removeMoleculeFromPlaylist(molecule, Playlist)
+		//scheduleContent(Playlist, time, date)
+		//uploadContent(Molecule)
+
 }
 
 
