@@ -21,4 +21,15 @@ BEGIN
 	INSERT INTO Users VALUES (IDKey, firstName, lastName, username, password, email, role);
 	RETURN IDKey;
 END;
+/*this is still in progress*/
+/*CREATE OR REPLACE FUNCTION update_profile(firstName text, lastName text, username text, password text, email text, role int)
+RETURNS boolean as $updateSuccessful$
+DECLARE
+	updateSuccessful boolean;
+BEGIN
+	IF (text IS NOT NULL) THEN
+		INSERT INTO Users VALUES (text);	
+	END IF;
+	
+END;*/
 $IDKey$ LANGUAGE plpgsql;
