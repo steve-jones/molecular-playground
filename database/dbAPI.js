@@ -5,7 +5,10 @@ module.exports = {
 	createUser : function(firstName, lastName, username, password, email, role) {
 			createUserParameterCheck(firstName, lastName, username, password, email, role);
 			parameters = [firstName, lastName, username, password, email, role];
-			dbReader.executeFunction('add_user', parameters);
+			dbReader.executeFunction('add_user', parameters); 
+
+			// TODO: Throw exception if user already exists (email duplicate)
+			// TODO: Throw exception for invalid role
 	}
 }
 
