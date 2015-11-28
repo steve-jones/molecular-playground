@@ -1,12 +1,13 @@
 
 var dbReader = require('./databaseReader.js');
+var dbFunctions = require('./dbFunctions.js');
 
 module.exports = {
 	//users
 	createUser : function(firstName, lastName, username, password, email, role) {
 		createUserParameterCheck(firstName, lastName, username, password, email, role);
 		parameters = [firstName, lastName, username, password, email, role];
-		dbReader.usernameExists(username, function(usernameExists){
+		dbFunctions.usernameExists(username, function(usernameExists){
 			if(usernameExists === 'false'){
 				dbReader.executeFunction('add_user', parameters);
 			}
