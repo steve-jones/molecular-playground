@@ -1,10 +1,12 @@
 var express = require('express');
 var router = express.Router();
+var model = require('../model/installtion_functions');
 
 // object which contains DB access functions
 var model = require('../model/installtion_functions');
 
 // TODOs will be completed once DB API is ready.
+
 router.post('/create', function(req,res) {
 	var user = req.session.user;
 	if (!check(user)) res.redirect('/login');
