@@ -7,7 +7,6 @@ module.exports = {
 		createUserParameterCheck(firstName, lastName, username, password, email, role);
 		parameters = [firstName, lastName, username, password, email, role];
 		dbReader.usernameExists(username, function(usernameExists){
-			console.log(usernameExists);
 			if(usernameExists === 'false'){
 				dbReader.executeFunction('add_user', parameters);
 			}

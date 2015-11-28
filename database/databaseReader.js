@@ -27,7 +27,6 @@ module.exports = {
 	},
 
 	usernameExists: function(username, callback) {
-		console.log(username);
                 db.query("select username from users where username = '$s'".replace('$s',username))
                    .then(function(data){
 			console.log("username " + username);
