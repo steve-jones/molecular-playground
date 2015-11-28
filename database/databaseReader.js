@@ -1,3 +1,4 @@
+
 var pgp = require('pg-promise')();
 
 var cn = {
@@ -12,7 +13,6 @@ var cn = {
 
 var db = pgp(cn);
 
-
 module.exports = {
 	executeFunction: function(functionName, parameters) {
 		db.func(functionName, parameters)
@@ -24,26 +24,5 @@ module.exports = {
 		   		// TODO: Find a better way to log errors
 	        	console.log(error);
 		   });
-	},
-
-	usernameExists: function(username, callback) {
-                db.query("select username from users where username = '$s'".replace('$s',username))
-                   .then(function(data){
-			console.log("username " + username);
-                        if(data[0] === undefined){
-				console.log("false");
-                                callback('false');
-                        }
-                        else{
-                                callback('true');
-                        }
-                   })
-                   .catch(function (error) {
-                               // TODO: Find a better way to log errors
-                        console.log(error);
-                   });
-       }
-
-
+	}
 }
-
