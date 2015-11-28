@@ -6,17 +6,25 @@ module.exports = {
 	createUser : function(firstName, lastName, username, password, email, role) {
 		createUserParameterCheck(firstName, lastName, username, password, email, role);
 		parameters = [firstName, lastName, username, password, email, role];
-		dbReader.executeFunction('add_user', parameters); 
+		dbReader.usernameExists(username, function(usernameExists){
+			console.log(usernameExists);
+			if(usernameExists === 'false'){
+				dbReader.executeFunction('add_user', parameters);
+			}
+			else{
+				console.log("username exists");
+			}
+		});
 
 		// TODO: Throw exception if user already exists (email duplicate)
 		// TODO: Throw exception for invalid role
 	}
 	//updateProfile
 	//parameters can be null and update_profile in progress
-	updateProfile : function (firstName, lastName, username, password, email, role) {
-		parameters = [firstName, lastName, username, password, email, role];
-		dbReader.executeFunction('update_profile', parameters); 
-	}
+//	updateProfile : function (firstName, lastName, username, password, email, role) {
+//		parameters = [firstName, lastName, username, password, email, role];
+//		dbReader.executeFunction('update_profile', parameters); 
+//	}
 	
 	//manageDelegates 
 		//add,edit and remove local delegate
