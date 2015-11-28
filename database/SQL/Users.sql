@@ -28,6 +28,18 @@ $IDKey$ LANGUAGE plpgsql;
 
 
 
+CREATE OR REPLACE FUNCTION user_exists(usernameCheck text)
+RETURNS int AS $userID$
+DECLARE
+	userID int;
+BEGIN
+	SELECT id INTO userID FROM Users WHERE username=usernameCheck;
+	RETURN userID;
+END;
+$userID$ LANGUAGE plpgsql;
+
+
+
 CREATE OR REPLACE FUNCTION update_email(new_username text, new_email text)
 RETURNS void AS $$
 BEGIN
