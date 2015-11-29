@@ -1,5 +1,6 @@
-<h1 align="middle">Team Dropout</h1>
-<img src = "Documentation/Images/logo1.jpg" alt = "Team Dropout" align="middle" height = "132" width = "110">
+<h1 align="middle">Team Dropout
+<img src = "Documentation/Images/logo1.jpg" alt = "Team Dropout" align="middle" height = "132" width = "110"></h1>
+
 
 ## Molecular Playground Expansion
 
