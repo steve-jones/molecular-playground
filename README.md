@@ -1,5 +1,5 @@
 # Team Dropout
-<img src = "docs/Images/logo1.jpg" alt = "Team Dropout" height = "132" width = "110">
+<img src = "Documentation/Images/logo1.jpg" alt = "Team Dropout" height = "132" width = "110">
 
 ## Molecular Playground Expansion
 
