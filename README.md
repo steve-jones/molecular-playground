@@ -5,11 +5,13 @@
 ## Molecular Playground Expansion
 
 ### Project Overview
->The Molecular Playground is an system that displays large-scale interactive projections of molecules in public places. The equipment required for the system to function properly consists of a Kinect 360 Sensor, a computer with Mac OS X, the appropriate cables, and a screen or surface for the projection. *Team Dropout* is aiming to expand this system with out Molecular Playground Expansion. Our expansion consists of a web app for that will plug into the existing system and a central server that will create a repository for all the interactive molecules.
+>The Molecular Playground is an existing system that displays large-scale interactive projections of molecules in local installations. Users of the playground can use hand motions to directly interact with the 3D molecule via a motion sensor controller. There are currently 9 of these installations across the globe. You can view the existing system code in ~/Existing_Molecular_Playground/.
 
->As far as programming tools, we are using Javascript, Node JS, Express, and PostgreSQL
+>*Team Dropout* is aiming to build upon this system with Molecular Playground Expansion. Our expansion consists of a scalable web application that will plug into the existing system and a central server that will create a repository for all the interactive molecules. This centralization will hopefully bring in more local installations of Molecular Playground and garner interest in chemistry and physics across the world!
 
->Our web application will primarily be used for administration to monitor their installation of Molecular Playground. Authors that wish to upload their own interactive content will be able to use our application to do so. To get more of a high level overview of our system, refer to our High Level Design Document in the ~/Documentation/ folder.
+>As far as programming tools, we are using Javascript, Node JS, Express, and PostgreSQL.
+
+>Our web application will primarily be used for administration to monitor their installation of Molecular Playground. Authors that wish to upload their own interactive content will be able to use our application to do so. We are keeping scalability and expansion in mind as we develop because we want to allow for more local installations to be put in place across the world. To get more of a high level overview of our system, refer to our High Level Design Document in the ~/Documentation/ folder.
 
 
 ### Weekly Production Deployment Timeline:
