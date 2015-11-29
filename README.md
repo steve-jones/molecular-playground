@@ -1,5 +1,5 @@
-# Team Dropout
-<img src = "Documentation/Images/logo1.jpg" alt = "Team Dropout" height = "132" width = "110">
+<h1 align="middle">Team Dropout</h1>
+<img src = "Documentation/Images/logo1.jpg" alt = "Team Dropout" align="middle" height = "132" width = "110">
 
 ## Molecular Playground Expansion
 
@@ -11,8 +11,8 @@
 >Our web application will primarily be used for administration to monitor their installation of Molecular Playground. Authors that wish to upload their own interactive content will be able to use our application to do so. To get more of a high level overview of our system, refer to our High Level Design Document in the ~/Documentation/ folder.
 
 
-### Weekly production deployment timeline:
->*Latest prototype files are in the branch "dev1"*
+### Weekly Production Deployment Timeline:
+>**Latest prototype files are in the branch "dev1"**
 - 11/18 -- decided on framework
 - 11/25 -- pushed homepage views and folder structure
 - 12/02
