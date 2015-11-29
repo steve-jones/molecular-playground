@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var model = require('../model/installtion_functions');
 
 // object which contains DB access functions
 var model = require('../model/installtion_functions');
