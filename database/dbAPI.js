@@ -9,7 +9,8 @@ module.exports = {
 		parameters = [firstName, lastName, username, password, email, role];
 		dbFunctions.usernameExists(username, function(usernameExists){
 			if(usernameExists === 'false'){
-				dbReader.executeFunction('add_user', parameters);
+				dbReader.executeFunction('add_user', parameters, function(err){
+				});
 			}
 			else{
 				console.log("username exists");

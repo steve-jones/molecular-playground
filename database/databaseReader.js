@@ -14,11 +14,10 @@ var cn = {
 var db = pgp(cn);
 
 module.exports = {
-	executeFunction: function(functionName, parameters) {
+	executeFunction: function(functionName, parameters, callback) {
 		db.func(functionName, parameters)
 		   .then(function (data) {
-		   		console.log(data);
-		    	return data;
+		    	callback(data);
 		   })
 		   .catch(function (error) {
 		   		// TODO: Find a better way to log errors
