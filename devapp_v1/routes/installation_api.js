@@ -4,6 +4,26 @@ var router = express.Router();
 // object which contains DB access functions
 var model = require('../model/installtion_functions');
 
+
+
+// for FRONT-END testing purposes only (renders installation views.)//
+router.get('/', function(req, res){
+	res.render('installation_page');
+});
+
+router.get('/add', function(req, res){
+	res.render('add');
+});
+
+router.get('/edit', function(req, res){
+	res.render('edit');
+});
+// testing END	.
+
+
+
+
+
 // TODOs will be completed once DB API is ready.
 
 router.post('/create', function(req,res) {
