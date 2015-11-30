@@ -5,10 +5,10 @@ var model = require('../model/auth');
 // Homepage
 router.get('/', function(req, res) {
 
-	var user_obj = req.session.user;	
+	var user_obj = req.session.user;
       	    		res.render('home_page', { userinfo   : user_obj, testdata: 'testing'});
 
-	
+
 });
 
 
@@ -27,7 +27,7 @@ router.post('/login', function (req, res) {
 router.post('/logout', function (req, res) {
   delete req.session;
   res.redirect('/');
-});    
+});
 
 // About page
 router.get('/about', function(req, res) {
