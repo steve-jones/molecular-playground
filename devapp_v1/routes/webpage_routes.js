@@ -5,18 +5,9 @@ var model = require('../model/auth');
 // Homepage
 router.get('/', function(req, res) {
 
-	var user_obj = req.session.user;
-	model.getCourse('CS121',function(err,data){
-		if(err)
-			console.log("course not found\n");
-		else{
-			testdata = JSON.parse(data);
-			console.log(testdata);
-					
-      	    		res.render('home_page', { userinfo   : user_obj, testdata: testdata});
-		}
-	
-	}); 
+	var user_obj = req.session.user;	
+      	    		res.render('home_page', { userinfo   : user_obj, testdata: 'testing'});
+
 	
 });
 
