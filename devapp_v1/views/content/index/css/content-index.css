@@ -1,0 +1,69 @@
+h1{
+  font-family: Helvetica;
+  font-weight: 300;
+  text-align: left;
+  color: gray;
+  padding-bottom: 10px;
+  padding-left: 0px;
+  font-size: 40px;
+  margin-left: 20px;
+  margin-top: -20px;
+}
+h4{
+  font-family: Helvetica;
+  font-weight: 300;
+  text-align: left;
+  color: gray;
+  padding-top: -20px;
+  padding-left: px;
+  font-size: 20px;
+  margin-left: 20px;
+}
+table{
+    margin-left: 100px;
+    margin-top: 10px;
+    width: 50%;
+    text-align: center;
+
+}
+
+table tr:nth-child(odd) {
+   background-color: #ccc;
+}
+
+th#num{
+  width:10px;
+}
+
+body{
+    background-color: lightblue;
+
+}
+
+button#newcontent{
+ background-color: gray;
+ color: #lightgray;
+ font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+ font-size: 15px;
+ font-weight: 300;
+}
+
+.new{
+position: absolute;
+right:250px;  
+margin-top: 5px;
+
+}
+
+.tab{
+  width: 90%;
+  position: absolute;
+  margin-left:10px;
+  top: 130px;
+}
+
+img{
+  width:250px;
+margin-left: 820px;
+margin-top: 230px;
+}
