@@ -19,36 +19,10 @@ var connString = 'postgres://test:password@localhost/molecular_db';
 
 
 //Returns course specified by courseid
-exports.getCourse = getCourse;
+exports.login = login;
 
 
 //Returns course specified by courseid
-function getCourse(courseid, callback) {
-  var querystring ='';
-  if (courseid ==="all"){
-    querystring = 'select * from coursecatalog ;';
-  }
-  else{
-    querystring = 'select * from coursecatalog where coursenumber =\'' + courseid + '\';';
-  }
-
-    pg.connect(connString, function(err, client, done) {
-    if(err) {
-      callback(err);
-    }
-    else {
-      client.query(querystring, function(err, result) {
-          done();
-          client.end();
-          if(err) {
-            console.log(err);
-          }
-          else {
-            //NOTE: returns '[]' if coursenumber does not exist
-            var data = JSON.stringify(result.rows);
-            callback(undefined, data);
-          }
-        });
-    }
-  });
+function login(name,password, callback) {
+  return "username test"
 }

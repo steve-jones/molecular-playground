@@ -5,7 +5,7 @@ var m = require('../model/user_functions');
 
 router.get('/', function(req, res) {
 	var user_obj = req.session.user;
-	res.render('user_page', { userinfo   : user_obj});
+	res.render('user_templates/user_page', { userinfo   : user_obj});
 });
 
 router.post('/createuser', function(req,res) {

@@ -6,7 +6,7 @@ var m = require('../model/playlist_functions');
 
 router.get('/', function(req, res) {
 	var user_obj = req.session.user;
-	res.render('playlist_page', { userinfo   : user_obj});
+	res.render('playlist_template/playlist_page', { userinfo   : user_obj});
 });
 
 

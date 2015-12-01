@@ -8,7 +8,7 @@ var model = require('../model/installtion_functions');
 
 // for FRONT-END testing purposes only (renders installation views.)//
 router.get('/', function(req, res){
-	res.render('installation_page');
+	res.render('installation_templates/installation_page');
 });
 
 router.get('/add', function(req, res){
