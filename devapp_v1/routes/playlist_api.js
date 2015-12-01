@@ -3,23 +3,33 @@ var router = express.Router();
 
 var m = require('../model/playlist_functions');
 
-
 router.get('/', function(req, res) {
 	var user_obj = req.session.user;
 	res.render('playlist_page', { userinfo   : user_obj});
 });
 
-
-router.post('/createplaylist', function(req,res) {
+router.post('/create', function(req,res) {
 	var user = req.session.user;
-	  	if (user === undefined || user.role !=='global_admin') {
-		    	req.flash('auth', 'Not logged in!');
-	    		res.redirect('/login');
-		}
-		else{}
+	if (!check(user)) res.redirect('/login');
+	else {
+		// TODO: create and store playlist in DB
+	}
 });
 
-
-
+//////////
+// Utility functions
+//////////
+function check(user) {
+	if (!user) return false;
+	switch (user.role) {
+		case 'global_admin':
+		case 'local_admin':
+		case 'delegate':
+			return true;
+		default:
+			return false;
+	}
+	return false;
+}
 
 module.exports = router;
