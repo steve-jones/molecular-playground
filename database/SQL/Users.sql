@@ -1,6 +1,6 @@
 
 CREATE TABLE Users (
-	id SERIAL PRIMARY KEY NOT NULL,
+	id SERIAL PRIMARY KEY,
 	first_name TEXT NOT NULL,
 	last_name TEXT NOT NULL,
 	username TEXT NOT NULL,
@@ -16,7 +16,8 @@ RETURNS void as $$
 DECLARE
 BEGIN
 	INSERT INTO Users VALUES
-		(firstName
+		(DEFAULT
+		,firstName
 		,lastName
 		,username
 		,password
