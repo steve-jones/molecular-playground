@@ -3,6 +3,11 @@ var router = express.Router();
 
 var m = require('../model/user_functions');
 
+router.get('/', function(req, res) {
+	var user_obj = req.session.user;
+	res.render('user_page', { userinfo   : user_obj});
+});
+
 router.post('/createuser', function(req,res) {
 	var user = req.session.user;
 	  	if (user === undefined || user.role !=='global_admin') {

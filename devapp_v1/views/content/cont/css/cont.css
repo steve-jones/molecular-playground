@@ -1,0 +1,59 @@
+h1{
+  font-family: Helvetica;
+  font-weight: 300;
+  text-align: left;
+  color: gray;
+  padding-bottom: 10px;
+  padding-left: 0px;
+  font-size: 40px;
+  margin-left: 20px;
+  margin-top: -20px;
+}
+h4{
+  font-family: Helvetica;
+  font-weight: 300;
+  text-align: left;
+  color: gray;
+  padding-top: -20px;
+  padding-left: px;
+  font-size: 20px;
+  margin-left: 20px;
+}
+body{
+
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+button{
+  background-color: gray;
+ color: #lightgray;
+ font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+ font-size: 15px;
+ font-weight: 300;
+ margin-left: 20px；
+}
+.back{
+margin-left: 20px;
+margin-top: 20px;
+}
+
+
+body{
+    background-color: lightblue;
+
+}
+.div1 {
+    background-color: lightgray;
+    width: 500px;
+    padding: 50px;
+    border: 25px solid grey;
+    margin: 25px;
+}
+
+.img1{
+      background-color: lightgray;
+
+  width:220px;
+  position: absolute;
+  right: 250px;
+  top:100px;
+}

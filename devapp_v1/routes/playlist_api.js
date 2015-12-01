@@ -3,6 +3,13 @@ var router = express.Router();
 
 var m = require('../model/playlist_functions');
 
+
+router.get('/', function(req, res) {
+	var user_obj = req.session.user;
+	res.render('playlist_page', { userinfo   : user_obj});
+});
+
+
 router.post('/createplaylist', function(req,res) {
 	var user = req.session.user;
 	  	if (user === undefined || user.role !=='global_admin') {
