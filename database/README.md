@@ -1,6 +1,6 @@
 #Database API
 
-###The following are the list of functions, their parameters, and return types exposed by the database API:
+###The following are the list of functions, their parameters (in order), and return types exposed by the database API:
 
 1. usersAPI.js:
 	* **createUser**
