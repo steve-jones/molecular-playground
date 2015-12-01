@@ -39,10 +39,18 @@ END;
 $userID$ LANGUAGE plpgsql;
 
 
-
 CREATE OR REPLACE FUNCTION update_email(new_username text, new_email text)
 RETURNS void AS $$
 BEGIN
     UPDATE users SET email=new_email WHERE username=new_username;
 END;
 $$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION remove_user(current_username text)
+RETURNS void AS $$
+BEGIN
+    DELETE FROM users WHERE username=current_username;
+END;
+$$ LANGUAGE plpgsql;
+
