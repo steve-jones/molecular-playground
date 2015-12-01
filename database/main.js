@@ -1,8 +1,9 @@
 
-var db = require('./dbAPI.js');
+var db = require('./usersAPI.js');
 
-db.createUser('test', 'test', '1', 'password', 'ganderson@umass.edu', 6);
-//db.removeUser('2');
+// db.createUser('test', 'test', 'jcalabro', 'password', 'ganderson@umass.edu', 2);
+db.updateRole('jcalabro', 7);
+
 
 console.log("Done");
 return;

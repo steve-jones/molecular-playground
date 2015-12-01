@@ -1,12 +1,13 @@
 
 var dbReader = require('./databaseReader.js');
 var dbFunctions = require('./dbFunctions.js');
+var crypto = require('./encryption.js');
 
 module.exports = {
-	//users
+
 	createUser : function(firstName, lastName, username, password, email, role) {
-		createUserParameterCheck(firstName, lastName, username, password, email, role);
-		parameters = [firstName, lastName, username, password, email, role];
+		var encryptedPassword = crypto.encrypt(password);
+		parameters = [firstName, lastName, username, encryptedPassword, email, role];
 		dbFunctions.usernameExists(username, function(usernameExists){
 			if(usernameExists === 'false'){
 				dbReader.executeFunction('add_user', parameters, function(err){
@@ -17,16 +18,16 @@ module.exports = {
 				console.log("username exists");
 			}
 		});
+	},
 
-		// TODO: Throw exception if user already exists (email duplicate)
-		// TODO: Throw exception for invalid role
-	},//, needs a comma
-	//updateProfile
-	//parameters can be null and update_profile in progress
 
-// Any of these that have return statements should probably use callbacks instead	
+	
+	// updateProfile
+	// parameters can be null and update_profile in progress
 
-// This updates a users personal data. If a parameter shouldn't be updated then make it undefined
+	// Any of these that have return statements should probably use callbacks instead	
+
+	// This updates a users personal data. If a parameter shouldn't be updated then make it undefined
 	updateProfile : function (firstName, lastName, username, password, email) {
 		if(email != undefined){
 			dbReader.executeFunction('update_email', email, function(err){
@@ -60,10 +61,10 @@ module.exports = {
 	//manageDelegates this will be handeled by create user and update profile above
 		//add,edit and remove local delegate
 
-	removeUser : function(username){
-		dbReader.executeFunction('remove_user', username, function(){
-		});
- 	}
+	// removeUser : function(username){
+	// 	dbReader.executeFunction('remove_user', username, function(){
+	// 	});
+ // 	},
 	
 	//global admin
 //	displayInstallations : function(callback){
@@ -113,78 +114,46 @@ module.exports = {
 	//playlist
 
 	//returns an array of JSON objects of all playlists using a callback
-	getPlaylists : function(callback){
-		dbReader.executeFunction('get_playlist', function(playlists){
-			callback(playlists);
-		});
- 	},
+// 	getPlaylists : function(callback){
+// 		dbReader.executeFunction('get_playlist', function(playlists){
+// 			callback(playlists);
+// 		});
+//  	},
 
-	getSpecificPlaylist : function(playlist_id, callback){
-		dbReader.executeFunction('get_specific_playlist', playlist_id, function(playlist){
-			callback(playlist);
-		});
-	},
+// 	getSpecificPlaylist : function(playlist_id, callback){
+// 		dbReader.executeFunction('get_specific_playlist', playlist_id, function(playlist){
+// 			callback(playlist);
+// 		});
+// 	},
 
-	createPlaylist : function(playlist_name, playlist_creator, installation,){
-		parameters = [playlist_name, playlist_creator, NULL, installation, NULL, NULL, NULL, NULL, false];
-		dbReader.executeFunction('create_playlists', parameters);
-	},
+// 	createPlaylist : function(playlist_name, playlist_creator, installation,){
+// 		parameters = [playlist_name, playlist_creator, NULL, installation, NULL, NULL, NULL, NULL, false];
+// 		dbReader.executeFunction('create_playlists', parameters);
+// 	},
 
-//	createPlaylist(molecule, approved) ???
-
-
-	removePlaylist : function(playlist_id){
-		dbReader.executeFunction('remove_playlist', playlist_id);
-	},
+// //	createPlaylist(molecule, approved) ???
 
 
-//add molecule to playlist
-	addToPlaylist : function(playlist_id, molecule_id){
-		parameters = [playlist_id, molecule_id];
-		dbReader.executeFunction('add_to_playlist', parameters);
-	},
-
-//	removeMoleculeFromPLaylist : function(molecule_id, playlist_id){
-//		parameters = [playlist_id, molecule_id];
-//		dbReader.executeFunction('remove_molecule_from_playlist', parameters);
-//	},
-
-//all of these parameters should have a value
-	scheduleContent : function(playlists_id, start_time, end_time, start_date, end_date){
-		parameters = [playlists_id, start_time, end_time, start_date, end_date];
-		dbReader.executeFunction('schedule_content', parameters);
-	}
-
-}
+// 	removePlaylist : function(playlist_id){
+// 		dbReader.executeFunction('remove_playlist', playlist_id);
+// 	},
 
 
+// //add molecule to playlist
+// 	addToPlaylist : function(playlist_id, molecule_id){
+// 		parameters = [playlist_id, molecule_id];
+// 		dbReader.executeFunction('add_to_playlist', parameters);
+// 	},
 
-function createUserParameterCheck(firstName, lastName, username, password, email, role) {
-	var errorMessageStart = "Error in function \"createNewUser\": ";
-	var errorMessageEnd   = " must not be null or empty.";
-	if (firstName == null || firstName == '') {
-		throw errorMessageStart + "first name" + errorMessageEnd;
-	}
+// //	removeMoleculeFromPLaylist : function(molecule_id, playlist_id){
+// //		parameters = [playlist_id, molecule_id];
+// //		dbReader.executeFunction('remove_molecule_from_playlist', parameters);
+// //	},
 
-	if (lastName == null || lastName == '') {
-		throw errorMessageStart + "last name" + errorMessageEnd;
-	}
+// //all of these parameters should have a value
+// 	scheduleContent : function(playlists_id, start_time, end_time, start_date, end_date){
+// 		parameters = [playlists_id, start_time, end_time, start_date, end_date];
+// 		dbReader.executeFunction('schedule_content', parameters);
+// 	}
 
-	if (username == null || username == '') {
-		throw errorMessageStart + "username" + errorMessageEnd;
-	}
-
-	if (password == null || password == '') {
-		throw errorMessageStart + "password" + errorMessageEnd;
-	}
-
-	if (email == null || email == '') {
-		throw errorMessageStart + "email" + errorMessageEnd;
-	}
-
-	if (role == null || role == '') {
-		throw errorMessageStart + "role" + errorMessageEnd;
-	}
-
-	// TODO: Type checking of each parameter
 }
