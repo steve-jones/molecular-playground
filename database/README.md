@@ -2,7 +2,7 @@
 
 ###The following are the list of functions, their parameters (in order), and return types exposed by the database API:
 
-1. * **usersAPI:** *
+1. ***usersAPI:***
 	* **createUser**
 		* Parameters: (String) firstName, (String) lastName, (String) username, (String) password, (String) email, (Number) role
 		* Returns: void
