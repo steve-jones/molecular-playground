@@ -28,7 +28,11 @@ router.get('/edit', function(req, res){
 
 router.post('/create', function(req,res) {
 	var user = req.session.user;
-	if (!check(user)) res.redirect('/login');
+	if (!user) res.redirect('/login');
+	else if (!validRole(user)) {
+		req.flash('invalid_role', "Invalid Role");
+		res.redirect('/');
+	}
 	else {
 		// TODO: create installation row in DB.
 	}
@@ -36,7 +40,11 @@ router.post('/create', function(req,res) {
 
 router.post('/remove/:id', function(req,res) {
 	var user = req.session.user;
-	if (!check(user)) res.redirect('/login');
+	if (!user) res.redirect('/login');
+	else if (!validRole(user)) {
+		req.flash('invalid_role', "Invalid Role");
+		res.redirect('/');
+	}
 	else if (!req.params.id) res.sendStatus(400);
 	else {
 		// TODO: delete installation row from DB.
@@ -45,7 +53,11 @@ router.post('/remove/:id', function(req,res) {
 
 router.post('/update_local_admin/:id', function(req,res) {
 	var user = req.session.user;
-	if (!check(user)) res.redirect('/login');
+	if (!user) res.redirect('/login');
+	else if (!validRole(user)) {
+		req.flash('invalid_role', "Invalid Role");
+		res.redirect('/');
+	}
 	else if (!req.params.id) res.sendStatus(400);
 	else {
 		// TODO: update local admin column by row ID in DB.
@@ -55,8 +67,8 @@ router.post('/update_local_admin/:id', function(req,res) {
 /////////
 // Utility Functions
 /////////
-function check(user) {
-	return user && user.role === 'global_admin';
+function validRole(user) {
+	return user.role === 'global_admin';
 }
 
 module.exports = router;
