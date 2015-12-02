@@ -28,6 +28,21 @@ module.exports = {
 		});
 	},
 
+	getUser: function(username, callback) {
+		dbFunctions.usernameExists(username, function(usernameExists) {
+			if (usernameExists === 'false') {
+				// log error
+				throw "Cannot get user because user with username: " + username + " does not exist.";
+			}
+			else {
+				dbReader.executeFunction('get_user_by_username', [username], function(userData, err) {
+					// log error
+					callback(userData);
+				});
+			}
+		});
+	},
+
 	updateEmail: function(username, newEmail) {
 		dbFunctions.usernameExists(username, function(usernameExists) {
 			if (usernameExists === 'false') {
