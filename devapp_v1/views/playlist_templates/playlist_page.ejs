@@ -7,25 +7,39 @@
   <body data-spy="scroll" data-offset="0" data-target="#theMenu"   >
 
 	<% include ./../partials_template/header %>
-  	<% include ./../partials_template/menu_templates/menu_public %>
+  	<% include ./../partials_template/menu_templates/menu_globaladmin%> <!--need to do a if statement and render the right menu-->
 
 	<!-- ========== render partial SECTION ========== -->
-	<section id="about" name="about"></section>
-	<div id="f">
+  <section id="home" name="home"></section>
+	<div id="headerwrap" style="background:white">
+
 		<div class="container">
-			<div class="row">
-				<h3>ABOUT</h3>
-				<p class="centered"><i class="icon icon-circle"></i><i class="icon icon-circle"></i><i class="icon icon-circle"></i></p>
-
-				<!-- INTRO INFORMATIO-->
-				<div class="col-lg-6 col-lg-offset-3">
-
-				<!--  render templates and forms here   -->
+			<div class="logo">
+				<img src="/img/logoblack.png">
+			</div>
+			<br>
+			<div class="row" >
+        <h1 style="color:black">MANAGE PLAYLISTS</h1>
+          <div class="col-lg-4">
+          <p>
+            <a href="/installation/add"><span class="glyphicon glyphicon-list" style="font-size: 12em;"></span></a> <br><b>view playlists</b>
+          </p>
 
 				</div>
+
+        <div class="col-lg-4"><p>
+          <a href="/installation/add"><span class="glyphicon glyphicon-plus" style="font-size: 12em;"></span></a> <br><b>create playlist</b>
+        </p></div>
+
+        <div class="col-lg-4">
+          <a href="/installation/edit"><span class="glyphicon glyphicon-wrench" style="font-size: 12em"></span></a> <br><b>edit playlist</b>
+
+        </div>
 			</div>
 		</div><!-- /container -->
-	</div><!-- /f -->
+	</div><!-- /headerwrap -->
+
+
 
 
     <!-- Bootstrap core JavaScript

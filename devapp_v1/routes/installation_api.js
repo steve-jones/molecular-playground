@@ -6,33 +6,39 @@ var model = require('../model/installtion_functions');
 
 
 
-// for FRONT-END testing purposes only (renders installation views.)//
+// overview: this is the landing page for Manage Installations
 router.get('/', function(req, res){
 	res.render('installation_templates/installation_page');
 });
-
-router.get('/add', function(req, res){
-	res.render('add');
-});
-
-router.get('/edit', function(req, res){
-	res.render('edit');
-});
-// testing END	.
-
 
 
 
 
 // TODOs will be completed once DB API is ready.
 
-router.post('/create', function(req,res) {
+// note: 12/2. changed router method to GET.
+// the route will get the create installation view which will have a form, etc.
+// with the submit button on this form, a post request will be performed..
+router.get('/create', function(req,res) {
 	var user = req.session.user;
-	if (!check(user)) res.redirect('/login');
-	else {
-		// TODO: create installation row in DB.
-	}
+	// testing route rendering //
+
+	// note: the code below is commented out only for testing the views,
+	// please uncomment whenever needed -- phil.
+	res.render('installation_templates/add');
+	//
+	// if (!check(user)) res.redirect('/login');
+	// else {
+	// 	// TODO: create installation row in DB.
+	// }
 });
+
+
+// overview: this is the Edit Installation view.
+router.get('/edit', function(req, res){
+	res.render('installation_templates/edit');
+});
+
 
 router.post('/remove/:id', function(req,res) {
 	var user = req.session.user;
