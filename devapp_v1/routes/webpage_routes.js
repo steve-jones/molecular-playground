@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var model = require('../model/auth');
+var db = require('../database/usersAPI.js');
 
 // Homepage
 router.get('/', function(req, res) {
@@ -15,6 +16,7 @@ router.get('/', function(req, res) {
 // Login page
 router.post('/login', function (req, res) {
   var post = req.body;
+	//next step: get user from database if credentials are good
   if (post.user === 'john' && post.password === 'johnspassword') {
     req.session.user_id = 'johns_user_id_here';
     res.redirect('/');
