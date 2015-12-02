@@ -7,6 +7,11 @@
 		* Parameters: (String) firstName, (String) lastName, (String) username, (String) password, (String) email, (Number) role
 		* Returns: void
 		* Throws: User already exists, Invalid Role, Unable to connect to db
+	* **getUser**
+		* Parameters: (String) userName, (Function) callback
+		* Returns: void
+		* Throws: User doesn't exist, Unable to connect to db
+		* Example Usage: getUser('jcalabro', function(userData) { console.log(userData[0].email); });
 	* **updateEmail**
 		* Parameters: (String) username, (String) newEmail
 		* Returns: void
