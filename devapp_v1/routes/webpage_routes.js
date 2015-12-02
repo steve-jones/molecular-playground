@@ -5,7 +5,7 @@ var model = require('../model/auth');
 // Homepage
 router.get('/', function(req, res) {
 
-	var user_obj = req.session.user;
+	var user_obj = req.session.user_id;
       	    		res.render('home_page', { userinfo   : user_obj, testdata: 'testing'});
 
 
@@ -20,6 +20,8 @@ router.post('/login', function (req, res) {
     res.redirect('/');
   } else {
     res.render('home_page', {userinfo:"joijoiji"});
+		console.log(post.user);
+		console.log(post.password);
   }
 });
 
