@@ -17,9 +17,9 @@ router.post('/login', function (req, res) {
   var post = req.body;
   if (post.user === 'john' && post.password === 'johnspassword') {
     req.session.user_id = 'johns_user_id_here';
-    res.redirect('home_page');
+    res.redirect('/');
   } else {
-    res.render('home_page');
+    res.render('home_page', {userinfo:"joijoiji"});
   }
 });
 
