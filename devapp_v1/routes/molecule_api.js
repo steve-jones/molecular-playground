@@ -9,16 +9,81 @@ router.get('/', function(req, res) {
 	res.render('molecule_page', { userinfo   : user_obj});
 });
 
+/* NOTE: 
+ROUTES CURRENTLY LISTED HAVE PLACEHOLDER ROUTING DESTINATIONS.
+REPLACE WITH ACCURATE ROUTES ONCE I SPEAK TO TEAM TONIGHT. */
 
 router.post('/createmolecule', function(req,res) {
 	var user = req.session.user;
-	  	if (user === undefined || user.role !=='global_admin') {
-		    	req.flash('auth', 'Not logged in!');
+		if (!user) res.redirect('/login');
+	  	else if (!validRole(user)) {
+		    	req.flash('invalid_role', "Invalid Permissions");
 	    		res.redirect('/login');
 		}
-		else{}
+		else{
+			//create molecule from DB
+		}
+});
+
+router.post('/deletemolecule', function(req,res) {
+	var user = req.session.user;
+		if (!user) res.redirect('/login');
+	  	else if (!validRole(user)) {
+		    	req.flash('invalid_role', "Invalid Permissions");
+	    		res.redirect('/login');
+		}
+		else{
+			//delete molecule from DB
+		}
+});
+
+router.post('/updatemolecule', function(req,res) {
+	var user = req.session.user;
+		if (!user) res.redirect('/login');
+	  	else if (!validRole(user)) {
+		    	req.flash('invalid_role', "Invalid Permissions");
+	    		res.redirect('/login');
+		}
+		else{
+			//update a molecule from DB
+		}
+});
+
+router.post('/approvemolecule', function(req,res) {
+	var user = req.session.user;
+		if (!user) res.redirect('/login');
+	  	else if (!validRole(user)) {
+		    	req.flash('invalid_role', "Invalid Permissions");
+	    		res.redirect('/login');
+		}
+		else{
+			//approve a molecule for integration in pending molecules (DB function)
+		}
+});
+
+router.post('/rejectmolecule', function(req,res) {
+	var user = req.session.user;
+		if (!user) res.redirect('/login');
+	  	else if (!validRole(user)) {
+		    	req.flash('invalid_role', "Invalid Permissions");
+	    		res.redirect('/login');
+		}
+		else{
+			//reject a molecule from integration in pending molecules (DB function)
+		}
 });
 
 
+//////////
+// Utility functions
+//////////
+function validRole(user) {
+	switch (user.role) {
+		case 'global_admin':
+			return true;
+		default:
+			return false;
+	}
+}
 
 module.exports = router;
