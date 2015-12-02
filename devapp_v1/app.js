@@ -47,7 +47,7 @@ app.use('/installation', installation_api);
 app.use('/molecule', molecule_api);
 app.use('/playlist', playlist_api);
 app.use('/user', user_api);
-
+app.use('/login', homepage_api);
 
 //start up the server by loading database in !!!//
 var sys = require('sys')
