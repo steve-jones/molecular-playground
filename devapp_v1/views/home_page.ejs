@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  
-  		<link rel="stylesheet" type="text/css" href="./css/homepage.css" media="all" />
   		<% include ./partials_template/head %>
   </head>
 
@@ -38,12 +36,14 @@
 		<div class="container">
 			<div class="row">
 				<section class="container">
+
     <div class="login">
       <h1>Login to Web App</h1>
-     	 <% if (message) { %>
-		<p><%- message %></p>
-		<% } %>
 
+      	<% if (message && message.length>0) { %>
+   			<div class="alert alert-danger"><%= message %></div>
+		<% } %>
+		 
       <form method="post" action="login">
         <p><input type="text" name="user" value="" placeholder="Username or Email"></p>
         <p><input type="password" name="password" value="" placeholder="Password"></p>

@@ -7,8 +7,7 @@ var db = require('../database/usersAPI.js');
 router.get('/', function(req, res) {
 	var user = req.session.user;
 	  	if (user === undefined) {
-		    	req.flash('auth', 'Not logged in!');
-      			res.render('home_page', { message: req.flash('pleaselogin')});
+      			res.render('home_page', { message: req.flash('auth')});
 		}
 		else{
       			res.render('loggedin_page', { userinfo   : user});
@@ -25,7 +24,7 @@ router.post('/login', function (req, res) {
 		console.log(post.user);
 		console.log(post.password);
   } else {
-	req.flash('auth', 'Not logged in!');
+	req.flash('auth', 'Login incorrect');
      res.redirect('/#login');
   }
 });
