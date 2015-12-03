@@ -25,7 +25,7 @@ module.exports = {
 			else {
 				dbReader.executeFunction('get_molecule', moleculeID, function(moleculeData, err) {
 					// log error
-					callback(moleculeData);
+					callback(moleculeData[0]);
 				});
 			}
 		})
@@ -57,13 +57,13 @@ module.exports = {
 		});
 	},
 
-	setApprovalStatus: function(moleculeID, approvalStatus) {
+	setApprovalStatus: function(moleculeID, newApprovalStatus) {
 		dbFunctions.moleculeExists(moleculeID, function(moleculeExists) {
 			if (moleculeExists === 'false') {
 				throw "Cannot set approval status because molecule with id: " + moleculeID + " does not exist.";
 			}
 			else {
-				dbReader.executeFunction('change_approval_status', [moleculeID, approvalStatus], function(err) {
+				dbReader.executeFunction('change_approval_status', [moleculeID, newApprovalStatus], function(err) {
 					// log error
 				});
 			}
