@@ -1,13 +1,12 @@
 h1{
-  font-family: Helvetica;
+   font-family: 'Oswald';
+  font-style: normal;
   font-weight: 300;
-  text-align: left;
-  color: gray;
-  padding-bottom: 10px;
-  padding-left: 0px;
+  text-align: center;
+
+
   font-size: 40px;
-  margin-left: 20px;
-  margin-top: -20px;
+
 }
 h4{
   font-family: Helvetica;
@@ -25,6 +24,12 @@ table{
     width: 50%;
     text-align: center;
 
+}
+
+.col-lg-2{
+margin:auto;
+left: 290px;
+top:50px;
 }
 
 table tr:nth-child(odd) {
@@ -53,8 +58,8 @@ button#newcontent{
 
 .new{
 position: absolute;
-right:-100px;  
-margin-top: 20px;
+right:290px;  
+margin-top: 200px;
 font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 font-weight: 300;
 
@@ -62,14 +67,14 @@ font-weight: 300;
 }
 
 .tab{
-  width: 180%;
-  position: absolute;
-  margin-left:-200px;
-  margin-top: 20px;
+  width: 120%;
+  padding-top:200px;
+  padding-left: 300px;
+  margin:auto;
 }
 
 img{
   width:200px;
-margin-left: 500px;
-margin-top: 200px;
+margin-left: 600px;
+margin-top: 250px;
 }
