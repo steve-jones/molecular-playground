@@ -38,6 +38,10 @@
 				<section class="container">
     <div class="login">
       <h1>Login to Web App</h1>
+     	 <% if (message) { %>
+		<p><%- message %></p>
+		<% } %>
+
       <form method="post" action="login">
         <p><input type="text" name="user" value="" placeholder="Username or Email"></p>
         <p><input type="password" name="password" value="" placeholder="Password"></p>
