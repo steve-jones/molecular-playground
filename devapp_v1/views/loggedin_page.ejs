@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  		<% include ./partials_template/head %>
+  </head>
+
+  <body data-spy="scroll" data-offset="0" data-target="#theMenu"   >
+
+	<% include ./partials_template/header %>
+  	<% include ./partials_template/menu_templates/menu_globaladmin %>
+  	<% include ./partials_template/menu_templates/menu_localadmin %>
+  	<% include ./partials_template/menu_templates/menu_delegate %>
+  	<% include ./partials_template/menu_templates/menu_author %>
+
+
+	<!-- ========== HEADER SECTION ========== -->
+	<section id="home" name="home"></section>
+	<div id="headerwrap">
+
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-lg-offset-3">
+				<h3>
+				<br>the current user session: <%= userinfo %>
+				</h3>
+				</div>
+			</div>
+		</div><!-- /container -->
+	</div><!-- /headerwrap -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+   	<footer>
+		<% include ./partials_template/footer %>
+	</footer>
+	</body>
+</html>
