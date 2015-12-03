@@ -1,12 +1,7 @@
 var mol = require('./moleculeAPI.js');
 var usr = require('./usersAPI.js');
 
-mol.getMolecule(6, function(callback) {
-	console.log(callback[0]);
-});
-
-usr.getUser('jcalabro', function(callback) {
-	console.log(callback[0]);
-});
+mol.createMolecule(3, 'Sample Molecule', '/path/to/file/243', false);
+mol.setApprovalStatus(11, true);
 
 console.log('Done');

@@ -68,6 +68,15 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION public.change_approval_status(mol_id int, new_approval_status boolean)
+RETURNS void AS $$
+BEGIN
+    UPDATE Molecules SET approval_status=new_approval_status
+    WHERE id=mol_id
+    ;
+END;
+$$ LANGUAGE plpgsql;
+
 CREATE OR REPLACE FUNCTION public.get_molecule(molecule_id text)
 RETURNS TABLE(molecule_id int, creatorID int, name text, filepath text, day int, month int, year int) AS $molecule$
 BEGIN

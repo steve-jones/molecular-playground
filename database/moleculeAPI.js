@@ -5,12 +5,12 @@ var crypto = require('./Local/encryption.js');
 
 module.exports = {
 
-	createMolecule: function(creatorUserID, moleculeName, filepath, pendingApproval) {
+	createMolecule: function(creatorUserID, moleculeName, filepath, approvalStatus) {
 		var date = new Date();
 		var day = date.getDate();
 		var month = date.getMonth();
 		var year = date.getFullYear();
-		parameters = [creatorUserID, moleculeName, filepath, day, month, year, pendingApproval];
+		parameters = [creatorUserID, moleculeName, filepath, day, month, year, approvalStatus];
 		dbReader.executeFunction('create_molecule', parameters, function(err) {
 			// log error
 		});
@@ -31,14 +31,54 @@ module.exports = {
 	},
 
 	renameMolecule: function(moleculeID, newName) {
-		dbReader.executeFunction('rename_molecule', [moleculeID, newName], function(err) {
-			// log error
+		dbFunctions.moleculeExists(moleculeID, function(moleculeExists) {
+			if (moleculeExists === 'false') {
+				throw "Cannot rename molecule because molecule with id: " + moleculeID + " does not exist.";
+			}
+			else {
+				dbReader.executeFunction('rename_molecule', [moleculeID, newName], function(err) {
+					// log error
+				});
+			}
 		});
 	},
 
 	alterPath: function(moleculeID, newPath) {
-		dbReader.executeFunction('change_path', [moleculeID, newPath], function(err) {
-			// log error
+		dbFunctions.moleculeExists(moleculeID, function(moleculeExists) {
+			if (moleculeExists === 'false') {
+				throw "Cannot alter path because molecule with id: " + moleculeID + " does not exist.";
+			}
+			else {
+				dbReader.executeFunction('change_path', [moleculeID, newPath], function(err) {
+					// log error
+				});
+			}
+		});
+	},
+
+	setApprovalStatus: function(moleculeID, approvalStatus) {
+		dbFunctions.moleculeExists(moleculeID, function(moleculeExists) {
+			if (moleculeExists === 'false') {
+				throw "Cannot set approval status because molecule with id: " + moleculeID + " does not exist.";
+			}
+			else {
+				dbReader.executeFunction('change_approval_status', [moleculeID, approvalStatus], function(err) {
+					// log error
+				});
+			}
+		});
+	},
+
+	deleteMolecule: function(moleculeID) {
+		dbFunctions.moleculeExists(moleculeID, function(moleculeExists) {
+			if (moleculeExists === 'false') {
+				throw "Cannot delete molecule because molecule with id: " + moleculeID + " does not exist.";
+			}
+			else {
+				dbReader.executeFunction('delete_molecule', [moleculeID], function(err) {
+					// log error
+				});
+			}
 		});
 	}
 }
