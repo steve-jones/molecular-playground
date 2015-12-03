@@ -11,5 +11,16 @@ module.exports = {
 				callback('true');
 			}
 		});
+   	},
+
+   	moleculeExists: function(moleculeID, callback) {
+		dbReader.executeFunction('molecule_exists', moleculeID, function(moleculeExists){
+			if(moleculeExists[0].molecule_exists === null){
+				callback('false');
+			}
+			else{
+				callback('true');
+			}
+		});
    	}
 }

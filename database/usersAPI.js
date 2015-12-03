@@ -37,7 +37,7 @@ module.exports = {
 			else {
 				dbReader.executeFunction('get_user_by_username', [username], function(userData, err) {
 					// log error
-					callback(userData);
+					callback(userData[0]);
 				});
 			}
 		});
