@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var m = require('../model/playlist_functions');
+var model = require('../model/playlist_functions');
 
 router.get('/', function(req, res) {
 	var user_obj = req.session.user;
@@ -20,25 +20,27 @@ router.post('/create', function(req,res) {
 	}
 });
 
-router.post('/remove/:installationid', function(req,res) {
+router.post('/remove/:playlistid', function(req,res) {
 	var user = req.session.user;
 	if (!user) res.redirect('/login');
 	else if (!validRole(user)) {
 		req.flash('invalid_role', "Invalid Role");
 		res.redirect('/');
 	}
-	else if (!req.params.installationid) res.sendStatus(400);
+	else if (!req.params.playlistid) res.sendStatus(400);
 	else {
 		// TODO: remove playlist from DB
 	}
 });
-router.post('/update/:id', function(req,res) {
+
+router.post('/update/:playlistid', function(req,res) {
 	var user = req.session.user;
 	if (!user) res.redirect('/login');
 	else if (!validRole(user)) {
 		req.flash('invalid_role', "Invalid Role");
 		res.redirect('/');
 	}
+	else if (!req.params.playlistid) res.sendStatus(400);
 	else {
 		// TODO: update playlist in DB
 	}
