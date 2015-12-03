@@ -1,0 +1,80 @@
+h1{
+   font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 300;
+  text-align: center;
+
+
+  font-size: 40px;
+
+}
+h4{
+  font-family: Helvetica;
+  font-weight: 300;
+  text-align: left;
+  color: gray;
+  padding-top: -20px;
+  padding-left: px;
+  font-size: 20px;
+  margin-left: 20px;
+}
+table{
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 50%;
+    text-align: center;
+
+}
+
+.col-lg-2{
+margin:auto;
+left: 290px;
+top:50px;
+}
+
+table tr:nth-child(odd) {
+   background-color: #ccc;
+}
+
+th#num{
+  width:10px;
+}
+th#nam{
+  text-align: center;
+}
+
+body{
+    background-color:lightgray;
+}
+
+
+button#newcontent{
+ background-color: gray;
+ color: #lightgray;
+ font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+ font-size: 15px;
+ font-weight: 300;
+}
+
+.new{
+position: absolute;
+right:290px;  
+margin-top: 200px;
+font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+font-weight: 300;
+
+
+}
+
+.tab{
+  width: 120%;
+  padding-top:200px;
+  padding-left: 300px;
+  margin:auto;
+}
+
+img{
+  width:200px;
+margin-left: 600px;
+margin-top: 250px;
+}

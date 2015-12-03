@@ -15,7 +15,7 @@
 
 
 ### Weekly Production Deployment Timeline:
->**Latest prototype files are in the branch "dev1"**
+>**Latest prototype files for new features are in their respective branch**
 - 11/18 -- decided on framework
 - 11/25 -- pushed homepage views and folder structure
 - 12/02

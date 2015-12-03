@@ -50,16 +50,13 @@ app.use('/user', user_api);
 app.use('/login', homepage_api);
 
 //start up the server by loading database in !!!//
-var sys = require('sys')
+var sys = require('util')
 var exec = require('child_process').exec;
 function puts(error, stdout, stderr) { sys.puts(stdout) }
 //exec("ls ", puts);
 
 
-//load local data bases
-//exec("bash ./lib/db/init-db.sh", puts);
-//exec("echo running part 2 student enrollments, finish in 10 secs", puts);
-//exec("bash ./lib/db/init-db-enrollment.sh", puts);
+
 
 /////////////////
 //EVERYTHING BELOW HELPS WITH MISSING ROUTES
