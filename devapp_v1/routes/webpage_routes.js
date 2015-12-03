@@ -5,11 +5,8 @@ var db = require('../database/usersAPI.js');
 
 // Homepage
 router.get('/', function(req, res) {
-
 	var user_obj = req.session.user_id;
-      	    		res.render('home_page', { userinfo   : user_obj, testdata: 'testing'});
-
-
+      	res.render('home_page', { userinfo   : user_obj, testdata: 'testing'});
 });
 
 //login
@@ -20,7 +17,7 @@ router.post('/login', function (req, res) {
     req.session.user_id = 'johns_user_id_here';
     res.redirect('/');
   } else {
-    res.render('home_page', {userinfo:"joijoiji"});
+    res.render('loggedin_page', {userinfo:"joijoiji"});
 		console.log(post.user);
 		console.log(post.password);
   }
