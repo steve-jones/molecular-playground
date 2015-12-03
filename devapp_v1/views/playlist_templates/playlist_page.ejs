@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  		<% include ./../partials_template/head %>
+  </head>
+
+  <body data-spy="scroll" data-offset="0" data-target="#theMenu"   >
+
+	<% include ./../partials_template/header %>
+  	<% include ./../partials_template/menu_templates/menu_sub_playlist%> <!--need to do a if statement and render the right menu-->
+
+	<!-- ========== render partial SECTION ========== -->
+  <section id="home" name="home"></section>
+	<div id="headerwrap" style="background:white">
+
+		<div class="container">
+			<div class="logo">
+				<img src="/img/logoblack.png">
+			</div>
+			<br>
+			<div class="row" >
+        <h1 style="color:black">MANAGE PLAYLISTS</h1>
+          <div class="col-lg-4">
+          <p>
+            <a href="/installation/add"><span class="glyphicon glyphicon-list" style="font-size: 12em;"></span></a> <br><h2>view playlists</h2>
+          </p>
+
+				</div>
+
+        <div class="col-lg-4"><p>
+          <a href="/installation/add"><span class="glyphicon glyphicon-plus" style="font-size: 12em;"></span></a> <br><h2>create playlist</h2>
+        </p></div>
+
+        <div class="col-lg-4">
+          <a href="/installation/edit"><span class="glyphicon glyphicon-wrench" style="font-size: 12em"></span></a> <br><h2>edit playlist</h2>
+
+        </div>
+			</div>
+		</div><!-- /container -->
+	</div><!-- /headerwrap -->
+
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+   	<footer>
+		<% include ./../partials_template/footer %>
+	</footer>
+	</body>
+</html>

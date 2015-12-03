@@ -6,7 +6,7 @@ var m = require('../model/molecule_functions');
 
 router.get('/', function(req, res) {
 	var user_obj = req.session.user;
-	res.render('molecule_page', { userinfo   : user_obj});
+	res.render('molecule_templates/molecule_page', { userinfo   : user_obj});
 });
 
 
