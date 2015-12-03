@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
   		<% include ./../partials_template/head %>
+  		<link rel="stylesheet" type="text/css" href="./css/content-index.css" media="all" />
   </head>
 
   <body data-spy="scroll" data-offset="0" data-target="#theMenu"   >
@@ -10,24 +11,70 @@
   	<% include ./../partials_template/menu_templates/menu_sub_molecule %>
 
 	<!-- ========== render partial SECTION ========== -->
-	<section id="about" name="about"></section>
-	<div id="f">
-		<div class="container">
-			<div class="row">
-				<h3>ABOUT</h3>
-				<p class="centered"><i class="icon icon-circle"></i><i class="icon icon-circle"></i><i class="icon icon-circle"></i></p>
+  <div id="headerwrap" style="background:white">
+	
+<div class="container">
+ 
+      <br>
+      <div class="row" >
+        <h1 style="color:black">MANAGE CONTENT</h1>
+        <div class="col-lg-2">
+        </div>
+        <div class="col-lg-2">
+          <p>
+            <a href="/molecule/createmolecule"><span class="glyphicon glyphicon-plus-sign" style="font-size: 8em;"></span></a> <br><h2>New Content</h2>
+          </p>
+        </div>
 
-				<!-- INTRO INFORMATIO-->
-				<div class="col-lg-6 col-lg-offset-3">
+   
+      </div>
+    </div><!-- /container -->
 
-				<!--  render templates and forms here   -->
+<div class=tab>
+<table id="ta1" border="1">
+    <thead>
+      <tr>
+        <th id ="num">Number</th>
+        <th id ="nam">Name</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td><a href="content.html">mol1</a></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><a href="content.html">mol2</a></td>
+      </tr>
+       <tr>
+        <td>3</td>
+        <td><a href="content.html">mol3</a></td>
+      </tr> <tr>
+        <td>4</td>
+        <td><a href="content.html">mol4</a></td>
+      </tr> <tr>
+        <td>5</td>
+        <td><a href="content.html">mol5</a></td>
+      </tr>
+       <tr>
+        <td>6</td>
+        <td><a href="content.html">mol6</a></td>
+      </tr> <tr>
+        <td>7</td>
+        <td><a href="content.html">mol7</a></td>
+      </tr> <tr>
+        <td>8</td>
+        <td><a href="content.html">mol8</a></td>
+      </tr> <tr>
+        <td>9</td>
+        <td><a href="content.html">mol9</a></td>
+      </tr>
+    </thead>
+  </table>
+</div>
 
-				</div>
-			</div>
-		</div><!-- /container -->
-	</div><!-- /f -->
 
 
+</div>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

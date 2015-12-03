@@ -12,10 +12,11 @@
 
 	<!-- ========== HEADER SECTION ========== -->
 	<section id="home" name="home"></section>
-	<div id="headerwrap">
+	<div id="headerwrap" >
 
 		<div class="container">
 			<div class="row">
+			<h1>Molecular Playground Admin Portal</h1>
 				<div class="col-lg-6 col-lg-offset-3">
 				<h3>
 				<br>placeholder for googlemap 
@@ -36,8 +37,14 @@
 		<div class="container">
 			<div class="row">
 				<section class="container">
+
     <div class="login">
       <h1>Login to Web App</h1>
+
+      	<% if (message && message.length>0) { %>
+   			<div class="alert alert-danger"><%= message %></div>
+		<% } %>
+		 
       <form method="post" action="login">
         <p><input type="text" name="user" value="" placeholder="Username or Email"></p>
         <p><input type="password" name="password" value="" placeholder="Password"></p>
