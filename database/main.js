@@ -1,7 +1,12 @@
-var db = require('./Local/dbFunctions.js');
+var mol = require('./moleculeAPI.js');
+var usr = require('./usersAPI.js');
 
-db.moleculeExists(5, function (callback) {
-	console.log(callback);
+mol.getMolecule(6, function(callback) {
+	console.log(callback[0]);
+});
+
+usr.getUser('jcalabro', function(callback) {
+	console.log(callback[0]);
 });
 
 console.log('Done');

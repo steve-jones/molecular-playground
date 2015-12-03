@@ -1,6 +1,16 @@
 #Database API
 
-###The following are the list of functions, their parameters (in order), and return types exposed by the database API:
+###The following are the list of functions, their parameters (in order), return types, and callback functions exposed by the database API:
+
+#####To use one of these functions, do:
+```
+var db = require('/path/to/file.js');
+
+// example function call:
+db.getUser(username, function(callback) {
+	console.log(callback[0].firstName);
+});
+```
 
 1. ***usersAPI:***
 	* **createUser**
@@ -11,7 +21,15 @@
 		* Parameters: (String) userName, (Function) callback
 		* Returns: void
 		* Throws: User doesn't exist, Unable to connect to db
-		* Example Usage: getUser('jcalabro', function(userData) { console.log(userData[0].email); });
+		* Callback contains user .json file with parameters:
+			* (Number) id
+			* (String) firstName
+			* (String) lastName
+			* (String) uname
+			* (String) password
+			* (String) email
+			* (Number) role
+		* Example Usage: getUser('jcalabro', function(userData) { console.log(userData[0].uname); });
 	* **updateEmail**
 		* Parameters: (String) username, (String) newEmail
 		* Returns: void

@@ -17,7 +17,17 @@ module.exports = {
 	},
 
 	getMolecule: function(moleculeID, callback) {
-
+		dbFunctions.moleculeExists(moleculeID, function(moleculeExists) {
+			if (moleculeExists === 'false') {
+				throw "Cannot get molecule because molecule with id: " + moleculeID + " does not exist.";
+			}
+			else {
+				dbReader.executeFunction('get_molecule', moleculeID, function(moleculeData, err) {
+					// log error
+					callback(moleculeData);
+				});
+			}
+		})
 	},
 
 	renameMolecule: function(moleculeID, newName) {

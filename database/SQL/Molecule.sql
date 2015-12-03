@@ -11,7 +11,7 @@ CREATE TABLE Molecules (
 
 
 
-CREATE OR REPLACE FUNCTION create_molecule(creator_ID int, molecule_name text, path_to_file text, day int, month int, year int, pending_approval boolean)
+CREATE OR REPLACE FUNCTION public.create_molecule(creator_ID int, molecule_name text, path_to_file text, day int, month int, year int, pending_approval boolean)
 RETURNS void as $$
 DECLARE
 BEGIN
@@ -28,7 +28,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION molecule_exists(moleculeID_check text)
+CREATE OR REPLACE FUNCTION public.molecule_exists(moleculeID_check text)
 RETURNS int AS $moleculeID$
 DECLARE
 	moleculeID int;
@@ -41,7 +41,16 @@ BEGIN
 END;
 $moleculeID$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION rename_molecule(mol_id int, new_name text)
+CREATE OR REPLACE FUNCTION public.get_molecule(molecule_id int)
+ RETURNS TABLE(moleculeID integer, creatorid integer, name text, filepath text, day integer, month integer, year integer, approvalStatus boolean)
+ LANGUAGE plpgsql
+AS $function$
+BEGIN
+	RETURN QUERY SELECT * FROM Molecules WHERE id=molecule_id;
+END;
+$function$
+
+CREATE OR REPLACE FUNCTION public.rename_molecule(mol_id int, new_name text)
 RETURNS void AS $$
 BEGIN
     UPDATE Molecules SET name=new_name
@@ -50,7 +59,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION change_path(mol_id int, new_path text)
+CREATE OR REPLACE FUNCTION public.change_path(mol_id int, new_path text)
 RETURNS void AS $$
 BEGIN
     UPDATE Molecules SET filepath=new_path
@@ -59,7 +68,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION get_molecule(molecule_id text)
+CREATE OR REPLACE FUNCTION public.get_molecule(molecule_id text)
 RETURNS TABLE(molecule_id int, creatorID int, name text, filepath text, day int, month int, year int) AS $molecule$
 BEGIN
 	RETURN QUERY SELECT * FROM Molecules WHERE id=molecule_id
