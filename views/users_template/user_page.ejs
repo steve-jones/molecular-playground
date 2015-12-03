@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  		<% include ./../partials_template/head %>
+  </head>
+
+  <body data-spy="scroll" data-offset="0" data-target="#theMenu"   >
+
+	<% include ./../partials_template/header %>
+  	<% include ./../partials_template/menu_templates/menu_sub_user %>
+
+	<!-- ========== HEADER SECTION ========== -->
+	<section id="home" name="home"></section>
+	<div id="headerwrap" style="background:white">
+
+		<div class="container">
+			<div class="logo">
+				<img src="/img/logoblack.png">
+			</div>
+			<br>
+			<div class="row" >
+        <div class="col-xs-3 ">
+          <a href="/installation/add"><span class="glyphicon glyphicon-user" style="font-size: 17em;"></span></a>
+
+        </div>
+        <div class="col-lg-3">
+
+          <p>
+          </p>
+        </div>
+        <h1 style="color:black; text-align:left;">USERS</h1>
+
+
+
+        <!-- bootstrap table begin -->
+        <div class="container">
+        <h2>Current User(s)</h2>
+        <p>(The table schema may be subject to change)</p>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th style="text-align:center;">Firstname</th>
+              <th style="text-align:center;">Lastname</th>
+              <th style="text-align:center;">Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>John</td>
+              <td>Doe</td>
+              <td>john@example.com</td>
+            </tr>
+            </a>
+            <tr>
+              <td>Mary</td>
+              <td>Moe</td>
+              <td>mary@example.com</td>
+            </tr>
+            <tr>
+              <td>July</td>
+              <td>Dooley</td>
+              <td>july@example.com</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- bootstrap table END. -->
+
+
+
+			</div>
+		</div><!-- /container -->
+	</div><!-- /headerwrap -->
+
+
+
+
+
+  	<!-- ========== other scoll SECTION ========== -->
+
+
+
+  <section id="add" name="add"></section>
+  <div id="f">
+  		<div class="container">
+  			<div class="row">
+  				<h3>Add Installation Form</h3>
+  				<p class="centered"><i class="icon icon-circle"></i><i class="icon icon-circle"></i><i class="icon icon-circle"></i></p>
+
+  				<!-- INTRO INFORMATIO-->
+  				<div class="col-lg-6 col-lg-offset-3">
+  				</div>
+  			</div>
+  		</div><!-- /container -->
+  	</div><!-- /f -->
+
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+	<script src="/js/classie.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/smoothscroll.js"></script>
+	<script src="/js/main.js"></script>
+</body>
+</html>
