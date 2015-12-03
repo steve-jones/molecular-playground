@@ -1,5 +1,4 @@
 
-
 CREATE TABLE Molecules (
 	id SERIAL PRIMARY KEY,
 	creator_userID INT NOT NULL REFERENCES Users(id),
@@ -29,24 +28,25 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-/* FIX THIS, IT WAS JUST COPIED AND PASTER FROM USERS.SQL */
-CREATE OR REPLACE FUNCTION molecule_exists(molecule_id int)
+CREATE OR REPLACE FUNCTION molecule_exists(moleculeID_check text)
 RETURNS int AS $moleculeID$
 DECLARE
 	moleculeID int;
 BEGIN
 	SELECT id INTO moleculeID
 	FROM Molecules WHERE
-	id=molecule;
-	RETURN userID;
+	id=moleculeID_check
+	;
+	RETURN moleculeID;
 END;
-$userID$ LANGUAGE plpgsql;
+$moleculeID$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION rename_molecule(mol_id int, new_name text)
 RETURNS void AS $$
 BEGIN
     UPDATE Molecules SET name=new_name
-    WHERE id=mol_id;
+    WHERE id=mol_id
+    ;
 END;
 $$ LANGUAGE plpgsql;
 
@@ -54,13 +54,15 @@ CREATE OR REPLACE FUNCTION change_path(mol_id int, new_path text)
 RETURNS void AS $$
 BEGIN
     UPDATE Molecules SET filepath=new_path
-    WHERE id=mol_id;
+    WHERE id=mol_id
+    ;
 END;
 $$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION get_molecule(molecule_id text)
 RETURNS TABLE(molecule_id int, creatorID int, name text, filepath text, day int, month int, year int) AS $molecule$
 BEGIN
-	RETURN QUERY SELECT * FROM Molecules WHERE id=molecule_id;
+	RETURN QUERY SELECT * FROM Molecules WHERE id=molecule_id
+	;
 END;
 $user$ LANGUAGE plpgsql;
