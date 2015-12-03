@@ -5,14 +5,15 @@ var crypto = require('./Local/encryption.js');
 
 module.exports = {
 
-	createMolecule: function(creatorUserID, moleculeName, filepath, approvalStatus) {
+	createMolecule: function(creatorUserID, moleculeName, filepath, approvalStatus, callback) {
 		var date = new Date();
 		var day = date.getDate();
 		var month = date.getMonth();
 		var year = date.getFullYear();
 		parameters = [creatorUserID, moleculeName, filepath, day, month, year, approvalStatus];
-		dbReader.executeFunction('create_molecule', parameters, function(err) {
+		dbReader.executeFunction('create_molecule', parameters, function(moleculeID, err) {
 			// log error
+			callback(moleculeID[0].create_molecule);
 		});
 	},
 

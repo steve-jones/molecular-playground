@@ -12,8 +12,9 @@ CREATE TABLE Molecules (
 
 
 CREATE OR REPLACE FUNCTION public.create_molecule(creator_ID int, molecule_name text, path_to_file text, day int, month int, year int, pending_approval boolean)
-RETURNS void as $$
+RETURNS int as $molID$
 DECLARE
+	molID int;
 BEGIN
 	INSERT INTO Molecules VALUES
 		(DEFAULT
@@ -25,8 +26,10 @@ BEGIN
 		,year
 		,pending_approval
 		);
+	SELECT max(id) INTO molID FROM Molecules;
+	RETURN molID;
 END;
-$$ LANGUAGE plpgsql;
+$molID$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION public.molecule_exists(moleculeID_check text)
 RETURNS int AS $moleculeID$

@@ -12,7 +12,7 @@ db.getUser(username, function(callback) {
 });
 ```
 
-1. ***usersAPI:***
+1. ***Users API:*** (~/database/usersAPI.js)
 	* **createUser**
 		* Parameters: (String) firstName, (String) lastName, (String) username, (String) password, (String) email, (Number) role
 		* Returns: void
@@ -46,3 +46,18 @@ db.getUser(username, function(callback) {
 		* Parameters: (String) username
 		* Returns: void
 		* Throws: User doesn't exist, Unable to connect to db
+
+
+2. ***Molecule API*** (~/database/moleculeAPI.js)
+	* **createMolecule** 
+		* Parameters: (Number) creatorUserID, (String) moleculeName, (String) filepath, (Boolean) approvalStatus, (Function) callback
+		* Returns: void
+		* Throws: Unable to connect to db
+		* Callback contains moleculeID (Number)
+		* Example Usage: createMolecule(3, 'New Molecule', '/path/to/file', false, function(moleculeID) { console.log(moleculeID); });
+	* **getMolecule**
+		* Parameters: (Number) moleculeID
+	* **renameMolecule**
+	* **alterPath**
+	* **setApprovalStatus**
+	* **deleteMolecule**
