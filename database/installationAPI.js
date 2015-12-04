@@ -36,9 +36,9 @@ module.exports = {
 		});
 	}
 
-	//edit installation??
+	//edit installation what to edit??
 
-	//this may require a callback in createUser
+	//this may require a callback in createUser otherwise it might not work
 	addLocalDelegate : function(installation_id, firstName, lastName, username, password, email, role){
 		dbUser.createUser(firstName, lastName, username, password, email, role);
 		dbUser.getUser(username,function(userData){
