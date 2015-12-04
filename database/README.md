@@ -7,7 +7,7 @@
 * [Users API](#usersAPI)
 * [Molecule API](#moleculeAPI)
 * [Playlist API](#playlistAPI)
-
+* [Installation API](#installationAPI)
 
 <a name="usage"></a>
 
