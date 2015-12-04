@@ -39,13 +39,19 @@ module.exports = {
 	//edit installation??
 
 	//this may require a callback in createUser
-	addLocalDelegate : function(installation_id, firstName, lastName, username, password, email, role, callback){
+	addLocalDelegate : function(installation_id, firstName, lastName, username, password, email, role){
 		dbUser.createUser(firstName, lastName, username, password, email, role);
 		dbUser.getUser(username,function(userData){
 			var userID = userData[0].id;
 			dbreader.executeFunction('add_local_delegate', userID, function(){
-				callback();
 			});
+		});
+	}
+
+	removeLocalDelegate : function(installation_id, delegate_id, delegate_username){
+		parameters = [installation_id, delegate_id];
+		dbreader.executeFunction('remove_local_delegate', parameters, function(){	
+			dbUser.deleteUser(delegate_username);
 		});
 	}
 

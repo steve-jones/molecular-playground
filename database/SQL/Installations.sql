@@ -71,3 +71,29 @@ BEGIN
 END;
 $all_delegates$
 LANGUAGE plpgsql;
+
+
+/*complete*/
+CREATE OR REPLACE FUNCTION public.add_local_delegate(installationID INT, delegateID INT)
+Returns void AS $$
+DECLARE 
+	delegate_array int[];
+BEGIN
+	SELECT delegate_list into delegate_array FROM installations WHERE installation_id=installationID;
+	delegate_array = array_append(delegate_array, delegateID);
+	UPDATE installations SET delegate_list = delegate_array WHERE installation_id=installationID;
+END;
+$$
+LANGUAGE plpgsql;
+
+/*complete*/
+CREATE OR REPLACE FUNCTION public.remove_local_delegate(installationID INT, delegateID INT)
+Returns void AS $$
+DECLARE 
+	delegate_array int[];
+BEGIN
+	SELECT delegate_list into delegate_array FROM installations WHERE installation_id=installationID;
+	delegate_array = array_remove(delegate_array, delegateID);
+	UPDATE installations SET delegate_list = delegate_array WHERE installation_id=installationID;
+END;
+$$ LANGUAGE plpgsql;
