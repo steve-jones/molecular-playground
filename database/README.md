@@ -57,7 +57,7 @@ db.getUser(username, function(callback) {
 		* Parameters: (String) username, (Number) newRole
 		* Returns: void
 		* Throws: User doesn't exist, Invalid role, Unable to connect to db
-	* **updateRole**
+	* **deleteUser**
 		* Parameters: (String) username
 		* Returns: void
 		* Throws: User doesn't exist, Unable to connect to db
@@ -139,3 +139,40 @@ db.getUser(username, function(callback) {
 		* Parameters: (Number) playlistID, (Number) startTime, (Number) endTime, (Number) startDate, (Number) endDate (FIX THIS)
 		* Returns: void
 		* Throws: Playlist doesn't exist, Unable to connect to db
+
+<a name="installationAPI"></a>
+
+* ***Installation API*** (~/database/installationAPI.js)
+	* **addInstallation**
+		* Parameters: (String) city, (String)country, (String) school_affiliation, (Number) local_admin_id, (Number) GPS_location_x, (Number) GPS_location_y
+		* Returns: void
+		* Throws: Local admin does not exist, Unable to connect to db	
+	* **getInstallation**
+		* Parameters: (Function) callback
+		* Returns: void
+		* Throws: Installation doesn't exist, Unable to connect to db
+		* Callback contains array of all installations
+		* Example Useage: `db.getInstalltions(function(installations) { for (var i = 0; i < installations.length; ++i) { console.log(installations[i]); } };`
+	* **deleteInstallation**
+		* Parameters: (Number) installation_id
+		* Returns: void
+		* Throws: installation doesn't exist, Unable to connect to db
+	* **disableInstallation**
+		* Parameters: (Number) installation_id
+		* Returns: void
+		* Throws: installation doesn't exist, Unable to connect to db
+	* **getLocalDelegates**
+		* Parameters: (Function) callback
+		* Returns: void
+		* Throws: Installation doesn't exist, Unable to connect to db
+		* Callback contains array of all Local Administrator ID's
+		* Example Useage: `db.getLocalDelegates(function(localAdminsIDs) { for (var i = 0; i < localAdminIDs.length; ++i) { console.log(localAdminIDs[i]); } };`
+	* **addLocalDelegate**
+		* Parameters: (Number) installation_id, (String) firstName, (String) lastName, (String) username, (String) password, (String) email, (Number) role
+		* Returns: void
+		* Throws: User already exists, Installation doesn't exist, Unable to connect to db
+	* **removeLocalDelegate**
+		* Parameters: (String) username, (Number) installation_id, (Number) delegate_id
+		* Returns: void
+		* Throws: User doesn't exist, Installation doesn't exist, Unable to connect to db
+		
