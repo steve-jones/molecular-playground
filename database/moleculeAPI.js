@@ -1,7 +1,6 @@
 
 var dbReader = require('./Local/databaseReader.js');
 var dbFunctions = require('./Local/dbFunctions.js');
-var crypto = require('./Local/encryption.js');
 
 module.exports = {
 

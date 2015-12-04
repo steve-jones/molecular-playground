@@ -1,7 +1,15 @@
 #Database API
 
-###The following are the list of functions, their parameters (in order), return types, and callback functions exposed by the database API:
+#####The following are the list of functions, their parameters (in order), return types, and callback functions exposed by the database API:
 
+####Contents:
+* [Usage](#usage)
+* [Users API](#usersAPI)
+* [Molecule API](#moleculeAPI)
+* [Playlist API](#playlistAPI)
+
+
+<a name="usage"></a>
 
 #####To use one of these functions, do:
 ```
@@ -14,7 +22,12 @@ db.getUser(username, function(callback) {
 ```
 
 
-1. ***Users API:*** (~/database/usersAPI.js)
+
+
+
+<a name="usersAPI"></a>
+
+* ***Users API:*** (~/database/usersAPI.js)
 	* **createUser**
 		* Parameters: (String) firstName, (String) lastName, (String) username, (String) password, (String) email, (Number) role
 		* Returns: void
@@ -31,7 +44,7 @@ db.getUser(username, function(callback) {
 			* (String) password
 			* (String) email
 			* (Number) role
-		* Example Usage: `getUser('jcalabro', function(userData) { console.log(userData.uname); });`
+		* Example Usage: `db.getUser('jcalabro', function(userData) { console.log(userData.uname); });`
 	* **updateEmail**
 		* Parameters: (String) username, (String) newEmail
 		* Returns: void
@@ -50,13 +63,15 @@ db.getUser(username, function(callback) {
 		* Throws: User doesn't exist, Unable to connect to db
 
 
-2. ***Molecule API*** (~/database/moleculeAPI.js)
+<a name="moleculeAPI"></a>
+
+* ***Molecule API*** (~/database/moleculeAPI.js)
 	* **createMolecule** 
 		* Parameters: (Number) creatorUserID, (String) moleculeName, (String) filepath, (Boolean) approvalStatus, (Function) callback
 		* Returns: void
 		* Throws: Unable to connect to db
 		* Callback contains moleculeID (Number)
-		* Example Usage: `createMolecule(3, 'New Molecule', '/path/to/file', false, function(moleculeID) { console.log(moleculeID); });`
+		* Example Usage: `db.createMolecule(3, 'New Molecule', '/path/to/file', false, function(moleculeID) { console.log(moleculeID); });`
 	* **getMolecule**
 		* Parameters: (Number) moleculeID
 		* Returns: void
@@ -70,7 +85,7 @@ db.getUser(username, function(callback) {
 			* (Number) month
 			* (Number) year
 			* (Boolean) approvalstatus
-		* Example Usage: `mol.getMolecule(12, function(molData) { console.log(molData); });`
+		* Example Usage: `db.getMolecule(12, function(molData) { console.log(molData); });`
 	* **renameMolecule**
 		* Parameters: (Number) moleculeID, (String) newName
 		* Returns: void
@@ -87,3 +102,40 @@ db.getUser(username, function(callback) {
 		* Parameters: (Number) moleculeID
 		* Returns: void
 		* Throws: Molecule doesn't exist, Unable to connect to db
+
+
+<a name="playlistAPI"></a>
+
+* ***Playlist API*** (~/database/playlistAPI.js)
+	* **createPlaylist**
+		* Parameters: (String) playlistName, (Number) playlistCreator, (Number) installation
+		* Returns: void
+		* Throws: Any molecule doesn't exist, Installation doesn't exist, Unable to connect to db
+	* **getPlaylists**
+		* Parameters: (Function) callback
+		* Returns: void
+		* Throws: Playlist doesn't exist, Unable to connect to db
+		* Callback contains array of all playlists
+		* Example Useage: `db.getPlaylists(function(molecules) { for (var i = 0; i < molecules.length; ++i) { console.log(molecules[i]); } };`
+	* **getPlaylist**
+		* Parameters: (Number) playlistID, (Function) callback
+		* Returns: void
+		* Throws: Playlist doesn't exist, Unable to connect to db
+		* Callback contains array of all playlists
+		* Example Useage: `db.getPlaylist(function(moleculeName, molecules) { console.log(molecules); };`
+	* **removePlaylist**
+		* Parameters: (Number) playlistID
+		* Returns: void
+		* Throws: Playlist doesn't exist, Unable to connect to db
+	* **addMoleculeToPlaylist**
+		* Parameters: (Number) playlistID, (Number) moleculeID
+		* Returns: void
+		* Throws: Playlist doesn't exist, Unable to connect to db
+	* **removeMoleculeFromPlaylist**
+		* Parameters: (Number) playlistID, (Number) moleculeID
+		* Returns: void
+		* Throws: Playlist doesn't exist, Unable to connect to db
+	* **scheduleContent**
+		* Parameters: (Number) playlistID, (Number) startTime, (Number) endTime, (Number) startDate, (Number) endDate (FIX THIS)
+		* Returns: void
+		* Throws: Playlist doesn't exist, Unable to connect to db
