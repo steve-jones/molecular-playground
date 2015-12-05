@@ -217,6 +217,7 @@ db.getUser(username, function(callback) {
 		errorLog.logError(error);
 		```
 	* Error Code Table:
+	
 		| Error Code  | Description                     |
 		| ----------- | ------------------------------- |
 		| 0           | No response from database       |
@@ -233,28 +234,3 @@ db.getUser(username, function(callback) {
 		| 11          | Error does not exist            |
 
 
-
-		// Database connection error codes
-		'No response from database' : 0,
-		'Invalid database credentials' : 1,
-		'Unable to connect to database' : 2,
-
-		// User error codes
-		'User does not exist' : 3,
-		'User already exists' : 4,
-		'Invalid role' : 5,
-
-		// Molecule error codes
-		'Molecule does not exist' : 6,
-
-		// Playlist error codes
-		'Playlist does not exist' : 7,
-
-
-		// Installation error codes
-		'Installation does not exist' : 8,
-		'Local admin does not exist' : 9,
-		'Delegate already exists' : 10,
-
-		// Error Logging error codes
-		'Error does not exist' : 11
