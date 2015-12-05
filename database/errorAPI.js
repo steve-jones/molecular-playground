@@ -14,7 +14,7 @@ module.exports = {
 		var day = date.getDate();
 		var month = date.getMonth();
 		var year = date.getFullYear();
-		dbReader.executeFunction('log_error', [dbError.code, seconds, minute, hour, day, month, year], function(err) {
+		dbReader.executeFunction('log_error', [dbError.getErrorCode(), seconds, minute, hour, day, month, year], function(err) {
 
 		});
 	},
@@ -26,7 +26,7 @@ module.exports = {
 			}
 			else {
 				dbReader.executeFunction('get_error', errorID, function(errorData, err) {
-					callback(errorData[0]);
+					callback(errorData[0], new DBError(errorData[0].code));
 				});
 			}
 		});
