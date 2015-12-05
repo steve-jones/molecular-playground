@@ -189,7 +189,7 @@ db.getUser(username, function(callback) {
 		* Parameters: (Number) errorID, (Function) callback
 		* Returns: void
 		* Throws: Error doesn't exist, Unable to connect to db
-		* Callback contains jsonized  error data with parameters;
+		* Callback contains jsonized  error data with parameters (below) and a reference DBError object for convenience
 			* (Number) errorid
 			* (Number) code
 			* (Number) second
@@ -198,20 +198,24 @@ db.getUser(username, function(callback) {
 			* (Number) day
 			* (Number) month
 			* (Number) year
-		* Example Useage: `db.getError(12, function(errorData) { console.log(errorData); });`
+		* Example Useage: `db.getError(12, function(errorData, dbObject) { console.log(errorData); console.log(dbObject.getDescription()); });`
 
 <a name="dbError"></a>
 
 * ***The DBError Object*** (~/database/DBError.js)
 	* Constructor: (Number) errorCode
-	* Public Member Variables: (Number) code, (String) description
+	* Public Methods:
+		* getErrorCode()
+			* Returns: the error code of this DBError object
+		* getDescription()
+			* Returns: the description of this DBError object
 	* Notes: The DBError object is used to map error codes to human-readable error descriptions. It is passed to the `logError(DBError)` function. As time goes on, if error codes are added, the codes will extend towards infinity, leaving all existing error codes constant. 
 	* Example Usage:
 		```
 		var DBError = require('../database/DBError.js');
 		var error = new DBError(3);
-		console.log(error.code);
-		console.log(error.description);
+		console.log(error.getErrorCode());
+		console.log(error.getDescription());
 
 		var errorLog = require('../database/errorAPI.js');
 		errorLog.logError(error);

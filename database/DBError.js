@@ -1,6 +1,9 @@
 
 var Enum = require('enum');
 
+var code = -1;
+var description = "";
+
 const errorCodeEnum = new Enum({
 	// Database connection error codes
 	'No response from database' : 0,
@@ -31,13 +34,21 @@ const errorCodeEnum = new Enum({
 
 // Constructor
 function DBError(errorCode) {
-	this.code = errorCode;
+	code = errorCode;
 	try {
-		this.description = errorCodeEnum.get(this.code).key;
+		description = errorCodeEnum.get(code).key;
 	}
 	catch (err) {
-		throw "Invalid Error Code: " + String(this.code);
+		throw "Invalid Error Code: " + String(code);
 	}
+}
+
+DBError.prototype.getErrorCode = function(){
+	return code;
+}
+
+DBError.prototype.getDescription = function() {
+	return description;
 }
 
 
