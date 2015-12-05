@@ -9,6 +9,7 @@
 * [Playlist API](#playlistAPI)
 * [Installation API](#installationAPI)
 * [Error Logging API](#errorAPI)
+* [The DBError Object](#dbError)
 
 <a name="usage"></a>
 
@@ -111,7 +112,7 @@ db.getUser(username, function(callback) {
 	* **createPlaylist**
 		* Parameters: (String) playlistName, (Number) playlistCreator, (Number) installation
 		* Returns: void
-		* Throws: Any molecule doesn't exist, Installation doesn't exist, Unable to connect to db
+		* Throws: Molecule doesn't exist, Installation doesn't exist, Unable to connect to db
 	* **getPlaylists**
 		* Parameters: (Function) callback
 		* Returns: void
@@ -157,11 +158,11 @@ db.getUser(username, function(callback) {
 	* **deleteInstallation**
 		* Parameters: (Number) installation_id
 		* Returns: void
-		* Throws: installation doesn't exist, Unable to connect to db
+		* Throws: Installation doesn't exist, Unable to connect to db
 	* **disableInstallation**
 		* Parameters: (Number) installation_id
 		* Returns: void
-		* Throws: installation doesn't exist, Unable to connect to db
+		* Throws: Installation doesn't exist, Unable to connect to db
 	* **getLocalDelegates**
 		* Parameters: (Function) callback
 		* Returns: void
@@ -171,7 +172,7 @@ db.getUser(username, function(callback) {
 	* **addLocalDelegate**
 		* Parameters: (Number) installation_id, (String) firstName, (String) lastName, (String) username, (String) password, (String) email, (Number) role
 		* Returns: void
-		* Throws: User already exists, Installation doesn't exist, Unable to connect to db
+		* Throws: Delegate already exists, Installation doesn't exist, Unable to connect to db
 	* **removeLocalDelegate**
 		* Parameters: (String) username, (Number) installation_id, (Number) delegate_id
 		* Returns: void
@@ -198,3 +199,20 @@ db.getUser(username, function(callback) {
 			* (Number) month
 			* (Number) year
 		* Example Useage: `db.getError(12, function(errorData) { console.log(errorData); });`
+
+<a name="dbError"></a>
+
+* ***The DBError Object*** (~/database/DBError.js)
+	* Constructor: (Number) errorCode
+	* Public Member Variables: (Number) code, (String) description
+	* Notes: The DBError object is used to map error codes to human-readable error descriptions. It is passed to the `logError(DBError)` function. As time goes on, if error codes are added, the codes will extend towards infinity, leaving all existing error codes constant. 
+	* Example Usage:
+		```
+		var DBError = require('../database/DBError.js');
+		var error = new DBError(3);
+		console.log(error.code);
+		console.log(error.description);
+
+		var errorLog = require('../database/errorAPI.js');
+		errorLog.logError(error);
+		```

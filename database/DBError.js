@@ -9,7 +9,23 @@ const errorCodeEnum = new Enum({
 
 	// User error codes
 	'User does not exist' : 3,
-	'a' : 4
+	'User already exists' : 4,
+	'Invalid role' : 5,
+
+	// Molecule error codes
+	'Molecule does not exist' : 6,
+
+	// Playlist error codes
+	'Playlist does not exist' : 7,
+
+
+	// Installation error codes
+	'Installation does not exist' : 8,
+	'Local admin does not exist' : 9,
+	'Delegate already exists' : 10,
+
+	// Error Logging error codes
+	'Error does not exist' : 11
 });
 
 

@@ -1,5 +1,5 @@
 
-var DBError = require('./Local/DBError.js');
+var DBError = require('./DBError.js');
 var dbReader = require('./Local/databaseReader.js');
 var dbFunctions = require('./Local/dbFunctions.js');
 
