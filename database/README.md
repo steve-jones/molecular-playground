@@ -217,20 +217,20 @@ db.getUser(username, function(callback) {
 		errorLog.logError(error);
 		```
 	* Error Code Table:
-		|Error Code | Description                   |
-		|-----------|-------------------------------|
-		| 0         | No response from database     |
-		| 1         | Invalid database credentials  |
-		| 2         | Unable to connect to database |
-		| 3         | User does not exist           |
-		| 4         | User already exists           |
-		| 5         | Invalid Role                  |
-		| 6         | Molecule does not exist       |
-		| 7         | Playlist does not exist       |
-		| 8         | Installation does not exist   |
-		| 9         | Local admin does not exist    |
-		| 10        | Delegate already exists       |
-		| 11        | Error does not exist          |
+		| Error Code  | Description                     |
+		| ----------- | ------------------------------- |
+		| 0           | No response from database       |
+		| 1           | Invalid database credentials    |
+		| 2           | Unable to connect to database   |
+		| 3           | User does not exist             |
+		| 4           | User already exists             |
+		| 5           | Invalid Role                    |
+		| 6           | Molecule does not exist         |
+		| 7           | Playlist does not exist         |
+		| 8           | Installation does not exist     |
+		| 9           | Local admin does not exist      |
+		| 10          | Delegate already exists         |
+		| 11          | Error does not exist            |
 
 
 
