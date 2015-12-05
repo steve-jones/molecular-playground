@@ -4,7 +4,7 @@ CREATE TABLE Playlists (
 	playlist_id SERIAL NOT NULL,
 	name TEXT NOT NULL,
 	playlist_creator INT NOT NULL REFERENCES Users(id),
-	molecule_ids INT[] NOT NULL /* REFERENCES Molecules(id), */
+	molecule_ids INT[] NOT NULL 
 	installation TEXT NOT NULL REFERENCES Installations(id),
 	start_time INT NOT NULL,
 	start_date  INT NOT NULL,
