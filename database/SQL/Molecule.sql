@@ -4,9 +4,9 @@ CREATE TABLE Molecules (
 	creator_userID INT NOT NULL REFERENCES Users(id),
 	name TEXT NOT NULL,
 	filepath TEXT NOT NULL UNIQUE,
-	creation_day  INT NOT NULL CHECK(creation_day > 0) CHECK(creation_day <= 31),
-	creation_month INT NOT NULL CHECK(creation_month > 0) CHECK(creation_month <= 12),
-	creation_year INT NOT NULL CHECK(creation_year > 2000)
+	creation_day  INT NOT NULL CHECK(creation_day >= 0) CHECK(creation_day <= 31),
+	creation_month INT NOT NULL CHECK(creation_month >= 0) CHECK(creation_month <= 12),
+	creation_year INT NOT NULL CHECK(creation_year >= 2000)
 );
 
 
