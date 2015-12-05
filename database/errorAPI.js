@@ -1,6 +1,7 @@
 
 var DBError = require('./Local/DBError.js');
 var dbReader = require('./Local/databaseReader.js');
+var dbFunctions = require('./Local/dbFunctions.js');
 
 module.exports = {
 
@@ -16,6 +17,18 @@ module.exports = {
 		dbReader.executeFunction('log_error', [dbError.code, seconds, minute, hour, day, month, year], function(err) {
 
 		});
-	}
+	},
 
+	getError: function(errorID, callback) {
+		dbFunctions.errorExists(errorID, function(errorExists) {
+			if (errorExists === 'false') {
+				throw "Cannot get error because error with id: " + String(errorID) + " does not exist.";
+			}
+			else {
+				dbReader.executeFunction('get_error', errorID, function(errorData, err) {
+					callback(errorData[0]);
+				});
+			}
+		});
+	}
 };

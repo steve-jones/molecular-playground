@@ -32,3 +32,23 @@ BEGIN
 END;
 $error_id$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION public.get_error(id_check int)
+ RETURNS TABLE(errorID integer, code int, second int, minute int, hour int, day int, month int, year int)
+ LANGUAGE plpgsql
+AS $error$
+BEGIN
+	RETURN QUERY SELECT * FROM ErrorLog WHERE id=id_check;
+END;
+$error$
+
+CREATE OR REPLACE FUNCTION public.error_exists(idCheck text)
+RETURNS int AS $errorID$
+DECLARE
+	errorID int;
+BEGIN
+	SELECT id INTO errorID
+	FROM ErrorLog WHERE
+	id=idCheck;
+	RETURN errorID;
+END;
+$errorID$ LANGUAGE plpgsql;

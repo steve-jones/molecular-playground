@@ -8,6 +8,7 @@
 * [Molecule API](#moleculeAPI)
 * [Playlist API](#playlistAPI)
 * [Installation API](#installationAPI)
+* [Error Logging API](#errorAPI)
 
 <a name="usage"></a>
 
@@ -147,7 +148,7 @@ db.getUser(username, function(callback) {
 		* Parameters: (String) city, (String)country, (String) school_affiliation, (Number) local_admin_id, (Number) GPS_location_x, (Number) GPS_location_y
 		* Returns: void
 		* Throws: Local admin does not exist, Unable to connect to db	
-	* **getInstallation**
+	* **getInstallations**
 		* Parameters: (Function) callback
 		* Returns: void
 		* Throws: Installation doesn't exist, Unable to connect to db
@@ -176,3 +177,24 @@ db.getUser(username, function(callback) {
 		* Returns: void
 		* Throws: User doesn't exist, Installation doesn't exist, Unable to connect to db
 		
+<a name="errorAPI"></a>
+
+* ***Error Logging API*** (~/database/errorAPI.js)
+	* **logError**
+		* Parameters: (DBError) dbError
+		* Returns: void
+		* Throws: Unable to connect to db	
+	* **getError**
+		* Parameters: (Number) errorID, (Function) callback
+		* Returns: void
+		* Throws: Error doesn't exist, Unable to connect to db
+		* Callback contains jsonized  error data with parameters;
+			* (Number) errorid
+			* (Number) code
+			* (Number) second
+			* (Number) minute
+			* (Number) hour
+			* (Number) day
+			* (Number) month
+			* (Number) year
+		* Example Useage: `db.getError(12, function(errorData) { console.log(errorData); });`
