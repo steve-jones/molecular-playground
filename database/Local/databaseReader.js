@@ -15,13 +15,25 @@ var db = pgp(cn);
 
 module.exports = {
 	executeFunction: function(functionName, parameters, callback) {
-		db.func(functionName, parameters)
-		   .then(function (data) {
+		if(parameters != ''){
+			db.func(functionName, parameters)
+		   	.then(function (data) {
 		    	callback(data);
-		   })
-		   .catch(function (error) {
+		   	})
+		   	.catch(function (error) {
 		   		// TODO: Find a better way to log errors
 	        	console.log(error);
-		   });
+		   	});
+		}
+		else{
+			db.func(functionName)
+		   	.then(function (data) {
+		    	callback(data);
+		   	})
+		   	.catch(function (error) {
+		   		// TODO: Find a better way to log errors
+	        	console.log(error);
+		   	});
+		}
 	}
 }

@@ -22,5 +22,16 @@ module.exports = {
 				callback('true');
 			}
 		});
+   	},
+
+   	errorExists: function(errorID, callback) {
+   		dbReader.executeFunction('error_exists', errorID, function(errorExists) {
+   			if (errorExists[0].error_exists === null) {
+   				callback('false');
+   			}
+   			else {
+   				callback('true');
+   			}
+   		});
    	}
 }
