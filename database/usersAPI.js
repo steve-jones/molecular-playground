@@ -35,7 +35,8 @@ module.exports = {
 		dbFunctions.usernameExists(username, function(usernameExists) {
 			if (usernameExists === 'false') {
 				// log error
-				throw "Cannot get user because user with username: " + username + " does not exist.";
+				//throw "Cannot get user because user with username: " + username + " does not exist.";
+				callback(undefined);
 			}
 			else {
 				dbReader.executeFunction('get_user_by_username', [username], function(userData, err) {
