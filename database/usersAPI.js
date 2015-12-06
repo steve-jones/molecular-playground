@@ -5,10 +5,11 @@ var crypto = require('./Local/encryption.js');
 
 module.exports = {
 
-	createUser: function(firstName, lastName, username, password, email, role) {
+	createUser: function(firstName, lastName, username, password, email, role, callback) {
 		if (!validateRole(role)) {
 			// TODO: Return some sort of error to the caller
 			console.log('User creation failed: Invalid Role: ' + String(role));
+			callback('User creation failed: Invalid Role: ' + String(role));
 			return;
 		}
 
@@ -18,12 +19,14 @@ module.exports = {
 			if(usernameExists === 'false') {
 				dbReader.executeFunction('add_user', parameters, function(err) {
 					// log error
+					callback(err);
 				});
 			}
 			else {
 				// log error
+					callback('username exists');
 				// TODO: Return some sort of error to the caller
-				console.log("username exists");
+					console.log("username exists");
 			}
 		});
 	},

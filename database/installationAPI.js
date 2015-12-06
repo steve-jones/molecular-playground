@@ -36,19 +36,18 @@ module.exports = {
 		});
 	}
 
-	//edit installation what to edit??
 	updateLocalAdmin : function(installation_id, new_local_admin_id){
 		parameters = [installation_id, new_local_admin_id]
 		dbreader.executeFunction('update_local_admin', parameters, function(){
 		});
 	}
 
-	//this may require a callback in createUser otherwise it might not work
 	addLocalDelegate : function(installation_id, firstName, lastName, username, password, email, role){
-		dbUser.createUser(firstName, lastName, username, password, email, role);
-		dbUser.getUser(username,function(userData){
-			var userID = userData[0].id;
-			dbreader.executeFunction('add_local_delegate', userID, function(){
+		dbUser.createUser(firstName, lastName, username, password, email, role, function(err){
+			dbUser.getUser(username,function(userData){
+				var userID = userData[0].id;
+				dbreader.executeFunction('add_local_delegate', userID, function(){
+				});
 			});
 		});
 	}
