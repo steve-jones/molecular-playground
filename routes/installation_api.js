@@ -31,6 +31,7 @@ router.get('/create', function(req,res) {
 // Backend API routes
 //////////
 router.post('/create', function(req,res) {
+	console.log(req.body);
 	var city, country, school_affiliation, local_admin_id, GPS_location_x, GPS_location_y;
 	city = req.body.form-city;
 	country = req.body.form-country;
@@ -40,8 +41,7 @@ router.post('/create', function(req,res) {
 	location_y = req.body.GPS_location_y;
 
 	installation_model.addInstallation(city, country, school_affiliation, local_admin_id, location_x, location_y);
-
-	res.end();
+	res.redirect('/installation');
 });
 router.post('/remove/:installationId', function(req,res) {
 	var user = req.session.user;
@@ -53,7 +53,7 @@ router.post('/remove/:installationId', function(req,res) {
 	else if (!req.params.installationId) res.sendStatus(400);
 	else {
 		installation_model.deleteInstallation(req.params.installationId);
-		res.end();
+		res.redirect('/installation');
 	}
 });
 
@@ -69,7 +69,7 @@ router.post('/update_local_admin', function(req,res) {
 		// TODO: figure out the data structure received from front end
 
 		installation_model.updateLocalAdmin(installation_id, new_local_admin_id);
-		res.end();
+		res.redirect('/installation');
 	}
 });
 
@@ -84,7 +84,7 @@ router.post('/add_delegate/:installationId', function(req,res) {
 	else {
 		var installation_id, firstName, lastName, username, password, email, role;
 		installation_model.addLocalDelegate(installation_id, firstName, lastName, username, password, email, role);
-		res.end();
+		res.redirect('/installation');
 	}
 });
 
@@ -100,7 +100,7 @@ router.post('/remove_delegate', function(req,res) {
 		var installation_id, delegate_id, delegate_username;
 
 		installation_model.removeLocalDelegate(installation_id, delegate_id, delegate_username);
-		res.end();
+		res.redirect('/installation');
 	}
 });
 

@@ -14,7 +14,7 @@ module.exports = {
 	addInstallation : function (city, country, school_affiliation, local_admin_id, GPS_location_x, GPS_location_y){
 		var date = new Date();
 		var day = date.getDate();
-		parameters = [city, country, school_affliation, local_admin_id, {}, true, day,
+		parameters = [city, country, school_affiliation, local_admin_id, '{}', true, day,
 		GPS_location_x, GPS_location_y];
 		dbReader.executeFunction('add_installation', parameters, function(){
 		});
@@ -40,7 +40,7 @@ module.exports = {
 		parameters = [installation_id, new_local_admin_id]
 		dbreader.executeFunction('update_local_admin', parameters, function(){
 		});
-	}
+	},
 
 	addLocalDelegate : function(installation_id, firstName, lastName, username, password, email, role){
 		dbUser.createUser(firstName, lastName, username, password, email, role, function(err){
