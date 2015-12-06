@@ -43,7 +43,7 @@ router.get('/createmolecule', function(req, res) {
 				req.flash('upload_success_state', "Uploaded. New molecule pending approval.");
 			}
 		}
->>>>>>> master
+
 });
 
 		/*
@@ -77,6 +77,7 @@ router.get('/allmolecules', function(req, res) {
 		res.render('/molecule_templates/allmolecules', {pendingList: molecules});
 		//push to frontend
 		});
+
 	}
 }
 
@@ -101,6 +102,7 @@ router.get('/pendingrequest', function(req, res) {
 				for (int i = 0; i < allMolecules.length; i++) {
 					if (allMolecules[i].approval_status == false) {
 						molecules.push(allMolecules[i]);
+
 					}
 				}
 		res.render('/molecule_templates/pending', {pendingList: molecules});
@@ -173,6 +175,7 @@ function validGlobalAdmin(user) {
 	switch (user.role) {
 		case 'global_admin':
 			return true;
+
 		default:
 			return false;
 	}
