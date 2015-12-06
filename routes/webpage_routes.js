@@ -5,26 +5,55 @@ var db = require('../database/usersAPI.js');
 
 // Homepage
 router.get('/', function(req, res) {
-	var user_obj = req.session.user_id;
-      	res.render('home_page', { userinfo   : user_obj, testdata: 'testing'});
+	var user = req.session.user;
+	  	if (user === undefined) {
+      			res.render('home_page', { message: req.flash('auth')});
+		}
+		else{
+      			res.render('loggedin_page', { userinfo   : user});
+		}
+});
+
+//single sign on for testing
+router.get('/sso', function(req, res) {
+	var user = 'global_admin';
+      	res.render('loggedin_page', { userinfo   : { id: 0,
+  firstname: 'super user',
+  lastname: 'person',
+  uname: 'superuser',
+  password: '12345',
+  email: 'superuser@umass.edu',
+  role: 1 }
+});
 });
 
 //login
 router.post('/login', function (req, res) {
-  var post = req.body;
-	//next step: get user from database if credentials are good
-  if (post.user === 'john' && post.password === 'johnspassword') {
-    req.session.user_id = 'johns_user_id_here';
-    res.redirect('/');
-  } else {
-    res.render('loggedin_page', {userinfo:"joijoiji"});
-		console.log(post.user);
-		console.log(post.password);
-  }
+ var post = req.body;
+  //next step: get user from database if credentials are good
+
+  db.getUser(post.user, function (data) {
+   console.log(data);
+    if (data === undefined){
+      req.flash('auth', 'User does not exist');
+      res.redirect('/#login');
+    }
+    else if (data.password !=  post.password){
+      req.flash('auth', 'Login password');
+      res.redirect('/#login');
+    }
+    else{
+      //success
+    req.session.user = data;
+    res.render('loggedin_page', {userinfo:data});
+    }
+  });
+
+
 });
 
 //The logout route:
-router.post('/logout', function(req,res) {
+router.get('/logout', function(req,res) {
     req.session.destroy(function(err) {
         res.redirect('/');
     });

@@ -5,10 +5,11 @@ var crypto = require('./Local/encryption.js');
 
 module.exports = {
 
-	createUser: function(firstName, lastName, username, password, email, role) {
+	createUser: function(firstName, lastName, username, password, email, role, callback) {
 		if (!validateRole(role)) {
 			// TODO: Return some sort of error to the caller
-			console.log('User creation failed: Invalid RoleID: ' + String(role));
+			console.log('User creation failed: Invalid Role: ' + String(role));
+			callback('User creation failed: Invalid Role: ' + String(role));
 			return;
 		}
 
@@ -18,26 +19,35 @@ module.exports = {
 			if(usernameExists === 'false') {
 				dbReader.executeFunction('add_user', parameters, function(err) {
 					// log error
+					callback(err);
 				});
 			}
 			else {
 				// log error
+					callback('username exists');
 				// TODO: Return some sort of error to the caller
-				console.log("username exists");
+					console.log("username exists");
 			}
 		});
 	},
 
 	getUser: function(username, callback) {
+		//console.log(username);
 		dbFunctions.usernameExists(username, function(usernameExists) {
+
+		//console.log(usernameExists);
 			if (usernameExists === 'false') {
 				// log error
-				throw "Cannot get user because user with username: " + username + " does not exist.";
+				//throw "Cannot get user because user with username: " + username + " does not exist.";
+				callback(undefined);
 			}
 			else {
 				dbReader.executeFunction('get_user_by_username', [username], function(userData, err) {
+		//console.log(userData);
 					// log error
-					callback(userData);
+					userData[0].password = crypto.decrypt(userData[0].password);
+		//console.log(userData[0].password);
+					callback(userData[0]);
 				});
 			}
 		});
@@ -81,7 +91,7 @@ module.exports = {
 	updateRole: function(username, newRole) {
 		if (!validateRole(newRole)) {
 			// TODO: Return some sort of error to the caller
-			console.log('Role update failed: Invalid RoleID: ' + String(newRole));
+			console.log('Role update failed: Invalid Role: ' + String(newRole));
 			return;
 		}
 
@@ -115,9 +125,9 @@ module.exports = {
 
 
 function validateRole(role) {
-	if (role < 0 || role > 4) {
-		return false;
+	if (role === 'global_admin' || role === 'local_admin' || role === 'author' || role === 'delegate') {
+		return true;
 	}
 
-	return true;
+	return false;
 }

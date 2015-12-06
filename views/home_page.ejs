@@ -12,13 +12,14 @@
 
 	<!-- ========== HEADER SECTION ========== -->
 	<section id="home" name="home"></section>
-	<div id="headerwrap">
+	<div id="headerwrap" >
 
 		<div class="container">
 			<div class="row">
+			<h1>Molecular Playground Admin Portal</h1>
 				<div class="col-lg-6 col-lg-offset-3">
 				<h3>
-				<br>placeholder for googlemap 
+				<br>placeholder for googlemap
 				<br>
 				</h3>
 				</div>
@@ -36,8 +37,14 @@
 		<div class="container">
 			<div class="row">
 				<section class="container">
+
     <div class="login">
       <h1>Login to Web App</h1>
+      <p class="centered"><i class="icon icon-circle"></i><i class="icon icon-circle"></i><i class="icon icon-circle"></i></p>
+      	<% if (message && message.length>0) { %>
+   			<div class="alert alert-danger"><%= message %></div>
+		<% } %>
+
       <form method="post" action="login">
         <p><input type="text" name="user" value="" placeholder="Username or Email"></p>
         <p><input type="password" name="password" value="" placeholder="Password"></p>
@@ -60,7 +67,7 @@
 <div id="f">
 		<div class="container">
 			<div class="row">
-				<h3>Signup</h3>
+				<h1>Signup</h1>
 				<p class="centered"><i class="icon icon-circle"></i><i class="icon icon-circle"></i><i class="icon icon-circle"></i></p>
 
 				<!-- INTRO INFORMATIO-->
@@ -76,7 +83,7 @@
 	<div id="f">
 		<div class="container">
 			<div class="row">
-				<h3>ABOUT</h3>
+				<h1>About</h1>
 				<p class="centered"><i class="icon icon-circle"></i><i class="icon icon-circle"></i><i class="icon icon-circle"></i></p>
 
 				<!-- INTRO INFORMATIO-->

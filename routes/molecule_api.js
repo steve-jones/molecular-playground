@@ -44,7 +44,6 @@ router.get('/createmolecule', function(req, res) {
 			}
 		}
 });
-
 		/*
 		We found that, given enough time, we would classify requests into separate queues.
 		We would have a deletion queue, an update queue, and a new molecule queue.
@@ -73,12 +72,12 @@ router.get('/pendingrequest', function(req, res) {
 				for (int i = 0; i < allMolecules.length; i++) {
 					if (allMolecules[i].approval_status == false) {
 						molecules.push(allMolecules[i]);
-					} 
+					}
 				}
-		//TODO: return array "molecules" to front end for rendering	
+		//TODO: return array "molecules" to front end for rendering
 		res.render('/molecule_templates/pending', {pendingList: molecules});
 		});
-	} 
+	}
 }
 
 ////// APPROVE //////
@@ -144,7 +143,7 @@ function validGlobalAdmin(user) {
 	switch (user.role) {
 		case 'global_admin':
 			return true;
-		default: 
+		default:
 			return false;
 	}
 }
