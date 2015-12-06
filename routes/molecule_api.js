@@ -16,6 +16,12 @@ router.get('/createmolecule', function(req,res) {
 res.render('./molecule_templates/upload');
 });
 
+router.get('/approval', function(req,res) {
+	var user = req.session.user;
+	  	
+res.render('./molecule_templates/approval');
+});
+
 router.get('/content', function(req,res) {
 	var user = req.session.user;
 	  	
