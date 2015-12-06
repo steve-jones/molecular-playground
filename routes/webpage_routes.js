@@ -17,14 +17,21 @@ router.get('/', function(req, res) {
 //single sign on for testing
 router.get('/sso', function(req, res) {
 	var user = 'global_admin';
-      	res.render('loggedin_page', { userinfo   : user});
+      	res.render('loggedin_page', { userinfo   : { id: 5,
+  firstname: 'matt',
+  lastname: 'lydigsen',
+  uname: 'mlydigsen',
+  password: '12345',
+  email: 'mlydigsen@umass.edu',
+  role: 1 }
+});
 });
 
 //login
 router.post('/login', function (req, res) {
   var post = req.body;
 	//next step: get user from database if credentials are good
-  db.getUser('mlydigsen', function (data) {
+  db.getUser(body.user, function (data) {
 	console.log(data);
 
     if (data === null){
