@@ -8,7 +8,13 @@ var model = require('../database/installationAPI');
 
 // overview: this is the landing page for Manage Installations
 router.get('/', function(req, res){
-	res.render('installation_templates/installation_page');
+	var user = req.session.user;
+	if (user=== undefined) {
+      	req.flash('auth', 'Your session expired, please login to your account');
+		res.redirect('/#login');
+	}
+	else
+	res.render('installation_templates/installation_page',{ userinfo   : user});
 });
 
 
@@ -24,10 +30,16 @@ router.get('/create', function(req,res) {
 	// testing route rendering //
 
 	// note: the code below is commented out only for testing the views,
-	// please uncomment whenever needed -- phil.
-	res.render('installation_templates/add');
+	// please uncomment whenever needed -- phil.	
+
+	if (user=== undefined) {
+      	req.flash('auth', 'Your session expired, please login to your account');
+		res.redirect('/#login');
+	}
+	else
+	res.render('installation_templates/add',{ userinfo   : user});
 	//
-	// if (!check(user)) res.redirect('/login');
+	// if (user===undefined) res.redirect('/login');
 	// else {
 	// 	// TODO: create installation row in DB.
 	// }
@@ -45,7 +57,10 @@ router.post('/installation_add', function(req,res) {
 		console.log(err + " hello");
 			model.getInstallations(function(data){console.log("data: " + JSON.stringify(data))})
 	});
-	if (!check(user)) res.redirect('/login');
+	if (user=== undefined) {
+      	req.flash('auth', 'Your session expired, please login to your account');
+		res.redirect('/#login');
+	}
 	else if (!req.params.id) res.sendStatus(400);
 	else {
 		// TODO: update local admin column by row ID in DB.
@@ -55,13 +70,21 @@ router.post('/installation_add', function(req,res) {
 
 // overview: this is the Edit Installation view.
 router.get('/edit', function(req, res){
-	res.render('installation_templates/edit');
+	if (user=== undefined) {
+      	req.flash('auth', 'Your session expired, please login to your account');
+		res.redirect('/#login');
+	}
+	else
+	res.render('installation_templates/edit',{ userinfo   : user});
 });
 
 
 router.post('/remove/:id', function(req,res) {
 	var user = req.session.user;
-	if (!check(user)) res.redirect('/login');
+		if (user=== undefined) {
+      	req.flash('auth', 'Your session expired, please login to your account');
+		res.redirect('/#login');
+	}
 	else if (!req.params.id) res.sendStatus(400);
 	else {
 		// TODO: delete installation row from DB.
@@ -70,7 +93,10 @@ router.post('/remove/:id', function(req,res) {
 
 router.post('/update_local_admin/:id', function(req,res) {
 	var user = req.session.user;
-	if (!check(user)) res.redirect('/login');
+		if (user=== undefined) {
+      	req.flash('auth', 'Your session expired, please login to your account');
+		res.redirect('/#login');
+	}
 	else if (!req.params.id) res.sendStatus(400);
 	else {
 		// TODO: update local admin column by row ID in DB.
