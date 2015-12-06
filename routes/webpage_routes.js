@@ -33,7 +33,7 @@ router.post('/login', function (req, res) {
   //next step: get user from database if credentials are good
 
   db.getUser(post.user, function (data) {
-   console.log(data);
+   console.log("user data :"+ data);
     if (data === undefined){
       req.flash('auth', 'User does not exist');
       res.redirect('/#login');
