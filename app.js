@@ -15,7 +15,7 @@ var homepage_api       	= require('./routes/webpage_routes');
 
 // Business layer components
 var installation_api = require('./routes/installation_api');
-var molecule_api = require('./routes/molecule_api');
+// var molecule_api = require('./routes/molecule_api');
 var playlist_api = require('./routes/playlist_api');
 var user_api = require('./routes/user_api');
 
@@ -44,7 +44,7 @@ app.use(flash());
 app.use('/', homepage_api);
 
 app.use('/installation', installation_api);
-app.use('/molecule', molecule_api);
+// app.use('/molecule', molecule_api);
 app.use('/playlist', playlist_api);
 app.use('/user', user_api);
 app.use('/login', homepage_api);

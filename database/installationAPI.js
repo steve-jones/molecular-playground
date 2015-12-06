@@ -9,7 +9,7 @@ module.exports = {
 		dbReader.executeFunction('get_installations', '', function(installations){
 			callback(installations);
 		});
-	}, 
+	},
 
 	addInstallation : function (city, country, school_affiliation, local_admin_id, GPS_location_x, GPS_location_y){
 		var date = new Date();
@@ -18,23 +18,23 @@ module.exports = {
 		GPS_location_x, GPS_location_y];
 		dbReader.executeFunction('add_installation', parameters, function(){
 		});
-	} 
+	},
 
 	deleteInstallation : function(installation_id){
 		dbreader.executeFunction('delete_installation', installation_id, function(){
 		});
-	}
+	},
 
 	disableInstallation : function(installation_id){
 		dbreader.executeFunction('disable_installation', installation_id, function(){
 		});
-	}
+	},
 
 	getLocalDelegates : function(installation_id, callback){
 		dbreader.executeFunction('get_local_delegates', installation_id, function(allDelegates){
 			callback(allDelegates);
 		});
-	}
+	},
 
 	updateLocalAdmin : function(installation_id, new_local_admin_id){
 		parameters = [installation_id, new_local_admin_id]
@@ -50,13 +50,13 @@ module.exports = {
 				});
 			});
 		});
-	}
+	},
 
 	removeLocalDelegate : function(installation_id, delegate_id, delegate_username){
 		parameters = [installation_id, delegate_id];
-		dbreader.executeFunction('remove_local_delegate', parameters, function(){	
+		dbreader.executeFunction('remove_local_delegate', parameters, function(){
 			dbUser.deleteUser(delegate_username);
 		});
 	}
 
-}	
+}

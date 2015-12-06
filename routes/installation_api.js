@@ -2,27 +2,19 @@ var express = require('express');
 var router = express.Router();
 
 // object which contains DB access functions
-var model = require('../model/installtion_functions');
+var installation_model = require('../database/installationAPI');
 
-// for FRONT-END testing purposes only (renders installation views.)//
+//////////
+// Installation views rendering routes
+//////////
 router.get('/', function(req, res){
 	res.render('installation_templates/installation_page');
 });
 
-router.get('/add', function(req, res){
-	res.render('add');
-});
-
 router.get('/edit', function(req, res){
-	res.render('edit');
+	res.render('installation_templates/edit');
 });
-// testing END.
 
-// TODOs will be completed once DB API is ready.
-
-// note: 12/2. changed router method to GET.
-// the route will get the create installation view which will have a form, etc.
-// with the submit button on this form, a post request will be performed..
 router.get('/create', function(req,res) {
 	var user = req.session.user;
 	if (!user) res.redirect('/login');
@@ -31,10 +23,26 @@ router.get('/create', function(req,res) {
 		res.redirect('/');
 	}
 	else {
-		// TODO: create installation row in DB.
+		res.render('installation_templates/add');
 	}
 });
 
+//////////
+// Backend API routes
+//////////
+router.post('/create', function(req,res) {
+	var city, country, school_affiliation, local_admin_id, GPS_location_x, GPS_location_y;
+	city = req.body.form-city;
+	country = req.body.form-country;
+	school_affiliation = req.body.form-school_affiliation;
+	local_admin_id = req.body.form-local_admin_id;
+	location_x = req.body.GPS_location_x;
+	location_y = req.body.GPS_location_y;
+
+	installation_model.addInstallation(city, country, school_affiliation, local_admin_id, location_x, location_y);
+
+	res.end();
+});
 router.post('/remove/:installationId', function(req,res) {
 	var user = req.session.user;
 	if (!user) res.redirect('/login');
@@ -44,24 +52,28 @@ router.post('/remove/:installationId', function(req,res) {
 	}
 	else if (!req.params.installationId) res.sendStatus(400);
 	else {
-		// TODO: delete installation row from DB.
+		installation_model.deleteInstallation(req.params.installationId);
+		res.end();
 	}
 });
 
-router.post('/update_local_admin/:userid', function(req,res) {
+router.post('/update_local_admin', function(req,res) {
 	var user = req.session.user;
 	if (!user) res.redirect('/login');
 	else if (!isGlobalAdmin(user)) {
 		req.flash('invalid_role', "Invalid Role");
 		res.redirect('/');
 	}
-	else if (!req.params.userid) res.sendStatus(400);
 	else {
-		// TODO: update local admin column by row ID in DB.
+		var installation_id, new_local_admin_id;
+		// TODO: figure out the data structure received from front end
+
+		installation_model.updateLocalAdmin(installation_id, new_local_admin_id);
+		res.end();
 	}
 });
 
-router.post('/add_delegate/:userid', function(req,res) {
+router.post('/add_delegate/:installationId', function(req,res) {
 	var user = req.session.user;
 	if (!user) res.redirect('/login');
 	else if (!isLocalAdmin(user)) {
@@ -70,11 +82,13 @@ router.post('/add_delegate/:userid', function(req,res) {
 	}
 	else if (!req.params.userid) res.sendStatus(400);
 	else {
-		// TODO: add delegate to installation in DB.
+		var installation_id, firstName, lastName, username, password, email, role;
+		installation_model.addLocalDelegate(installation_id, firstName, lastName, username, password, email, role);
+		res.end();
 	}
 });
 
-router.post('/remove_delegate/:userid', function(req,res) {
+router.post('/remove_delegate', function(req,res) {
 	var user = req.session.user;
 	if (!user) res.redirect('/login');
 	else if (!isLocalAdmin(user)) {
@@ -83,7 +97,10 @@ router.post('/remove_delegate/:userid', function(req,res) {
 	}
 	else if (!req.params.userid) res.sendStatus(400);
 	else {
-		// TODO: remove delegate from installation in DB.
+		var installation_id, delegate_id, delegate_username;
+
+		installation_model.removeLocalDelegate(installation_id, delegate_id, delegate_username);
+		res.end();
 	}
 });
 
