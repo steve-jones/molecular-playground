@@ -41,7 +41,7 @@ module.exports = {
 				dbReader.executeFunction('get_user_by_username', [username], function(userData, err) {
 		//console.log(userData);
 					// log error
-					//userData[0].password = crypto.decrypt(userData[0].password);
+					userData[0].password = crypto.decrypt(userData[0].password);
 		//console.log(userData[0].password);
 					callback(userData[0]);
 				});
