@@ -29,18 +29,26 @@ router.get('/sso', function(req, res) {
 
 //login
 router.post('/login', function (req, res) {
-  var post = req.body;
-	//next step: get user from database if credentials are good
-  db.getUser(body.user, function (data) {
-	console.log(data);
+ var post = req.body;
+  //next step: get user from database if credentials are good
 
+  db.getUser(post.user, function (data) {
+   console.log(data);
     if (data === null){
       req.flash('auth', 'Login incorrect');
       res.redirect('/#login');
     }
+    else if (data.password !=  post.password){
+      req.flash('auth', 'Login password');
+      res.redirect('/#login');
+    }
+    else{
+      //success
     req.session.user = data;
     res.render('loggedin_page', {userinfo:data});
+    }
   });
+
 
 });
 
