@@ -29,6 +29,13 @@ module.exports = {
 			}
 		})
 	},
+	
+	getMolecules: function(callback) {
+		dbReader.executeFunction('get_molecules', '', function(moleculeData, err) {
+			// log error
+			callback(moleculeData);
+		});
+	},
 
 	renameMolecule: function(moleculeID, newName) {
 		dbFunctions.moleculeExists(moleculeID, function(moleculeExists) {

@@ -6,7 +6,8 @@ CREATE TABLE Molecules (
 	filepath TEXT NOT NULL UNIQUE,
 	creation_day  INT NOT NULL CHECK(creation_day >= 0) CHECK(creation_day <= 31),
 	creation_month INT NOT NULL CHECK(creation_month >= 0) CHECK(creation_month <= 12),
-	creation_year INT NOT NULL CHECK(creation_year >= 2000)
+	creation_year INT NOT NULL CHECK(creation_year >= 2000),
+	approval_status BOOLEAN NOT NULL
 );
 
 
@@ -52,6 +53,21 @@ BEGIN
 	RETURN QUERY SELECT * FROM Molecules WHERE id=molecule_id;
 END;
 $function$
+
+CREATE OR REPLACE FUNCTION public.get_molecules()
+RETURNS TABLE(id INT
+	,creatorUserID INT
+	,name TEXT
+	,filePath TEXT
+	,day INT
+	,month  INT
+	,year INT
+	,approvalStatus BOOLEAN) AS $all_molecules$
+BEGIN
+	RETURN QUERY SELECT * FROM molecules;
+END;
+$all_molecules$ LANGUAGE plpgsql;
+
 
 CREATE OR REPLACE FUNCTION public.rename_molecule(mol_id int, new_name text)
 RETURNS void AS $$

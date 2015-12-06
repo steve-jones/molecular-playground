@@ -72,6 +72,14 @@ END;
 $all_delegates$
 LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION public.update_local_admin(installationID INT, localAdminId INT)
+RETURNS void AS $$
+BEGIN
+    UPDATE installations
+    SET local_admin_id=localAdminId
+    WHERE installation_id=installationID;
+END;
+$$ LANGUAGE plpgsql;
 
 /*complete*/
 CREATE OR REPLACE FUNCTION public.add_local_delegate(installationID INT, delegateID INT)
