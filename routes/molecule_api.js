@@ -6,7 +6,7 @@ var m = require('../model/molecule_functions');
 
 router.get('/', function(req, res) {
 	var user_obj = req.session.user;
-	res.render('molecule_page', { userinfo   : user_obj});
+	res.render('molecule_templates/molecule_page', { userinfo   : user_obj});
 });
 
 ////// UPLOAD ///////
@@ -14,7 +14,13 @@ router.get('/', function(req, res) {
 // GLOBAL ADMIN request approves immediately
 /////////////////////
 
-router.get('/createmolecule', function(req, res) {
+router.get('/createmolecule', function(req,res) {
+	var user = req.session.user;
+	  	
+res.render('./molecule_templates/upload');
+});
+
+router.get('/submitmol', function(req, res) {
 	var molDB = require('../database/moleculeAPI.js');
 	var user = req.session.user;
 		//base user cases -- not a valid user
@@ -62,6 +68,7 @@ router.get('/content', function(req,res) {
 		it into the correct queue, and then they could be approved or rejected by a global admin.
 		The following placeholders are where the routing code would go for these functions.
 		*/
+res.render('./molecule_templates/specmole');
 
 
 ////// INDEX ////////
