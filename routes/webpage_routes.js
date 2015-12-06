@@ -17,7 +17,7 @@ router.get('/', function(req, res) {
 //single sign on for testing
 router.get('/sso', function(req, res) {
 	var user = 'global_admin';
-      	res.render('loggedin_page', { userinfo   : { id: 0,
+      	res.render('loggedin_page', { userinfo   : { id: 1,
   firstname: 'super user',
   lastname: 'person',
   uname: 'superuser',
