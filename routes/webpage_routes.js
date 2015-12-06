@@ -17,12 +17,12 @@ router.get('/', function(req, res) {
 //single sign on for testing
 router.get('/sso', function(req, res) {
 	var user = 'global_admin';
-      	res.render('loggedin_page', { userinfo   : { id: 5,
-  firstname: 'matt',
-  lastname: 'lydigsen',
-  uname: 'mlydigsen',
+      	res.render('loggedin_page', { userinfo   : { id: 0,
+  firstname: 'super user',
+  lastname: 'person',
+  uname: 'superuser',
   password: '12345',
-  email: 'mlydigsen@umass.edu',
+  email: 'superuser@umass.edu',
   role: 1 }
 });
 });
@@ -35,7 +35,7 @@ router.post('/login', function (req, res) {
   db.getUser(post.user, function (data) {
    console.log(data);
     if (data === undefined){
-      req.flash('auth', 'Login incorrect');
+      req.flash('auth', 'User does not exist');
       res.redirect('/#login');
     }
     else if (data.password !=  post.password){
