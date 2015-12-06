@@ -8,7 +8,7 @@ module.exports = {
 	createUser: function(firstName, lastName, username, password, email, role) {
 		if (!validateRole(role)) {
 			// TODO: Return some sort of error to the caller
-			console.log('User creation failed: Invalid RoleID: ' + String(role));
+			console.log('User creation failed: Invalid Role: ' + String(role));
 			return;
 		}
 
@@ -87,7 +87,7 @@ module.exports = {
 	updateRole: function(username, newRole) {
 		if (!validateRole(newRole)) {
 			// TODO: Return some sort of error to the caller
-			console.log('Role update failed: Invalid RoleID: ' + String(newRole));
+			console.log('Role update failed: Invalid Role: ' + String(newRole));
 			return;
 		}
 
@@ -121,9 +121,9 @@ module.exports = {
 
 
 function validateRole(role) {
-	if (role < 0 || role > 4) {
-		return false;
+	if (role === 'global_admin' || role === 'local_admin' || role === 'author' || role === 'delegate') {
+		return true;
 	}
 
-	return true;
+	return false;
 }
