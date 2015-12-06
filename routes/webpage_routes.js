@@ -34,7 +34,7 @@ router.post('/login', function (req, res) {
 
   db.getUser(post.user, function (data) {
    console.log(data);
-    if (data === null){
+    if (data === undefined){
       req.flash('auth', 'Login incorrect');
       res.redirect('/#login');
     }
