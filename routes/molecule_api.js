@@ -19,6 +19,13 @@ router.post('/createmolecule', function(req,res) {
 		else{}
 });
 
+router.get('/content', function(req,res) {
+	var user = req.session.user;
+	  	
+			res.render('./molecule_templates/specmole');
+	
+});
+
 
 
 module.exports = router;
