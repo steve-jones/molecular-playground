@@ -14,19 +14,34 @@ router.get('/', function(req, res) {
 		}
 });
 
+//single sign on for testing
+router.get('/sso', function(req, res) {
+	var user = 'global_admin';
+      	res.render('loggedin_page', { userinfo   : { id: 5,
+  firstname: 'matt',
+  lastname: 'lydigsen',
+  uname: 'mlydigsen',
+  password: '12345',
+  email: 'mlydigsen@umass.edu',
+  role: 1 }
+});
+});
+
 //login
 router.post('/login', function (req, res) {
   var post = req.body;
 	//next step: get user from database if credentials are good
-  if (post.user === 'john' && post.password === 'johnspassword') {
-    req.session.user = 'johns_user_id_here';
-    res.render('loggedin_page', {userinfo:"joijoiji"});
-		console.log(post.user);
-		console.log(post.password);
-  } else {
-	req.flash('auth', 'Login incorrect');
-     res.redirect('/#login');
-  }
+  db.getUser(body.user, function (data) {
+	console.log(data);
+
+    if (data === null){
+      req.flash('auth', 'Login incorrect');
+      res.redirect('/#login');
+    }
+    req.session.user = data;
+    res.render('loggedin_page', {userinfo:data});
+  });
+
 });
 
 //The logout route:

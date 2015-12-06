@@ -11,7 +11,7 @@ CREATE TABLE Users (
 
 
 
-CREATE OR REPLACE FUNCTION add_user(firstName text, lastName text, username text, password text, email text, role int)
+CREATE OR REPLACE FUNCTION public.add_user(firstName text, lastName text, username text, password text, email text, role int)
 RETURNS void as $$
 DECLARE
 BEGIN
@@ -27,7 +27,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 
-CREATE OR REPLACE FUNCTION user_exists(usernameCheck text)
+CREATE OR REPLACE FUNCTION public.user_exists(usernameCheck text)
 RETURNS int AS $userID$
 DECLARE
 	userID int;
@@ -40,7 +40,7 @@ END;
 $userID$ LANGUAGE plpgsql;
 
 
-CREATE OR REPLACE FUNCTION update_email(new_username text, new_email text)
+CREATE OR REPLACE FUNCTION public.update_email(new_username text, new_email text)
 RETURNS void AS $$
 BEGIN
     UPDATE users SET email=new_email
@@ -48,7 +48,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION update_password(current_username text, new_password text)
+CREATE OR REPLACE FUNCTION public.update_password(current_username text, new_password text)
 RETURNS void AS $$
 BEGIN
     UPDATE users SET password=new_password
@@ -56,7 +56,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION update_name(current_username text, new_first text, new_last text)
+CREATE OR REPLACE FUNCTION public.update_name(current_username text, new_first text, new_last text)
 RETURNS void AS $$
 BEGIN
     UPDATE users
@@ -66,14 +66,14 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION remove_user(current_username text)
+CREATE OR REPLACE FUNCTION public.remove_user(current_username text)
 RETURNS void AS $$
 BEGIN
     DELETE FROM users WHERE username=current_username;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION update_role(current_username text, new_role int)
+CREATE OR REPLACE FUNCTION public.update_role(current_username text, new_role int)
 RETURNS void AS $$
 BEGIN
 	IF new_role < 0 OR new_role > 4 THEN
@@ -83,4 +83,14 @@ BEGIN
     WHERE username=current_username;
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION public.get_user_by_username(username_check text)
+ RETURNS TABLE(id integer, firstName text, lastName text, uname text, password text, email text, role integer)
+ LANGUAGE plpgsql
+AS $function$
+BEGIN
+	RETURN QUERY SELECT * FROM Users WHERE username=username_check;
+END;
+$function$
+
 

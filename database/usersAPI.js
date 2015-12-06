@@ -29,15 +29,21 @@ module.exports = {
 	},
 
 	getUser: function(username, callback) {
+		//console.log(username);
 		dbFunctions.usernameExists(username, function(usernameExists) {
+
+		//console.log(usernameExists);
 			if (usernameExists === 'false') {
 				// log error
 				throw "Cannot get user because user with username: " + username + " does not exist.";
 			}
 			else {
 				dbReader.executeFunction('get_user_by_username', [username], function(userData, err) {
+		//console.log(userData);
 					// log error
-					callback(userData);
+					//userData[0].password = crypto.decrypt(userData[0].password);
+		//console.log(userData[0].password);
+					callback(userData[0]);
 				});
 			}
 		});
