@@ -10,13 +10,10 @@ router.get('/', function(req, res) {
 });
 
 
-router.post('/createmolecule', function(req,res) {
+router.get('/createmolecule', function(req,res) {
 	var user = req.session.user;
-	  	if (user === undefined || user.role !=='global_admin') {
-		    	req.flash('auth', 'Not logged in!');
-	    		res.redirect('/login');
-		}
-		else{}
+	  	
+res.render('./molecule_templates/upload');
 });
 
 router.get('/content', function(req,res) {
