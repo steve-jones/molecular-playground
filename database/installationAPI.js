@@ -9,32 +9,35 @@ module.exports = {
 		dbReader.executeFunction('get_installations', '', function(installations){
 			callback(installations);
 		});
-	}, 
+	},
 
-	addInstallation : function (city, country, school_affiliation, local_admin_id, GPS_location_x, GPS_location_y){
+	addInstallation : function (city, country, school_affiliation, local_admin_id, GPS_location_x, GPS_location_y, callback){
 		var date = new Date();
 		var day = date.getDate();
-		parameters = [city, country, school_affliation, local_admin_id, {}, true, day,
+		console.log("recieved contents: "+ city, country, school_affiliation, local_admin_id, GPS_location_x, GPS_location_y)
+		parameters = [city, country, school_affiliation, local_admin_id, '{}', true, day,
 		GPS_location_x, GPS_location_y];
-		dbReader.executeFunction('add_installation', parameters, function(){
+		dbReader.executeFunction('add_installation', parameters, function(err){
+			console.log(err);
+			callback(err);
 		});
-	} 
+	},
 
 	deleteInstallation : function(installation_id){
 		dbreader.executeFunction('delete_installation', installation_id, function(){
 		});
-	}
+	},
 
 	disableInstallation : function(installation_id){
 		dbreader.executeFunction('disable_installation', installation_id, function(){
 		});
-	}
+	},
 
 	getLocalDelegates : function(installation_id, callback){
 		dbreader.executeFunction('get_local_delegates', installation_id, function(allDelegates){
 			callback(allDelegates);
 		});
-	}
+	},
 
 	//edit installation what to edit??
 
@@ -46,13 +49,13 @@ module.exports = {
 			dbreader.executeFunction('add_local_delegate', userID, function(){
 			});
 		});
-	}
+	},
 
 	removeLocalDelegate : function(installation_id, delegate_id, delegate_username){
 		parameters = [installation_id, delegate_id];
-		dbreader.executeFunction('remove_local_delegate', parameters, function(){	
+		dbreader.executeFunction('remove_local_delegate', parameters, function(){
 			dbUser.deleteUser(delegate_username);
 		});
 	}
 
-}	
+}

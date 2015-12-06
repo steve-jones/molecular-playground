@@ -6,12 +6,12 @@ CREATE TABLE Users (
 	username TEXT NOT NULL,
 	password TEXT NOT NULL,
 	email TEXT NOT NULL,
-	role INT NOT NULL
+	role TEXT NOT NULL
 );
 
 
 
-CREATE OR REPLACE FUNCTION public.add_user(firstName text, lastName text, username text, password text, email text, role int)
+CREATE OR REPLACE FUNCTION public.add_user(firstName text, lastName text, username text, password text, email text, role text)
 RETURNS void as $$
 DECLARE
 BEGIN
@@ -73,7 +73,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION public.update_role(current_username text, new_role int)
+CREATE OR REPLACE FUNCTION public.update_role(current_username text, new_role text)
 RETURNS void AS $$
 BEGIN
 	IF new_role < 0 OR new_role > 4 THEN
@@ -85,7 +85,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION public.get_user_by_username(username_check text)
- RETURNS TABLE(id integer, firstName text, lastName text, uname text, password text, email text, role integer)
+ RETURNS TABLE(id integer, firstName text, lastName text, uname text, password text, email text, role text)
  LANGUAGE plpgsql
 AS $function$
 BEGIN

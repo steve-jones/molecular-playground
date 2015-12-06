@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 // object which contains DB access functions
-var model = require('../model/installtion_functions');
+var model = require('../database/installationAPI');
 
 
 
@@ -31,6 +31,25 @@ router.get('/create', function(req,res) {
 	// else {
 	// 	// TODO: create installation row in DB.
 	// }
+});
+
+
+// new route handler for post request (form logic for new installation for..)
+router.post('/installation_add', function(req,res) {
+	var user = req.session.user;
+
+	var form = req.body; // object of html form
+	console.log("this is our form: " +JSON.stringify(form))
+
+	model.addInstallation(form.form_city, form.form_country, form.form_school_affiliation, form.form_username, form.form_GPS_location_x, form.form_GPS_location_y, function(err){
+		console.log(err + " hello");
+			model.getInstallations(function(data){console.log("data: " + JSON.stringify(data))})
+	});
+	if (!check(user)) res.redirect('/login');
+	else if (!req.params.id) res.sendStatus(400);
+	else {
+		// TODO: update local admin column by row ID in DB.
+	}
 });
 
 

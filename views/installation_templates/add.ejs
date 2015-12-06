@@ -2,6 +2,10 @@
 <html lang="en">
   <head>
   		<% include ./../partials_template/head %>
+      <link rel="stylesheet" href="/css/form-elements.css">
+      <link rel="stylesheet" href="/css/style.css">
+
+
   </head>
 
   <body data-spy="scroll" data-offset="0" data-target="#theMenu"   >
@@ -32,40 +36,71 @@
 
 
 
-        <!-- bootstrap table begin -->
-        <div class="container">
-        <h2>Current Installation(s)</h2>
-        <p>(The table schema may be subject to change)</p>
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th style="text-align:center;">Firstname</th>
-              <th style="text-align:center;">Lastname</th>
-              <th style="text-align:center;">Email</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>John</td>
-              <td>Doe</td>
-              <td>john@example.com</td>
-            </tr>
-            </a>
-            <tr>
-              <td>Mary</td>
-              <td>Moe</td>
-              <td>mary@example.com</td>
-            </tr>
-            <tr>
-              <td>July</td>
-              <td>Dooley</td>
-              <td>july@example.com</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <!-- bootstrap table END. -->
+        <!-- begin form logic below -->
+        <!-- Top content -->
+        <div class="top-content">
 
+            <div class="inner-bg">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-sm-6 book">
+                    </div>
+                      <div class="col-sm-5 form-box">
+                        <div class="form-top">
+                          <div class="form-top-left">
+                            <h3></h3>
+                              <p>Fill in the form below to get instant access:</p>
+                          </div>
+                          <div class="form-top-right">
+                            <i class="fa fa-pencil"></i>
+                          </div>
+                          </div>
+                          <div class="form-bottom">
+                        <form role="form" action="installation_add" method="post" class="registration-form">
+                          <div class="form-group">
+                            <label class="sr-only" for="form_city">City</label>
+                              <input type="text" name="form_city" placeholder="City..." class="form_city form-control" id="form_city">
+                            </div>
+
+                            <div class="form-group">
+                              <label class="sr-only" for="form_country">Country</label>
+                              <input type="text" name="form_country" placeholder="Country..." class="form_country form-control" id="form_country">
+                            </div>
+
+                            <div class="form-group">
+                              <label class="sr-only" for="form_school_affiliation">School Affiliation</label>
+                              <input type="text" name="form_school_affiliation" placeholder="School Affiliation..." class="form_school_affiliation form-control" id="form_school_affiliation">
+                            </div>
+
+                            <div class="form-group">
+                              <label class="sr-only" for="form_username">Local Admin ID</label>
+                              <input type="text" name="form_username" placeholder="Local Admin ID..." class="form_username form-control" id="form_username">
+                            </div>
+
+                            <div class="form-group">
+                              <label class="sr-only" for="form_GPS_location_x">GPS Location x</label>
+                              <input type="text" name="form_GPS_location_x" placeholder="GPS Location x..." class="form_GPS_location_x form-control" id="form_GPS_location_x">
+                            </div>
+
+                            <div class="form-group">
+                              <label class="sr-only" for="form_GPS_location_y">GPS Location y</label>
+                              <input type="text" name="form_GPS_location_y" placeholder="GPS Location y..." class="form_GPS_location_y form-control" id="form_GPS_location_y">
+                            </div>
+
+
+                            <button type="submit" class="btn">Post</button>
+                        </form>
+                      </div>
+                      </div>
+                  </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- end form logic here.-->
 
 
 			</div>
@@ -73,26 +108,6 @@
 	</div><!-- /headerwrap -->
 
 
-
-
-
-  	<!-- ========== other scoll SECTION ========== -->
-
-
-
-  <section id="add" name="add"></section>
-  <div id="f">
-  		<div class="container">
-  			<div class="row">
-  				<h3>Add Installation Form</h3>
-  				<p class="centered"><i class="icon icon-circle"></i><i class="icon icon-circle"></i><i class="icon icon-circle"></i></p>
-
-  				<!-- INTRO INFORMATIO-->
-  				<div class="col-lg-6 col-lg-offset-3">
-  				</div>
-  			</div>
-  		</div><!-- /container -->
-  	</div><!-- /f -->
 
 
 
@@ -104,5 +119,10 @@
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/smoothscroll.js"></script>
 	<script src="/js/main.js"></script>
+  <script src="/js/jquery-1.11.1.min.js"></script>
+  <script src="/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/js/jquery.backstretch.min.js"></script>
+  <script src="/js/retina-1.1.0.min.js"></script>
+  <script src="/js/scripts.js"></script>
 </body>
 </html>

@@ -22,6 +22,7 @@ module.exports = {
 		   	})
 		   	.catch(function (error) {
 		   		// TODO: Find a better way to log errors
+          callback(error);
 	        	console.log(error);
 		   	});
 		}
@@ -32,6 +33,7 @@ module.exports = {
 		   	})
 		   	.catch(function (error) {
 		   		// TODO: Find a better way to log errors
+            callback(error);
 	        	console.log(error);
 		   	});
 		}
