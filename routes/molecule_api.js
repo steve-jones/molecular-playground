@@ -9,37 +9,39 @@ router.get('/', function(req, res) {
 	res.render('molecule_page', { userinfo   : user_obj});
 });
 
-			// TODO: define removeRequest() pop function
-
 ////// UPLOAD ///////
 // Upload a molecule, pending approval
 // GLOBAL ADMIN request approves immediately
 /////////////////////
 
-router.post('/uploadmolecule', function(req,res) {
+router.get('/createmolecule', function(req, res) {
+	var molDB = require('../database/moleculeAPI.js');
 	var user = req.session.user;
 		//base user cases -- not a valid user
 		if (!validRole(user)) {
 			res.redirect('/login');
-	    	req.flash('invalid_role', "Invalid Permissions");
+	    	req.flash('invalid_role', "Invalid permissions. Please sign in.");
 	    }
 		//if it is not a global admin but is some other user, go through approval process
 		else {
+			var user_id = user.id;
+			var file_path = 'filepath'; // get from frontend
+			var molecule_name = "name"; // get from frontend
 			if (!validGlobalAdmin(user)){
-				retrieved_file = (( RETRIEVED FILE PLACEHOLDER ));
-				addToPendingRequest : function (retrieved_file, upload_request); (( DB PLACEHOLDER ))
-				//Success or fail state
-				// if ('success'){
+				molDB.createMolecule(user_id, molecule_name, file_path, false, function(placeholder) {
+					//body of callback
+				});
 				res.redirect('back');
 				req.flash('upload_success_state', "Uploaded. New molecule pending approval.");
-				// }
-				// else {
-				// 	res.redirect('back');
-				// 	req.flash('upload_fail_state', "Not uploaded successfully. Please try again.");
-				// }
 			}
 		//if it is a global admin, approve immediately
-			else approveNewMolecule : function(retrieved_file);
+			else {
+				molDB.createMolecule(user_id, molecule_name, file_path, true, function(placeholder) {
+					//body of callback
+				});
+				res.redirect('back');
+				req.flash('upload_success_state', "Uploaded. New molecule pending approval.");
+			}
 		}
 });
 
@@ -53,24 +55,39 @@ router.post('/uploadmolecule', function(req,res) {
 		The following placeholders are where the routing code would go for these functions.
 		*/
 
-////// DELETE ///////
-// Delete a molecule, pending approval
-// GLOBAL ADMIN request approves immediately
+///// PENDING ///////
+// Sends a list of molecules waiting to front end
+// GLOBAL ADMIN accesses this
 /////////////////////
 
-////// UPDATE ///////
-// Update a pre-existing molecule, pending approval
-// GLOBAL ADMIN request approves immediately
-/////////////////////
-
-		/*END PLACEHOLDERS*/
+router.get('/pendingrequest', function(req, res) {
+	var molDB = require('../database/moleculeAPI.js');
+	var user = req.session.user;
+	var molecules = [];
+	if (!validRole(user) || !validGlobalAdmin(user)) {
+			res.redirect('/login');
+	    	req.flash('invalid_role', "Invalid permissions. Please log in to a global admin account.");
+	    }
+		else {
+			molDB.getMolecules(function(allMolecules) {
+				for (int i = 0; i < allMolecules.length; i++) {
+					if (allMolecules[i].approval_status == false) {
+						molecules.push(allMolecules[i]);
+					} 
+				}
+		//TODO: return array "molecules" to front end for rendering	
+		res.render('/molecule_templates/pending', {pendingList: molecules});
+		});
+	} 
+}
 
 ////// APPROVE //////
 // Approves a selected request in collection of requests that are pending approval
 // Only GLOBAL ADMIN may access approval pending
 /////////////////////
 
-router.get('/approverequest', function(req,res) {
+router.get('/approverequest', function(req, res) {
+	var molDB = require('../database/moleculeAPI.js');
 	var user = req.session.user;
 		//base user cases -- not a valid user
 		if (!validRole(user) || !validGlobalAdmin(user)) {
@@ -78,14 +95,10 @@ router.get('/approverequest', function(req,res) {
 	    	req.flash('invalid_role', "Invalid permissions. Please log in to a global admin account.");
 	    }
 		else {
-			retrieved_file = (( RETRIEVED FILE PLACEHOLDER ));
-			approveNewMolecule : function(retrieved_file);
-			removeRequest(); //placeholder
+			var moleculeID = req.body;//placeholder
+			molDB.setApprovalStatus(moleculeID, true);
 			res.redirect('back');
-			// if ('success'){
 			req.flash('approval_success_state', "Approved new molecule.");
-			// }
-			// else req.flash('approval_fail_state', "Approval failure. Please refresh.");
 		}
 });
 
@@ -94,7 +107,8 @@ router.get('/approverequest', function(req,res) {
 // Only GLOBAL ADMIN may access approval pending
 /////////////////////
 
-router.get('/rejectrequest', function(req,res) {
+router.get('/rejectrequest', function(req, res) {
+	var molDB = require('../database/moleculeAPI.js');
 	var user = req.session.user;
 		//base user cases -- not a valid user
 		if (!validRole(user) || !validGlobalAdmin(user)) {
@@ -102,14 +116,10 @@ router.get('/rejectrequest', function(req,res) {
 	    	req.flash('invalid_role', "Invalid permissions. Please log in to a global admin account.");
 	    }
 		else {
-			retrieved_file = (( RETRIEVED FILE PLACEHOLDER ));
-			retrieved_request_type = //retrieved_file.request_type();
-			removeRequest(); // placeholder
+			var moleculeID = req.body;//placeholder
+			molDB.deleteMolecule(moleculeID);
 			res.redirect('back');
-			// if ('success'){
 			req.flash('reject_success_state', "Rejected request.");
-			// }
-			// else req.flash('reject_fail_state', "Failed to reject request. Please refresh.");
 		}
 });
 
@@ -117,6 +127,7 @@ router.get('/rejectrequest', function(req,res) {
 //////////
 // Utility functions
 //////////
+
 function validRole(user) {
 	switch (user.role) {
 		case 'global_admin':
