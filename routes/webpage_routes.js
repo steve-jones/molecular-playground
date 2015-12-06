@@ -7,7 +7,7 @@ var db = require('../database/usersAPI.js');
 router.get('/', function(req, res) {
 	var user = req.session.user;
 	  	if (user === undefined) {
-      			res.render('home_page', { message: req.flash('auth')});
+      			res.render('home_page', { userinfo   : user,message: req.flash('auth')});
 		}
 		else{
       			res.render('loggedin_page', { userinfo   : user});
@@ -17,14 +17,17 @@ router.get('/', function(req, res) {
 //single sign on for testing
 router.get('/sso', function(req, res) {
 	var user = 'global_admin';
-      	res.render('loggedin_page', { userinfo   : { id: 1,
+  var data ={ id: 1,
   firstname: 'super user',
   lastname: 'person',
   uname: 'superuser',
   password: '12345',
   email: 'superuser@umass.edu',
   role: 1 }
-});
+
+  req.session.user = data;
+
+      	res.render('loggedin_page', { userinfo   : data});
 });
 
 //login

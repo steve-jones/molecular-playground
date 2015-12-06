@@ -1,10 +1,18 @@
-<!--
+<!--  turn this whole thign off for production
 <nav class="navbar navbar-default" role="navigation">
 -->
 	<div class="container-fluid">
 
 		<div class="navbar-header">
-			<a class="navbar-brand" href="/sso">Single-Sign-On</a>
+			<a class="navbar-brand" href="/sso">
+			Single-Sign-On
+			<br>User: 
+						<% if (userinfo) {%>
+						<%= '#'+JSON.stringify(userinfo.id) + '-' +JSON.stringify(userinfo.firstname) %>
+						<% }else {%>
+						<%= 'undefined'%>
+						<%} %>
+						</a>
 		</div>
 
 		<ul class="nav navbar-nav">
@@ -13,10 +21,10 @@
 			<li><a href="/installation">mgmt installation</a></li>
 			<li><a href="/user">mgmt user</a></li>
 		</ul>
-
 	</div>
-
 	</nav>
+
+
 <!--
 </nav>
 -->
