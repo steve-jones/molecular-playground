@@ -6,7 +6,7 @@ var m = require('../model/molecule_functions');
 
 router.get('/', function(req, res) {
 	var user_obj = req.session.user;
-	res.render('molecule_page', { userinfo   : user_obj});
+	res.render('molecule_templates/molecule_page', { userinfo   : user_obj});
 });
 
 ////// UPLOAD ///////
@@ -14,7 +14,13 @@ router.get('/', function(req, res) {
 // GLOBAL ADMIN request approves immediately
 /////////////////////
 
-router.get('/createmolecule', function(req, res) {
+router.get('/createmolecule', function(req,res) {
+	var user = req.session.user;
+	  	
+res.render('./molecule_templates/upload');
+});
+
+router.get('/submitmol', function(req, res) {
 	var molDB = require('../database/moleculeAPI.js');
 	var user = req.session.user;
 		//base user cases -- not a valid user
@@ -46,6 +52,13 @@ router.get('/createmolecule', function(req, res) {
 
 });
 
+router.get('/approval', function(req,res) {
+	var user = req.session.user;
+	  	
+res.render('./molecule_templates/approval');
+});
+
+router.get('/content', function(req,res) {
 		/*
 		We found that, given enough time, we would classify requests into separate queues.
 		We would have a deletion queue, an update queue, and a new molecule queue.
@@ -55,12 +68,16 @@ router.get('/createmolecule', function(req, res) {
 		it into the correct queue, and then they could be approved or rejected by a global admin.
 		The following placeholders are where the routing code would go for these functions.
 		*/
+res.render('./molecule_templates/specmole');
 
 
 ////// INDEX ////////
 // Sends an index of molecules to front end
 // ANYONE accesses this
 /////////////////////
+});
+
+
 router.get('/allmolecules', function(req, res) {
 	var molDB = require('../database/moleculeAPI.js');
 	var user = req.session.user;
@@ -71,7 +88,7 @@ router.get('/allmolecules', function(req, res) {
 	    }
 		else {
 			molDB.getMolecules(function(allMolecules) {
-				for (int i = 0; i < allMolecules.length; i++) {
+				for (var i = 0; i < allMolecules.length; i++) {
 					molecules.push(allMolecules[i]);
 				}
 		res.render('/molecule_templates/allmolecules', {pendingList: molecules});
@@ -79,7 +96,7 @@ router.get('/allmolecules', function(req, res) {
 		});
 
 	}
-}
+});
 
 
 
@@ -99,7 +116,7 @@ router.get('/pendingrequest', function(req, res) {
 	    }
 		else {
 			molDB.getMolecules(function(allMolecules) {
-				for (int i = 0; i < allMolecules.length; i++) {
+				for (var i = 0; i < allMolecules.length; i++) {
 					if (allMolecules[i].approval_status == false) {
 						molecules.push(allMolecules[i]);
 
@@ -108,7 +125,7 @@ router.get('/pendingrequest', function(req, res) {
 		res.render('/molecule_templates/pending', {pendingList: molecules});
 		});
 	}
-}
+});
 
 /* PENDING REQUESTS */
 
