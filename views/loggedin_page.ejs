@@ -22,17 +22,40 @@
 			<div class="row">
 
 				<h2>
-				<br>the current user session: <%= userinfo.uname %> as role:<%= userinfo.role %>
+					<br>the current user session: <%= userinfo.uname %> as role:<%= userinfo.role %>
 				</h2>
 				<div class="col-lg-6 col-lg-offset-3">
-
-				<br>	hey you logged in successfully
-				<br>	click the menu on the top right cornor to manage
+					<br>	hey you logged in successfully
+					<br>	click the menu on the top right cornor to manage or the icons at the bottom:
+					<Br> gray out icons means you dont have access
 				</div>
-			</div>
-		</div><!-- /container -->
-	</div><!-- /headerwrap -->
 
+
+			</div>
+
+		</div><!-- /container -->
+			      
+		<div class="container">
+			      <div class="row" >
+			        <div class="col-lg-3">
+			            <a href="/molecule/"><span class="glyphicon glyphicon-plus-sign" style="font-size: 8em;"></span></a> <br><h2>Molecules</h2>
+			        </div>
+
+			        <div class="col-lg-3">
+			        	<a href="/playlist"><span class="glyphicon glyphicon-ok" style="font-size: 8em"></span></a> <br><h2>Playlist</h2>
+			        </div>        
+			        <div class="col-lg-3">
+			            <a href="/installation/"><span class="glyphicon glyphicon-plus-sign" style="font-size: 8em;"></span></a> <br><h2>Installtion</h2>
+			        </div>
+
+			        <div class="col-lg-3">
+			        	<a href="/user"><span class="glyphicon glyphicon-ok" style="font-size: 8em"></span></a> <br><h2>User</h2>
+			        </div>
+			   
+			      </div>
+		</div><!-- /container -->
+
+	</div><!-- /headerwrap -->
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
