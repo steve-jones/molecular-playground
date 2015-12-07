@@ -5,8 +5,13 @@ var m = require('../model/molecule_functions');
 
 
 router.get('/', function(req, res) {
-	var user_obj = req.session.user;
-	res.render('molecule_templates/molecule_page', { userinfo   : user_obj});
+	var user = req.session.user;
+	if (user=== undefined) {
+      	req.flash('auth', 'Your session expired, please login to your account');
+		res.redirect('/#login');
+	}
+	else
+	res.render('molecule_templates/molecule_page', { userinfo   : user});
 });
 
 ////// UPLOAD ///////
@@ -17,17 +22,22 @@ router.get('/', function(req, res) {
 router.get('/createmolecule', function(req,res) {
 	var user = req.session.user;
 	  	
-res.render('./molecule_templates/upload');
+	if (user=== undefined) {
+      	req.flash('auth', 'Your session expired, please login to your account');
+		res.redirect('/#login');
+	}
+	else
+		res.render('./molecule_templates/upload');
 });
 
 router.get('/submitmol', function(req, res) {
 	var molDB = require('../database/moleculeAPI.js');
 	var user = req.session.user;
 		//base user cases -- not a valid user
-		if (!validRole(user)) {
-			res.redirect('/login');
-	    	req.flash('invalid_role', "Invalid permissions. Please sign in.");
-	    }
+		if (user=== undefined) {
+	      	req.flash('auth', 'Your session expired, please login to your account');
+			res.redirect('/#login');
+		}
 		//if it is not a global admin but is some other user, go through approval process
 		else {
 			var user_id = user.id;
@@ -54,8 +64,12 @@ router.get('/submitmol', function(req, res) {
 
 router.get('/approval', function(req,res) {
 	var user = req.session.user;
-	  	
-res.render('./molecule_templates/approval');
+	if (user=== undefined) {
+      	req.flash('auth', 'Your session expired, please login to your account');
+		res.redirect('/#login');
+	}
+	else
+		res.render('./molecule_templates/approval');
 });
 
 router.get('/content', function(req,res) {
@@ -67,7 +81,14 @@ router.get('/content', function(req,res) {
 		If we were to implement them, we would have a request classifier that would sort
 		it into the correct queue, and then they could be approved or rejected by a global admin.
 		The following placeholders are where the routing code would go for these functions.
-		*/
+		*/	
+
+	var user = req.session.user;
+		if (user=== undefined) {
+      	req.flash('auth', 'Your session expired, please login to your account');
+		res.redirect('/#login');
+	}
+	else
 res.render('./molecule_templates/specmole');
 
 
