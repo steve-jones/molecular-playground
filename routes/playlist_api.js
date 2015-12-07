@@ -5,13 +5,22 @@ var m = require('../model/playlist_functions');
 
 
 router.get('/', function(req, res) {
-	var user_obj = req.session.user;
-	res.render('playlist_templates/playlist_page', { userinfo   : user_obj});
+	var user = req.session.user;
+	if (user=== undefined) {
+      	req.flash('auth', 'Your session expired, please login to your account');
+		res.redirect('/#login');
+	}
+	res.render('playlist_templates/playlist_page', { userinfo   : user});
 });
 
 router.get('/list', function(req, res) {
-	var user_obj = req.session.user;
-	res.render('playlist_templates/list', { userinfo   : user_obj});
+	var user = req.session.user;	
+
+	if (user=== undefined) {
+      	req.flash('auth', 'Your session expired, please login to your account');
+		res.redirect('/#login');
+	}
+	res.render('playlist_templates/list', { userinfo   : user});
 });
 
 
