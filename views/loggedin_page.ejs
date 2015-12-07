@@ -22,12 +22,11 @@
 			<div class="row">
 
 				<h2>
-					<br>the current user session: <%= userinfo.uname %> as role:<%= userinfo.role %>
+					<br>Welcome <%= userinfo.uname %> !
+					<br>Your current access is: <%= userinfo.role %>
 				</h2>
 				<div class="col-lg-6 col-lg-offset-3">
-					<br>	hey you logged in successfully
-					<br>	click the menu on the top right cornor to manage or the icons at the bottom:
-					<Br> gray out icons means you dont have access
+					<Br> (grayout icons means you dont have access) - not implemented yet
 				</div>
 
 
@@ -38,18 +37,18 @@
 		<div class="container">
 			      <div class="row" >
 			        <div class="col-lg-3">
-			            <a href="/molecule/"><span class="glyphicon glyphicon-plus-sign" style="font-size: 8em;"></span></a> <br><h2>Molecules</h2>
+			            <a href="/molecule/"><span class="glyphicon glyphicon-plus-sign" style="font-size: 8em;"></span></a> <br><h2>Manage Molecules</h2>
 			        </div>
 
 			        <div class="col-lg-3">
-			        	<a href="/playlist"><span class="glyphicon glyphicon-ok" style="font-size: 8em"></span></a> <br><h2>Playlist</h2>
+			        	<a href="/playlist"><span class="glyphicon glyphicon-ok" style="font-size: 8em"></span></a> <br><h2>Manage Playlist</h2>
 			        </div>        
 			        <div class="col-lg-3">
-			            <a href="/installation/"><span class="glyphicon glyphicon-plus-sign" style="font-size: 8em;"></span></a> <br><h2>Installtion</h2>
+			            <a href="/installation/"><span class="glyphicon glyphicon-plus-sign" style="font-size: 8em;"></span></a> <br><h2>Manage Installtion</h2>
 			        </div>
 
 			        <div class="col-lg-3">
-			        	<a href="/user"><span class="glyphicon glyphicon-ok" style="font-size: 8em"></span></a> <br><h2>User</h2>
+			        	<a href="/user"><span class="glyphicon glyphicon-ok" style="font-size: 8em"></span></a> <br><h2>Manage User</h2>
 			        </div>
 			   
 			      </div>
