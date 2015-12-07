@@ -27,7 +27,7 @@ router.get('/createmolecule', function(req,res) {
 		res.redirect('/#login');
 	}
 	else
-		res.render('./molecule_templates/upload');
+		res.render('./molecule_templates/upload', { userinfo   : user});
 });
 
 router.get('/submitmol', function(req, res) {
@@ -69,7 +69,7 @@ router.get('/approval', function(req,res) {
 		res.redirect('/#login');
 	}
 	else
-		res.render('./molecule_templates/approval');
+		res.render('./molecule_templates/approval', { userinfo   : user});
 });
 
 router.get('/content', function(req,res) {
@@ -89,7 +89,7 @@ router.get('/content', function(req,res) {
 		res.redirect('/#login');
 	}
 	else
-res.render('./molecule_templates/specmole');
+res.render('./molecule_templates/specmole', { userinfo   : user});
 
 
 ////// INDEX ////////
@@ -112,7 +112,7 @@ router.get('/allmolecules', function(req, res) {
 				for (var i = 0; i < allMolecules.length; i++) {
 					molecules.push(allMolecules[i]);
 				}
-		res.render('/molecule_templates/allmolecules', {pendingList: molecules});
+		res.render('/molecule_templates/allmolecules', {pendingList: molecules, userinfo   : user});
 		//push to frontend
 		});
 
