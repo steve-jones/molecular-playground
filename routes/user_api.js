@@ -19,7 +19,29 @@ router.post('/createuser', function(req,res) {
 		    	req.flash('auth', 'Not logged in!');
 	    		res.redirect('/login');
 		}
-		else{}
+		else {
+			// call db function for create user
+			// Parameters: (String) firstName, (String) lastName, (String) username,
+			// (String) password, (String) email, (Number) role
+			// TODO: verify password and such
+			var firstName = req.body.firstName;
+			var lastName = req.body.lastName;
+			var username = req.body.username;
+			var password = req.body.password;
+			var email = req.body.email;
+			var role = req.body.role;
+			try {
+				db.createUser(firstName, lastName, username, password, email, role, function(err){
+					if(err){
+						console.log(err.getDescription);
+					}
+					else{}
+				});
+			} catch(error) {
+				console.log("Error when creating user.");
+				//TODO: change this when the db code is updated to throw an error
+			}
+		}
 });
 
 router.post('/edit/:userid', function(req, res) {
