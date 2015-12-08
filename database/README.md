@@ -78,7 +78,7 @@ db.getUser(username, function(callback) {
 		* Parameters: (Number) moleculeID
 		* Returns: void
 		* Throws: Molecule doesn't exist, Unable to connect to db
-		* Callback contains jsonized molecule data with parameters (I'm sorray about the lower case, it is unavoidable):
+		* Callback contains jsonized molecule data with parameters (I'm sorry about the lower case, it is unavoidable):
 			* (Number) moleculeid
 			* (Number) creatorid
 			* (String) name
