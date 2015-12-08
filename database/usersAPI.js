@@ -1,16 +1,18 @@
 
 var dbReader = require('./Local/databaseReader.js');
+var dbError = require('./errorAPI.js');
 var dbFunctions = require('./Local/dbFunctions.js');
 var crypto = require('./Local/encryption.js');
+var DBError = require('./DBError.js');
+var UserRole = require('../model/UserRole.js');
 
 module.exports = {
 
 	createUser: function(firstName, lastName, username, password, email, role, callback) {
 		if (!validateRole(role)) {
-			// TODO: Return some sort of error to the caller
-			console.log('User creation failed: Invalid Role: ' + String(role));
-			callback('User creation failed: Invalid Role: ' + String(role));
-			return;
+			var error = new DBError(5);
+			dbError.logError(error);
+			callback(error);
 		}
 
 		var encryptedPassword = crypto.encrypt(password);
@@ -18,36 +20,28 @@ module.exports = {
 		dbFunctions.usernameExists(username, function(usernameExists) {
 			if(usernameExists === 'false') {
 				dbReader.executeFunction('add_user', parameters, function(err) {
-					// log error
 					callback(err);
 				});
 			}
 			else {
-				// log error
-					callback('username exists');
-				// TODO: Return some sort of error to the caller
-					console.log("username exists");
+				var error = new DBError(4);
+				dbError.logError(error);
+				callback(error);
 			}
 		});
 	},
 
 	getUser: function(username, callback) {
-		//console.log(username);
 		dbFunctions.usernameExists(username, function(usernameExists) {
-
-		//console.log(usernameExists);
 			if (usernameExists === 'false') {
-				// log error
-				//throw "Cannot get user because user with username: " + username + " does not exist.";
-				callback(undefined);
+				var error = new DBError(3);
+				dbError.logError(error);
+				callback(new DBError(3));
 			}
 			else {
 				dbReader.executeFunction('get_user_by_username', [username], function(userData, err) {
-		//console.log(userData);
-					// log error
 					userData[0].password = crypto.decrypt(userData[0].password);
-		//console.log(userData[0].password);
-					callback(userData[0]);
+					callback(userData[0], new UserRole(userData[0].role));
 				});
 			}
 		});
