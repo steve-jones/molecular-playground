@@ -30,17 +30,12 @@ router.post('/createuser', function(req,res) {
 			var password = req.body.password;
 			var email = req.body.email;
 			var role = req.body.role;
-			try {
 				db.createUser(firstName, lastName, username, password, email, role, function(err){
 					if(err){
 						console.log(err.getDescription);
 					}
 					else{}
 				});
-			} catch(error) {
-				console.log("Error when creating user.");
-				//TODO: change this when the db code is updated to throw an error
-			}
 		}
 });
 
