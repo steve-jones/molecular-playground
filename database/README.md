@@ -244,5 +244,7 @@ db.getUser(username, function(callback) {
 		| 9           | Local admin does not exist      |
 		| 10          | Delegate already exists         |
 		| 11          | Error does not exist            |
+		| 12          | Invalid DBError Code            |
+		| 13          | Undefined Error                 |
 
 

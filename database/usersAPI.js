@@ -19,7 +19,8 @@ module.exports = {
 			}
 			else {
 				var error = new DBError(4);
-				dbError.logError(error);
+				dbError.logError(error, function(err) {
+				});
 				callback(error);
 			}
 		});
@@ -29,7 +30,8 @@ module.exports = {
 		dbFunctions.usernameExists(username, function(usernameExists) {
 			if (usernameExists === 'false') {
 				var error = new DBError(3);
-				dbError.logError(error);
+				dbError.logError(error, function(err) {
+				});
 				callback(new DBError(3));
 			}
 			else {
@@ -45,7 +47,8 @@ module.exports = {
 		dbFunctions.usernameExists(username, function(usernameExists) {
 			if (usernameExists === 'false') {
 				var error = new DBError(3);
-				dbError.logError(error);
+				dbError.logError(error, function(err) {
+				});
 				callback(new DBError(3));
 			}
 			else {
@@ -61,7 +64,8 @@ module.exports = {
 		dbFunctions.usernameExists(username, function(usernameExists) {
 			if (usernameExists === 'false') {
 				var error = new DBError(3);
-				dbError.logError(error);
+				dbError.logError(error, function(err) {
+				});
 				callback(new DBError(3));
 			}
 			else {
@@ -76,7 +80,8 @@ module.exports = {
 		dbFunctions.usernameExists(username, function(usernameExists) {
 			if (usernameExists === 'false') {
 				var error = new DBError(3);
-				dbError.logError(error);
+				dbError.logError(error, function(err) {
+				});
 				callback(new DBError(3));
 			}
 			else {
@@ -91,7 +96,8 @@ module.exports = {
 		dbFunctions.usernameExists(username, function(usernameExists) {
 			if (usernameExists === 'false') {
 				var error = new DBError(3);
-				dbError.logError(error);
+				dbError.logError(error, function(err) {
+				});
 				callback(new DBError(3));
 			}
 			else {

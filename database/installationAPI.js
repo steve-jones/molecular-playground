@@ -17,23 +17,25 @@ module.exports = {
 		parameters = [city, country, school_affiliation, local_admin_id, '{}', true, day,
 		GPS_location_x, GPS_location_y];
 		dbReader.executeFunction('add_installation', parameters, function(err){
-			console.log(err);
-			callback(err);
+			var error = new DBError(13);
+			dbError.logError(error, function(err) {
+			});
+			callback(error);
 		});
 	},
 
 	deleteInstallation : function(installation_id){
-		dbreader.executeFunction('delete_installation', installation_id, function(){
+		dbReader.executeFunction('delete_installation', installation_id, function(){
 		});
 	},
 
 	disableInstallation : function(installation_id){
-		dbreader.executeFunction('disable_installation', installation_id, function(){
+		dbReader.executeFunction('disable_installation', installation_id, function(){
 		});
 	},
 
 	getLocalDelegates : function(installation_id, callback){
-		dbreader.executeFunction('get_local_delegates', installation_id, function(allDelegates){
+		dbReader.executeFunction('get_local_delegates', installation_id, function(allDelegates){
 			callback(allDelegates);
 		});
 	},
@@ -45,14 +47,14 @@ module.exports = {
 		dbUser.createUser(firstName, lastName, username, password, email, role);
 		dbUser.getUser(username,function(userData){
 			var userID = userData[0].id;
-			dbreader.executeFunction('add_local_delegate', userID, function(){
+			dbReader.executeFunction('add_local_delegate', userID, function(){
 			});
 		});
 	},
 
 	removeLocalDelegate : function(installation_id, delegate_id, delegate_username){
 		parameters = [installation_id, delegate_id];
-		dbreader.executeFunction('remove_local_delegate', parameters, function(){
+		dbReader.executeFunction('remove_local_delegate', parameters, function(){
 			dbUser.deleteUser(delegate_username);
 		});
 	}

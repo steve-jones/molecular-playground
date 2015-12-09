@@ -28,7 +28,11 @@ const errorCodeEnum = new Enum({
 	'Delegate already exists' : 10,
 
 	// Error Logging error codes
-	'Error does not exist' : 11
+	'Error does not exist' : 11,
+	'Invalid DBError code' : 12,
+
+	// Other
+	'Undefined Error' : 13
 });
 
 
