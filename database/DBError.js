@@ -32,7 +32,8 @@ const errorCodeEnum = new Enum({
 	'Invalid DBError code' : 12,
 
 	// Other
-	'Undefined Error' : 13
+	'Undefined Error' : 13,
+	'DelegateID does not match userID' : 14
 });
 
 

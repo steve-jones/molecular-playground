@@ -10,7 +10,7 @@ module.exports = {
 
 	createUser: function(firstName, lastName, username, password, email, role, callback) {
 		var encryptedPassword = crypto.encrypt(password);
-		parameters = [firstName, lastName, username, encryptedPassword, email, role.getCode()];
+		parameters = [firstName, lastName, username, encryptedPassword, email, role];
 		dbFunctions.usernameExists(username, function(usernameExists) {
 			if(usernameExists === 'false') {
 				dbReader.executeFunction('add_user', parameters, function(err) {

@@ -13,6 +13,18 @@ module.exports = {
 		});
    	},
 
+   	installationExists: function(installation_id, callback) {
+		dbReader.executeFunction('installation_exists', installation_id, function(installationExists){
+			if(installationExists[0].installation_exists === null){
+				callback('false');
+			}
+			else{
+				callback('true');
+			}
+		});
+   	},
+
+
    	moleculeExists: function(moleculeID, callback) {
 		dbReader.executeFunction('molecule_exists', moleculeID, function(moleculeExists){
 			if(moleculeExists[0].molecule_exists === null){
