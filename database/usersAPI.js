@@ -14,7 +14,7 @@ module.exports = {
 		dbFunctions.usernameExists(username, function(usernameExists) {
 			if(usernameExists === 'false') {
 				dbReader.executeFunction('add_user', parameters, function(err) {
-					callback(err);
+					callback(null);
 				});
 			}
 			else {
@@ -32,12 +32,12 @@ module.exports = {
 				var error = new DBError(3);
 				dbError.logError(error, function(err) {
 				});
-				callback(error);
+				callback(null, null, error);
 			}
 			else {
 				dbReader.executeFunction('get_user_by_username', [username], function(userData, err) {
 					userData[0].password = crypto.decrypt(userData[0].password);
-					callback(userData[0], new UserRole(userData[0].role));
+					callback(userData[0], new UserRole(userData[0].role), null);
 				});
 			}
 		});

@@ -31,46 +31,66 @@ db.getUser(username, function(callback) {
 
 * ***Users API:*** (~/database/usersAPI.js)
 	* **createUser**
-		* Parameters: (String) firstName, (String) lastName, (String) username, (String) password, (String) email, (Number) role
+		* Parameters: (String) firstName, (String) lastName, (String) username, (String) password, (String) email, (Number) role, (Function) callback[error]
 		* Returns: void
 		* Throws: User already exists, Invalid Role, Unable to connect to db
+		* Callback contains:
+			* Error information. If null, no error occured.
+		* Notes:
+			* Password will be encrypted before stored
+		* Example usage:
+		```
+		db.createUser('First', 'Second', 'username', 'password', 'user@email.com', 1, function(error) {
+			if (error != null) {
+				// handle the error situationally
+				console.log(error.getDescription());
+			}
+		});
+		```
 	* **getUser**
-		* Parameters: (String) userName, (Function) callback
+		* Parameters: (String) userName, (Function) callback[userData, userRole, error]
 		* Returns: void
 		* Throws: User doesn't exist, Unable to connect to db
-		* Callback contains jsonized user data with parameters:
-			* (Number) id
-			* (String) firstName
-			* (String) lastName
-			* (String) uname
-			* (String) password
-			* (String) email
-			* (Number) role
-		* Example Usage: `db.getUser('jcalabro', function(userData) { console.log(userData.uname); });`
+		* Callback contains:
+			* Jsonized user data with parameters:
+				* (Number) id
+				* (String) firstName
+				* (String) lastName
+				* (String) uname
+				* (String) password
+				* (String) email
+				* (Number) role
+			* UserRole object
+			* Error information. If null, no error occured. Additionally, if an error occured, the other callback parameters will be null.
+		* Example Usage: `db.getUser('jcalabro', function(userData, userRole, error) { if (error == null) { console.log(userData.uname); } });`
 	* **updateEmail**
-		* Parameters: (String) username, (String) newEmail, (Function) callback
+		* Parameters: (String) username, (String) newEmail, (Function) callback[error]
 		* Returns: void
 		* Throws: User doesn't exist, Unable to connect to db
-		* Callback contains error information. If callback is null, there is no error.
+		* Callback contains:
+			* Error information. If callback is null, there is no error.
 		* Example Usage: `db.updateEmail('jcalabro', 'newEmail@umass.edu', function(error) { console.log(error.getDescription()); });`
 	* **updatePassword**
-		* Parameters: (String) username, (String) newPassword, (Function) callback
+		* Parameters: (String) username, (String) newPassword, (Function) callback[error]
 		* Returns: void
 		* Throws: User doesn't exist, Unable to connect to db
-		* Callback contains error information. If callback is null, there is no error.
-		* Example Usage: `db.updatePassword('jcalabro', 'newPassword', function(error) { console.log(error.getDescription()); });`
+		* Callback contains:
+			* Error information. If null, there is no error.
+		* Example Usage: `db.updatePassword('jcalabro', 'newPassword', function(error) { if (error != null) { console.log(error.getDescription()); } });`
 	* **updateRole**
-		* Parameters: (String) username, (Number) newRole, (Function) callback
+		* Parameters: (String) username, (Number) newRole, (Function) callback[error]
 		* Returns: void
 		* Throws: User doesn't exist, Invalid role, Unable to connect to db
-		* Callback contains error information. If callback is null, there is no error.
-		* Example Usage: `db.updateRole('jcalabro', new UserRole(1), function(error) { console.log(error.getDescription()); });`
+		* Callback contains:
+			* Error information. If callback is null, there is no error.
+		* Example Usage: `db.updateRole('jcalabro', new UserRole(1), function(error) { if (error != null) { console.log(error.getDescription()); } });`
 	* **deleteUser**
-		* Parameters: (String) username
+		* Parameters: (String) username, (Function) callback[error]
 		* Returns: void
 		* Throws: User doesn't exist, Unable to connect to db
-		* Callback contains error information. If callback is null, there is no error.
-		* Example Usage: `db.deleteuser('jcalabro', function(error) { console.log(error.getDescription()); });`
+		* Callback contains:
+			* Error information. If callback is null, there is no error.
+		* Example Usage: `db.deleteuser('jcalabro', function(error) { if (error != null) { console.log(error.getDescription()); } });`
 
 
 <a name="moleculeAPI"></a>
