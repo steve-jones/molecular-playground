@@ -22,4 +22,5 @@
 - 12/02 -- completed users view, playlist landing page view, and view paths within installation_api.js and playlist_api.js
 - 12/02 -- completed new login module with flash error message, and landing page after login
 - 12/05 -- all database functionality (except error passing) is complete
+- 12/06 -- updated login page to make it functional and added authentication features 
 - 12/11 -- first prototype complete
