@@ -14,6 +14,12 @@ router.get('/', function(req, res) {
 		}
 });
 
+// route to render the google map
+router.get('/map', function(req, res) {
+	var user = req.session.user;
+	res.render('partials_template/map')
+});
+
 //single sign on for testing
 router.get('/sso', function(req, res) {
 	var user = 'global_admin';

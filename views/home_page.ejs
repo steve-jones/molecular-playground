@@ -7,7 +7,8 @@
   <body data-spy="scroll" data-offset="0" data-target="#theMenu"   >
 
 	<% include ./partials_template/header %>
-  	<% include ./partials_template/menu_templates/menu_public %>
+  <% include ./partials_template/menu_templates/menu_public %>
+  <% include ./partials_template/map %>
 
 
 	<!-- ========== HEADER SECTION ========== -->
@@ -19,12 +20,13 @@
 			<h1>Molecular Playground Admin Portal</h1>
 				<div class="col-lg-6 col-lg-offset-3">
 				<h3>
-				<br>placeholder for googlemap
+				<br>
 				<br>
 				</h3>
 				</div>
 			</div>
 		</div><!-- /container -->
+    <iframe id="single" src="/map" style="width:95%" height="420px" scrolling="no"></iframe>
 	</div><!-- /headerwrap -->
 
 
