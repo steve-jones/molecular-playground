@@ -30,6 +30,7 @@ router.post('/createuser', function(req,res) {
 			var password = req.body.password;
 			if(password.length < 6) {
 				console.log("Password isn't long enough.");
+				//res.flash <-- do this, similar to above
 				res.redirect('/login');
 			}
 			var email = req.body.email;
@@ -49,11 +50,17 @@ router.post('/edit/:userid', function(req, res) {
       	req.flash('auth', 'Your session expired, please login to your account');
 		res.redirect('/#login');
 	}
-	else{}
+	else {
+		/** Check which field(s) of user info have changed, then call appropriate
+		* 	db functions to update that info. Verify password length and all that
+		*		too.
+		*/
+	}
 });
 
 
 router.post('/disable/:userid', function(req,res) {
+	// what's the difference between this and /delete?
 	var user = req.session.user;
 	if (user=== undefined) {
       	req.flash('auth', 'Your session expired, please login to your account');
