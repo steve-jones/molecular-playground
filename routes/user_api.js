@@ -19,7 +19,29 @@ router.post('/createuser', function(req,res) {
 		    	req.flash('auth', 'Not logged in!');
 	    		res.redirect('/login');
 		}
-		else{}
+		else {
+			// call db function for create user
+			// Parameters: (String) firstName, (String) lastName, (String) username,
+			// (String) password, (String) email, (Number) role
+			// TODO: verify password length and such
+			var firstName = req.body.firstName;
+			var lastName = req.body.lastName;
+			var username = req.body.username;
+			var password = req.body.password;
+			if(password.length < 6) {
+				console.log("Password isn't long enough.");
+				//res.flash <-- do this, similar to above
+				res.redirect('/login');
+			}
+			var email = req.body.email;
+			var role = req.body.role;
+				db.createUser(firstName, lastName, username, password, email, role, function(err){
+					if(err){
+						console.log(err.getDescription);
+					}
+					else{}
+				});
+		}
 });
 
 router.post('/edit/:userid', function(req, res) {
@@ -28,17 +50,12 @@ router.post('/edit/:userid', function(req, res) {
       	req.flash('auth', 'Your session expired, please login to your account');
 		res.redirect('/#login');
 	}
-	else{}
-});
-
-
-router.post('/disable/:userid', function(req,res) {
-	var user = req.session.user;
-	if (user=== undefined) {
-      	req.flash('auth', 'Your session expired, please login to your account');
-		res.redirect('/#login');
+	else {
+		/** Check which field(s) of user info have changed, then call appropriate
+		* 	db functions to update that info. Verify password length and all that
+		*		too.
+		*/
 	}
-	else{}
 });
 
 router.post('/delete/:userid', function(req,res) {
@@ -47,7 +64,12 @@ router.post('/delete/:userid', function(req,res) {
       	req.flash('auth', 'Your session expired, please login to your account');
 		res.redirect('/#login');
 	}
-	else{}
+	else {
+		console.log("Deleting user.");
+		db.deleteUser(req.body.username, function(error){
+			console.log(error.getDescription);
+		});
+	}
 });
 
 
