@@ -32,7 +32,7 @@ module.exports = {
 				var error = new DBError(3);
 				dbError.logError(error, function(err) {
 				});
-				callback(new DBError(3));
+				callback(error);
 			}
 			else {
 				dbReader.executeFunction('get_user_by_username', [username], function(userData, err) {
@@ -49,7 +49,7 @@ module.exports = {
 				var error = new DBError(3);
 				dbError.logError(error, function(err) {
 				});
-				callback(new DBError(3));
+				callback(error);
 			}
 			else {
 				dbReader.executeFunction('update_email', [username, newEmail], function(err) {
@@ -66,7 +66,7 @@ module.exports = {
 				var error = new DBError(3);
 				dbError.logError(error, function(err) {
 				});
-				callback(new DBError(3));
+				callback(error);
 			}
 			else {
 				dbReader.executeFunction('update_password', [username, newEncryptedPassword], function(err) {
@@ -82,7 +82,7 @@ module.exports = {
 				var error = new DBError(3);
 				dbError.logError(error, function(err) {
 				});
-				callback(new DBError(3));
+				callback(error);
 			}
 			else {
 				dbReader.executeFunction('update_role', [username, newRole], function(err) {
@@ -98,7 +98,7 @@ module.exports = {
 				var error = new DBError(3);
 				dbError.logError(error, function(err) {
 				});
-				callback(new DBError(3));
+				callback(error);
 			}
 			else {
 				dbReader.executeFunction('remove_user', [username], function(err) {
