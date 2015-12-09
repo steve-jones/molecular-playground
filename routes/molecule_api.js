@@ -25,7 +25,7 @@ router.get('/createmolecule', function(req, res) {
 		//if it is not a global admin but is some other user, go through approval process
 		else {
 			var user_id = user.id;
-			var file_path = 'filepath'; // get from frontend
+			var file_path = "filepath"; req.session.uploadfilepath;// get from frontend
 			var molecule_name = "name"; // get from frontend
 			if (!validGlobalAdmin(user)){
 				molDB.createMolecule(user_id, molecule_name, file_path, false, function(placeholder) {
@@ -54,6 +54,28 @@ router.get('/createmolecule', function(req, res) {
 		The following placeholders are where the routing code would go for these functions.
 		*/
 
+router.get('/allmolecules', function(req, res) {
+	var molDB = require('../database/moleculeAPI.js');
+	var user = req.session.user;
+	var molecules = [];
+	if (!validRole(user) || !validGlobalAdmin(user)) {
+			res.redirect('/login');
+	    	req.flash('invalid_role', "Invalid permissions. Please log in to a global admin account.");
+	    }
+		else {
+			molDB.getMolecules(function(allMolecules) {
+				for (int i = 0; i < allMolecules.length; i++) {
+					molecules.push(allMolecules[i]);
+				}
+		res.render('/molecule_templates/allmolecules', {pendingList: molecules});
+		//push to frontend
+		});
+	} 
+}
+
+
+
+
 ///// PENDING ///////
 // Sends a list of molecules waiting to front end
 // GLOBAL ADMIN accesses this
@@ -74,11 +96,20 @@ router.get('/pendingrequest', function(req, res) {
 						molecules.push(allMolecules[i]);
 					}
 				}
+<<<<<<< Updated upstream
 		//TODO: return array "molecules" to front end for rendering
+=======
+<<<<<<< HEAD
+=======
+		//TODO: return array "molecules" to front end for rendering
+>>>>>>> origin/playlist-routes
+>>>>>>> Stashed changes
 		res.render('/molecule_templates/pending', {pendingList: molecules});
 		});
 	}
 }
+
+/* PENDING REQUESTS */
 
 ////// APPROVE //////
 // Approves a selected request in collection of requests that are pending approval
