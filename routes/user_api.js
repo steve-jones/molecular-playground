@@ -58,17 +58,6 @@ router.post('/edit/:userid', function(req, res) {
 	}
 });
 
-
-router.post('/disable/:userid', function(req,res) {
-	// what's the difference between this and /delete?
-	var user = req.session.user;
-	if (user=== undefined) {
-      	req.flash('auth', 'Your session expired, please login to your account');
-		res.redirect('/#login');
-	}
-	else{}
-});
-
 router.post('/delete/:userid', function(req,res) {
 	var user = req.session.user;
 	if (user=== undefined) {
