@@ -266,5 +266,6 @@ db.getUser(username, function(callback) {
 		| 11          | Error does not exist            |
 		| 12          | Invalid DBError Code            |
 		| 13          | Undefined Error                 |
+		| 14          | Molecule Already Exists         |
 
 

@@ -11,7 +11,7 @@ module.exports = {
 		var year = date.getFullYear();
 		parameters = [creatorUserID, moleculeName, filepath, day, month, year, approvalStatus];
 		dbReader.executeFunction('create_molecule', parameters, function(moleculeID, err) {
-			callback(moleculeID[0].create_molecule);
+			callback(moleculeID[0].create_molecule, err);
 		});
 	},
 
@@ -21,7 +21,7 @@ module.exports = {
 				var error = new DBError(6);
 				dbError.logError(error, function(err) {
 				});
-				callback(error, null);
+				callback(null, error);
 			}
 			else {
 				dbReader.executeFunction('get_molecule', moleculeID, function(moleculeData, err) {
@@ -47,6 +47,7 @@ module.exports = {
 			}
 			else {
 				dbReader.executeFunction('rename_molecule', [moleculeID, newName], function(err) {
+					callback(err);
 				});
 			}
 		});
@@ -62,6 +63,7 @@ module.exports = {
 			}
 			else {
 				dbReader.executeFunction('change_path', [moleculeID, newPath], function(err) {
+					callback(err);
 				});
 			}
 		});
@@ -77,6 +79,7 @@ module.exports = {
 			}
 			else {
 				dbReader.executeFunction('change_approval_status', [moleculeID, newApprovalStatus], function(err) {
+					callback(err);
 				});
 			}
 		});
@@ -92,6 +95,7 @@ module.exports = {
 			}
 			else {
 				dbReader.executeFunction('delete_molecule', [moleculeID], function(err) {
+					callback(err);
 				});
 			}
 		});
