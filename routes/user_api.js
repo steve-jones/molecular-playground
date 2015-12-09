@@ -75,7 +75,12 @@ router.post('/delete/:userid', function(req,res) {
       	req.flash('auth', 'Your session expired, please login to your account');
 		res.redirect('/#login');
 	}
-	else{}
+	else {
+		console.log("Deleting user.");
+		db.deleteUser(req.body.username, function(error){
+			console.log(error.getDescription);
+		});
+	}
 });
 
 
