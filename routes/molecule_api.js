@@ -1,21 +1,87 @@
 var express = require('express');
 var router = express.Router();
 
-var m = require('../model/molecule_functions');
+//DB access
+var molDB = require('../database/moleculeAPI.js');
 
+
+//////////////////
+//RENDERING ROUTES
+//////////////////
 
 router.get('/', function(req, res) {
 	var user_obj = req.session.user;
-	res.render('molecule_page', { userinfo   : user_obj});
+	res.render('molecule_templates/molecule_page');
 });
 
-////// UPLOAD ///////
+router.get('/create', function(req, res) {
+    var user = req.session.user;
+	if (!validRole(user)) res.redirect('/login');
+	else if (!isGlobalAdmin(user)) {
+		req.flash('invalid_role', "Invalid permissions. Please sign in.");
+		res.redirect('/');
+	}
+	else {
+		// TODO: waiting for correct template
+		// res.render('molecule_templates/add');
+	}
+}
+
+router.get('/all', function(req, res) {
+	var user = req.session.user;
+	var molecules = [];
+	if (!validRole(user) || !isGlobalAdmin(user)) {
+			res.redirect('/login');
+	    	req.flash('invalid_role', "Invalid permissions. Please log in to a global admin account.");
+	    }
+		else {
+			molDB.getMolecules(function(allMolecules) {
+				for (int i = 0; i < allMolecules.length; i++) {
+					molecules.push(allMolecules[i]);
+				}
+		// TODO: res.render('/molecule_templates/allmolecules', {pendingList: molecules});
+		// TODO: push to frontend
+		});
+	} 
+}
+
+router.get('/pending', function(req, res) {
+	var user = req.session.user;
+	var molecules = [];
+	if (!validRole(user) || !isGlobalAdmin(user)) {
+			res.redirect('/login');
+	    	req.flash('invalid_role', "Invalid permissions. Please log in to a global admin account.");
+	    }
+		else {
+			molDB.getMolecules(function(allMolecules) {
+				for (int i = 0; i < allMolecules.length; i++) {
+					if (allMolecules[i].approval_status == false) {
+						molecules.push(allMolecules[i]);
+					}
+				}
+<<<<<<< Updated upstream
+		//TODO: return array "molecules" to front end for rendering
+=======
+<<<<<<< HEAD
+=======
+		//TODO: return array "molecules" to front end for rendering
+>>>>>>> origin/playlist-routes
+>>>>>>> Stashed changes
+		//TODO: res.render('/molecule_templates/pending', {pendingList: molecules});
+		});
+	}
+}
+
+////////////////////
+//BACKEND API ROUTES
+////////////////////
+
+////// UPLOAD ///////////////////////////////
 // Upload a molecule, pending approval
 // GLOBAL ADMIN request approves immediately
-/////////////////////
+/////////////////////////////////////////////
 
-router.get('/createmolecule', function(req, res) {
-	var molDB = require('../database/moleculeAPI.js');
+router.post('/newmolecule', function(req, res) {
 	var user = req.session.user;
 		//base user cases -- not a valid user
 		if (!validRole(user)) {
@@ -25,9 +91,9 @@ router.get('/createmolecule', function(req, res) {
 		//if it is not a global admin but is some other user, go through approval process
 		else {
 			var user_id = user.id;
-			var file_path = "filepath"; req.session.uploadfilepath;// get from frontend
+			var file_path = "filepath"; // req.session.uploadfilepath; get from frontend
 			var molecule_name = "name"; // get from frontend
-			if (!validGlobalAdmin(user)){
+			if (!isGlobalAdmin(user)){
 				molDB.createMolecule(user_id, molecule_name, file_path, false, function(placeholder) {
 					//body of callback
 				});
@@ -54,73 +120,16 @@ router.get('/createmolecule', function(req, res) {
 		The following placeholders are where the routing code would go for these functions.
 		*/
 
-router.get('/allmolecules', function(req, res) {
-	var molDB = require('../database/moleculeAPI.js');
-	var user = req.session.user;
-	var molecules = [];
-	if (!validRole(user) || !validGlobalAdmin(user)) {
-			res.redirect('/login');
-	    	req.flash('invalid_role', "Invalid permissions. Please log in to a global admin account.");
-	    }
-		else {
-			molDB.getMolecules(function(allMolecules) {
-				for (int i = 0; i < allMolecules.length; i++) {
-					molecules.push(allMolecules[i]);
-				}
-		res.render('/molecule_templates/allmolecules', {pendingList: molecules});
-		//push to frontend
-		});
-	} 
-}
 
+////// PENDING /////////////////
+// APPROVE or REJECT a molecule
+// GLOBAL ADMIN access only
+////////////////////////////////
 
-
-
-///// PENDING ///////
-// Sends a list of molecules waiting to front end
-// GLOBAL ADMIN accesses this
-/////////////////////
-
-router.get('/pendingrequest', function(req, res) {
-	var molDB = require('../database/moleculeAPI.js');
-	var user = req.session.user;
-	var molecules = [];
-	if (!validRole(user) || !validGlobalAdmin(user)) {
-			res.redirect('/login');
-	    	req.flash('invalid_role', "Invalid permissions. Please log in to a global admin account.");
-	    }
-		else {
-			molDB.getMolecules(function(allMolecules) {
-				for (int i = 0; i < allMolecules.length; i++) {
-					if (allMolecules[i].approval_status == false) {
-						molecules.push(allMolecules[i]);
-					}
-				}
-<<<<<<< Updated upstream
-		//TODO: return array "molecules" to front end for rendering
-=======
-<<<<<<< HEAD
-=======
-		//TODO: return array "molecules" to front end for rendering
->>>>>>> origin/playlist-routes
->>>>>>> Stashed changes
-		res.render('/molecule_templates/pending', {pendingList: molecules});
-		});
-	}
-}
-
-/* PENDING REQUESTS */
-
-////// APPROVE //////
-// Approves a selected request in collection of requests that are pending approval
-// Only GLOBAL ADMIN may access approval pending
-/////////////////////
-
-router.get('/approverequest', function(req, res) {
-	var molDB = require('../database/moleculeAPI.js');
+router.get('/approve', function(req, res) {
 	var user = req.session.user;
 		//base user cases -- not a valid user
-		if (!validRole(user) || !validGlobalAdmin(user)) {
+		if (!validRole(user) || !isGlobalAdmin(user)) {
 			res.redirect('/login');
 	    	req.flash('invalid_role', "Invalid permissions. Please log in to a global admin account.");
 	    }
@@ -132,16 +141,10 @@ router.get('/approverequest', function(req, res) {
 		}
 });
 
-////// REJECT ///////
-// Rejects a selected request in collection of requests that are pending approval
-// Only GLOBAL ADMIN may access approval pending
-/////////////////////
-
-router.get('/rejectrequest', function(req, res) {
-	var molDB = require('../database/moleculeAPI.js');
+router.get('/reject', function(req, res) {
 	var user = req.session.user;
 		//base user cases -- not a valid user
-		if (!validRole(user) || !validGlobalAdmin(user)) {
+		if (!validRole(user) || !isGlobalAdmin(user)) {
 			res.redirect('/login');
 	    	req.flash('invalid_role', "Invalid permissions. Please log in to a global admin account.");
 	    }
@@ -154,9 +157,9 @@ router.get('/rejectrequest', function(req, res) {
 });
 
 
-//////////
-// Utility functions
-//////////
+///////////////////
+//UTILITY FUNCTIONS
+///////////////////
 
 function validRole(user) {
 	switch (user.role) {
@@ -170,13 +173,12 @@ function validRole(user) {
 	}
 }
 
-function validGlobalAdmin(user) {
-	switch (user.role) {
-		case 'global_admin':
-			return true;
-		default:
-			return false;
-	}
+function isGlobalAdmin(user) {
+	return user.role === 'global_admin';
+}
+
+function isLocalAdmin(user) {
+	return isGlobalAdmin(user) || user.role === 'local_admin';
 }
 
 module.exports = router;
