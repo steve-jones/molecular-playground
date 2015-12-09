@@ -21,6 +21,7 @@ router.get('/map', function(req, res) {
 });
 
 //single sign on for testing
+//in the future use google/aws Oauth2
 router.get('/sso', function(req, res) {
 	var user = 'global_admin';
   var data ={ id: 1,
@@ -69,7 +70,7 @@ router.get('/logout', function(req,res) {
 });
 
 // About page
-router.get('/about', function(req, res) {
+router.get('/signup', function(req, res) {
 	var user_obj = req.session.user;
 	res.render('about', { userinfo   : user_obj});
 });
