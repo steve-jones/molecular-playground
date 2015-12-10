@@ -14,7 +14,13 @@ router.get('/', function(req, res) {
 });
 
 router.get('/add', function(req, res) {
-
+		if (user === undefined || user.role !=='global_admin') {
+			req.flash('auth', 'Not logged in!');
+			res.redirect('/login');
+		}
+		else {
+			// render user/add view
+		}
 });
 
 router.post('/add', function(req,res) {
