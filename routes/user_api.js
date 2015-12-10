@@ -44,17 +44,18 @@ router.post('/createuser', function(req,res) {
 		}
 });
 
-router.post('/edit/:userid', function(req, res) {
+router.get('/edit/:id', function(req, res) {
+
+});
+
+router.post('/edit/:id', function(req, res) {
 	var user = req.session.user;
 	if (user=== undefined) {
       	req.flash('auth', 'Your session expired, please login to your account');
 		res.redirect('/#login');
 	}
 	else {
-		/** Check which field(s) of user info have changed, then call appropriate
-		* 	db functions to update that info. Verify password length and all that
-		*		too.
-		*/
+
 	}
 });
 
