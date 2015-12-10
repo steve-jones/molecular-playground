@@ -1,5 +1,7 @@
 
 var pgp = require('pg-promise')();
+var DBError = require('../DBError.js');
+var errorDB = require('../errorAPI.js');
 
 var cn = {
     host: 'ec2-54-83-201-196.compute-1.amazonaws.com',
@@ -16,13 +18,14 @@ var db = pgp(cn);
 module.exports = {
 	executeFunction: function(functionName, parameters, callback) {
 		if(parameters != ''){
-			db.func(functionName, parameters)
-		   	.then(function (data) {
-		    	callback(data, null);
-		   	})
-		   	.catch(function (error) {
-          		callback(null, new DBError(2));
-		   	});
+				db.func(functionName, parameters)
+			   	.then(function (data) {
+			    	callback(data, null);
+			   	});
+			   	.catch(function (error) {
+	          		callback(null, new DBError(2));
+			   	});
+			}
 		}
 		else{
 			db.func(functionName)
