@@ -48,21 +48,29 @@ db.getUser(username, function(callback) {
 			* (Number) role
 		* Example Usage: `db.getUser('jcalabro', function(userData) { console.log(userData.uname); });`
 	* **updateEmail**
-		* Parameters: (String) username, (String) newEmail
+		* Parameters: (String) username, (String) newEmail, (Function) callback
 		* Returns: void
 		* Throws: User doesn't exist, Unable to connect to db
+		* Callback contains error information. If callback is null, there is no error.
+		* Example Usage: `db.updateEmail('jcalabro', 'newEmail@umass.edu', function(error) { console.log(error.getDescription()); });`
 	* **updatePassword**
-		* Parameters: (String) username, (String) newPassword
+		* Parameters: (String) username, (String) newPassword, (Function) callback
 		* Returns: void
 		* Throws: User doesn't exist, Unable to connect to db
+		* Callback contains error information. If callback is null, there is no error.
+		* Example Usage: `db.updatePassword('jcalabro', 'newPassword', function(error) { console.log(error.getDescription()); });`
 	* **updateRole**
-		* Parameters: (String) username, (Number) newRole
+		* Parameters: (String) username, (Number) newRole, (Function) callback
 		* Returns: void
 		* Throws: User doesn't exist, Invalid role, Unable to connect to db
+		* Callback contains error information. If callback is null, there is no error.
+		* Example Usage: `db.updateRole('jcalabro', new UserRole(1), function(error) { console.log(error.getDescription()); });`
 	* **deleteUser**
 		* Parameters: (String) username
 		* Returns: void
 		* Throws: User doesn't exist, Unable to connect to db
+		* Callback contains error information. If callback is null, there is no error.
+		* Example Usage: `db.deleteuser('jcalabro', function(error) { console.log(error.getDescription()); });`
 
 
 <a name="moleculeAPI"></a>
@@ -78,7 +86,7 @@ db.getUser(username, function(callback) {
 		* Parameters: (Number) moleculeID
 		* Returns: void
 		* Throws: Molecule doesn't exist, Unable to connect to db
-		* Callback contains jsonized molecule data with parameters (I'm sorray about the lower case, it is unavoidable):
+		* Callback contains jsonized molecule data with parameters (I'm sorry about the lower case, it is unavoidable):
 			* (Number) moleculeid
 			* (Number) creatorid
 			* (String) name

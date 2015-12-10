@@ -21,9 +21,7 @@ module.exports = {
 		    	callback(data);
 		   	})
 		   	.catch(function (error) {
-		   		// TODO: Find a better way to log errors
-          callback(error);
-	        	console.log(error);
+          		callback(error);
 		   	});
 		}
 		else{
@@ -32,9 +30,7 @@ module.exports = {
 		    	callback(data);
 		   	})
 		   	.catch(function (error) {
-		   		// TODO: Find a better way to log errors
-            callback(error);
-	        	console.log(error);
+            	callback(error);
 		   	});
 		}
 	}
