@@ -1,33 +1,95 @@
 var express = require('express');
 var router = express.Router();
 
-var m = require('../model/molecule_functions');
+//DB access
+var molDB = require('../database/moleculeAPI.js');
 
+
+//////////////////
+//RENDERING ROUTES
+//////////////////
 
 router.get('/', function(req, res) {
-	var user = req.session.user;
-	if (user=== undefined) {
-      	req.flash('auth', 'Your session expired, please login to your account');
-		res.redirect('/#login');
-	}
-	else
-	res.render('molecule_templates/molecule_page', { userinfo   : user});
+	var user_obj = req.session.user;
+	res.render('molecule_templates/molecule_page');
 });
 
-////// UPLOAD ///////
+router.get('/create', function(req, res) {
+    var user = req.session.user;
+	if (!validRole(user)) res.redirect('/login');
+	else if (!isGlobalAdmin(user)) {
+		req.flash('invalid_role', "Invalid permissions. Please sign in.");
+		res.redirect('/');
+	}
+	else {
+		// TODO: waiting for correct template
+		// res.render('molecule_templates/add');
+	}
+}
+
+router.get('/all', function(req, res) {
+	var user = req.session.user;
+	var molecules = [];
+	if (!validRole(user) || !isGlobalAdmin(user)) {
+			res.redirect('/login');
+	    	req.flash('invalid_role', "Invalid permissions. Please log in to a global admin account.");
+	    }
+		else {
+			molDB.getMolecules(function(allMolecules) {
+				for (int i = 0; i < allMolecules.length; i++) {
+					molecules.push(allMolecules[i]);
+				}
+		// TODO: res.render('/molecule_templates/allmolecules', {pendingList: molecules});
+		// TODO: push to frontend
+		});
+	} 
+}
+
+router.get('/pending', function(req, res) {
+	var user = req.session.user;
+	var molecules = [];
+	if (!validRole(user) || !isGlobalAdmin(user)) {
+			res.redirect('/login');
+	    	req.flash('invalid_role', "Invalid permissions. Please log in to a global admin account.");
+	    }
+		else {
+			molDB.getMolecules(function(allMolecules) {
+				for (int i = 0; i < allMolecules.length; i++) {
+					if (allMolecules[i].approval_status == false) {
+						molecules.push(allMolecules[i]);
+					}
+				}
+		//TODO: res.render('/molecule_templates/pending', {pendingList: molecules});
+		});
+	}
+}
+
+////////////////////
+//BACKEND API ROUTES
+////////////////////
+
+////// UPLOAD ///////////////////////////////
 // Upload a molecule, pending approval
 // GLOBAL ADMIN request approves immediately
-/////////////////////
+/////////////////////////////////////////////
 
-router.get('/createmolecule', function(req,res) {
+router.post('/newmolecule', function(req, res) {
 	var user = req.session.user;
-	  	
-	if (user=== undefined) {
-      	req.flash('auth', 'Your session expired, please login to your account');
-		res.redirect('/#login');
-	}
-	else
-		res.render('./molecule_templates/upload', { userinfo   : user});
+		//base user cases -- not a valid user
+		if (!validRole(user)) {
+			res.redirect('/login');
+	    	req.flash('invalid_role', "Invalid permissions. Please sign in.");
+	    }
+		//if it is not a global admin but is some other user, go through approval process
+		else {
+			var user_id = user.id;
+			var file_path = "filepath"; // req.session.uploadfilepath; get from frontend
+			var molecule_name = "name"; // get from frontend
+			if (!isGlobalAdmin(user)){
+	res.render('molecule_templates/molecule_page', { userinfo   : user});
+}
+else{}
+
 });
 
 router.get('/submitmol', function(req, res) {
@@ -118,8 +180,15 @@ router.get('/allmolecules', function(req, res) {
 
 	}
 });
-
-
+		/*
+		We found that, given enough time, we would classify requests into separate queues.
+		We would have a deletion queue, an update queue, and a new molecule queue.
+		We were able to write the backend code for both.
+		However, we were not able to alter the database given the amount of time.
+		If we were to implement them, we would have a request classifier that would sort
+		it into the correct queue, and then they could be approved or rejected by a global admin.
+		The following placeholders are where the routing code would go for these functions.
+		*/
 
 
 ///// PENDING ///////
@@ -208,6 +277,13 @@ function validRole(user) {
 			return false;
 	}
 }
+
+function isGlobalAdmin(user) {
+	return user.role === 'global_admin';
+}
+
+function isLocalAdmin(user) {
+	return isGlobalAdmin(user) || user.role === 'local_admin';
 
 function validGlobalAdmin(user) {
 	switch (user.role) {
