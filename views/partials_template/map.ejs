@@ -21,6 +21,16 @@
 
 var map;
 function initMap() {
+  var UMassAmherstMarker = {lat: 42.3889, lng: -72.5278};
+  var SpringfieldScienceMarker = {lat: 42.1036, lng: -72.5853};
+  var StOlafMarker = {lat: 44.4594, lng: -93.1806};
+  var OkinawaMarker = {lat: 26.4619, lng: 127.8311};
+  var GileadSciencesMarker = {lat: 37.5669, lng: -122.2816};
+  var AlcalaMadridMarker = {lat: 40.4824, lng: -3.3651};
+  var KentuckyMarker = {lat: 37.7373, lng: -84.3089};
+  var ViaDomitiaMarker = {lat: 42.6820, lng: 2.8967};
+  var OtterbeinMarker = {lat: 40.1255, lng: -82.9386};
+
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 20, lng: -20},
     zoom: 2,
@@ -28,7 +38,70 @@ function initMap() {
     streetViewControl: false,
     mapTypeId: google.maps.MapTypeId.SATELLITE
   });
-}
+
+  var pinColor = "FE7569";
+    var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
+        new google.maps.Size(21, 34),
+        new google.maps.Point(0,0),
+        new google.maps.Point(10, 34));
+
+  var marker1 = new google.maps.Marker({
+    map: map,
+    position: UMassAmherstMarker,
+    title: 'UMass Amherst Integrated Sciences Building'
+  });
+
+  var marker2 = new google.maps.Marker({
+    map: map,
+    position: SpringfieldScienceMarker,
+    title: 'Springfield Science Museum'
+  });
+
+  var marker3 = new google.maps.Marker({
+    map: map,
+    position: StOlafMarker,
+    title: 'St Olaf College'
+  });
+
+  var marker4 = new google.maps.Marker({
+    map: map,
+    position: OkinawaMarker,
+    title: 'Okinawa Institute of Science & Technology',
+    icon: pinImage
+  });
+
+  var marker5 = new google.maps.Marker({
+    map: map,
+    position: GileadSciencesMarker,
+    title: 'Gilead Sciences Inc.'
+  });
+
+  var marker6 = new google.maps.Marker({
+    map: map,
+    position: AlcalaMadridMarker,
+    title: 'Universidad de Alcalá, Madrid, Spain'
+  });
+
+  var marker7 = new google.maps.Marker({
+    map: map,
+    position: KentuckyMarker,
+    title: 'University of Eastern Kentucky',
+    fillColor: '#FF00CC'
+  });
+
+  var marker8 = new google.maps.Marker({
+    map: map,
+    position: ViaDomitiaMarker,
+    title: 'Université de Perpignan Via Domitia'
+  });
+
+  var marker9 = new google.maps.Marker({
+    map: map,
+    position: OtterbeinMarker,
+    title: 'Otterbein University (Chemistry)'
+  });
+
+  }
 
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTdeav80CxRzqtWK7D8BbXSfEMkzDLV0Y&callback=initMap"
