@@ -20,18 +20,45 @@
 
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-6 col-lg-offset-3">
+
 				<h2>
+<<<<<<< HEAD
 				<br>the current user session: <%= userinfo.uname %> as role:<%= userinfo.role %>
+=======
+					<br>Welcome <%= userinfo.uname %> !
+					<br>Your current access is: <%= userinfo.role %>
+>>>>>>> 46b0b6e3236f2d4fb23288bba36584258ca056cf
 				</h2>
-
-				<br>	hey you logged in successfully
-				<br>	click the menu on the top right cornor to manage
+				<div class="col-lg-6 col-lg-offset-3">
+					<Br> (grayout icons means you dont have access) - not implemented yet
 				</div>
-			</div>
-		</div><!-- /container -->
-	</div><!-- /headerwrap -->
 
+
+			</div>
+
+		</div><!-- /container -->
+			      
+		<div class="container">
+			      <div class="row" >
+			        <div class="col-lg-3">
+			            <a href="/molecule/"><span class="glyphicon glyphicon-plus-sign" style="font-size: 8em;"></span></a> <br><h2>Manage Molecules</h2>
+			        </div>
+
+			        <div class="col-lg-3">
+			        	<a href="/playlist"><span class="glyphicon glyphicon-ok" style="font-size: 8em"></span></a> <br><h2>Manage Playlist</h2>
+			        </div>        
+			        <div class="col-lg-3">
+			            <a href="/installation/"><span class="glyphicon glyphicon-plus-sign" style="font-size: 8em;"></span></a> <br><h2>Manage Installation</h2>
+			        </div>
+
+			        <div class="col-lg-3">
+			        	<a href="/user"><span class="glyphicon glyphicon-ok" style="font-size: 8em"></span></a> <br><h2>Manage User</h2>
+			        </div>
+			   
+			      </div>
+		</div><!-- /container -->
+
+	</div><!-- /headerwrap -->
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

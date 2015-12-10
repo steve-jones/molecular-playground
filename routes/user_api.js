@@ -4,8 +4,13 @@ var router = express.Router();
 var m = require('../model/user_functions');
 
 router.get('/', function(req, res) {
-	var user_obj = req.session.user;
-	res.render('users_template/user_page', { userinfo   : user_obj});
+	var user = req.session.user;
+	if (user=== undefined) {
+      	req.flash('auth', 'Your session expired, please login to your account');
+		res.redirect('/#login');
+	}
+	else
+	res.render('users_template/user_page', { userinfo   : user});
 });
 
 router.post('/createuser', function(req,res) {
@@ -18,16 +23,31 @@ router.post('/createuser', function(req,res) {
 });
 
 router.post('/edit/:userid', function(req, res) {
-
+	var user = req.session.user;
+	if (user=== undefined) {
+      	req.flash('auth', 'Your session expired, please login to your account');
+		res.redirect('/#login');
+	}
+	else{}
 });
 
 
 router.post('/disable/:userid', function(req,res) {
-
+	var user = req.session.user;
+	if (user=== undefined) {
+      	req.flash('auth', 'Your session expired, please login to your account');
+		res.redirect('/#login');
+	}
+	else{}
 });
 
 router.post('/delete/:userid', function(req,res) {
-
+	var user = req.session.user;
+	if (user=== undefined) {
+      	req.flash('auth', 'Your session expired, please login to your account');
+		res.redirect('/#login');
+	}
+	else{}
 });
 
 
