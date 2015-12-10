@@ -2,7 +2,6 @@
 var dbReader = require('./Local/databaseReader.js');
 var dbFunctions = require('./Local/dbFunctions.js');
 var dbUser = require('./usersAPI.js');
-var crypto = require('./Local/encryption.js');
 
 module.exports = {
 	getInstallations : function (callback){

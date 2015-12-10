@@ -18,7 +18,14 @@ router.get('/', function(req, res) {
 		}
 });
 
+// route to render the google map
+router.get('/map', function(req, res) {
+	var user = req.session.user;
+	res.render('partials_template/map')
+});
+
 //single sign on for testing
+//in the future use google/aws Oauth2
 router.get('/sso', function(req, res) {
 	var user = 'global_admin';
 <<<<<<< HEAD
@@ -79,7 +86,7 @@ router.get('/logout', function(req,res) {
 });
 
 // About page
-router.get('/about', function(req, res) {
+router.get('/signup', function(req, res) {
 	var user_obj = req.session.user;
 	res.render('about', { userinfo   : user_obj});
 });

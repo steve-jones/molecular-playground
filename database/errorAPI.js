@@ -15,7 +15,7 @@ module.exports = {
 		var month = date.getMonth();
 		var year = date.getFullYear();
 		dbReader.executeFunction('log_error', [dbError.getErrorCode(), seconds, minute, hour, day, month, year], function(err) {
-
+			
 		});
 	},
 
