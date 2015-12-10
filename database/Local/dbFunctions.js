@@ -24,6 +24,16 @@ module.exports = {
 		});
    	},
 
+   	playlistExists: function(playlist_id, callback) {
+		dbReader.executeFunction('playlist_exists', playlist_id, function(playlistExists){
+			if(playlistExists[0].playlist_exists === null){
+				callback('false');
+			}
+			else{
+				callback('true');
+			}
+		});
+   	},
 
    	moleculeExists: function(moleculeID, callback) {
 		dbReader.executeFunction('molecule_exists', moleculeID, function(moleculeExists){

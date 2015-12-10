@@ -71,7 +71,6 @@ module.exports = {
 		});		
 	},
 
-	//this may require a callback in createUser otherwise it might not work
 	addLocalDelegate : function(installation_id, firstName, lastName, username, password, email, role, callback){
 		
 		dbFunctions.installationExists(installation_id, function(installationExists) {
