@@ -140,7 +140,7 @@ db.getUser(username, function(callback) {
 	* **createPlaylist**
 		* Parameters: (String) playlistName, (Number) playlistCreator, (Number) installation
 		* Returns: void
-		* Throws: Molecule doesn't exist, Installation doesn't exist, Unable to connect to db
+		* Throws: Unable to connect to db
 	* **getPlaylists**
 		* Parameters: (Function) callback
 		* Returns: void
@@ -151,24 +151,34 @@ db.getUser(username, function(callback) {
 		* Parameters: (Number) playlistID, (Function) callback
 		* Returns: void
 		* Throws: Playlist doesn't exist, Unable to connect to db
-		* Callback contains array of all playlists
+		* Callback contains:
+			* array of all playlists if error is null
+			* Error information. If error is null, there is no error.
 		* Example Useage: `db.getPlaylist(function(moleculeName, molecules) { console.log(molecules); };`
 	* **removePlaylist**
 		* Parameters: (Number) playlistID
 		* Returns: void
 		* Throws: Playlist doesn't exist, Unable to connect to db
+		* Callback contains:
+			* Error information. If callback is null, there is no error.
 	* **addMoleculeToPlaylist**
 		* Parameters: (Number) playlistID, (Number) moleculeID
 		* Returns: void
-		* Throws: Playlist doesn't exist, Unable to connect to db
+		* Throws: Playlist doesn't exist, Molecule doesn't exist, Unable to connect to db
+		* Callback contains:
+			* Error information. If callback is null, there is no error.
 	* **removeMoleculeFromPlaylist**
 		* Parameters: (Number) playlistID, (Number) moleculeID
 		* Returns: void
-		* Throws: Playlist doesn't exist, Unable to connect to db
+		* Throws: Playlist doesn't exist, Molecule doesn't exist, Unable to connect to db
+		* Callback contains:
+			* Error information. If callback is null, there is no error.
 	* **scheduleContent**
 		* Parameters: (Number) playlistID, (Number) startTime, (Number) endTime, (Number) startDate, (Number) endDate (FIX THIS)
 		* Returns: void
 		* Throws: Playlist doesn't exist, Unable to connect to db
+		* Callback contains:
+			* Error information. If callback is null, there is no error.
 
 <a name="installationAPI"></a>
 
@@ -177,6 +187,8 @@ db.getUser(username, function(callback) {
 		* Parameters: (String) city, (String)country, (String) school_affiliation, (Number) local_admin_id, (Number) GPS_location_x, (Number) GPS_location_y
 		* Returns: void
 		* Throws: Local admin does not exist, Unable to connect to db	
+		* Callback contains:
+			* Error information. If callback is null, there is no error.
 	* **getInstallations**
 		* Parameters: (Function) callback
 		* Returns: void
@@ -187,24 +199,34 @@ db.getUser(username, function(callback) {
 		* Parameters: (Number) installation_id
 		* Returns: void
 		* Throws: Installation doesn't exist, Unable to connect to db
+		* Callback contains:
+			* Error information. If callback is null, there is no error.
 	* **disableInstallation**
 		* Parameters: (Number) installation_id
 		* Returns: void
 		* Throws: Installation doesn't exist, Unable to connect to db
+		* Callback contains:
+			* Error information. If callback is null, there is no error.
 	* **getLocalDelegates**
 		* Parameters: (Function) callback
 		* Returns: void
 		* Throws: Installation doesn't exist, Unable to connect to db
-		* Callback contains array of all Local Administrator ID's
-		* Example Useage: `db.getLocalDelegates(function(localAdminsIDs) { for (var i = 0; i < localAdminIDs.length; ++i) { console.log(localAdminIDs[i]); } };`
+		* Callback contains:
+			 * array of all Local Administrator ID's if error doesn't exist
+			 * Error information. If error is null, there is no error.
+		* Example Useage: `db.getLocalDelegates(function(localAdminsIDs, err) { for (var i = 0; i < localAdminIDs.length; ++i) { console.log(localAdminIDs[i]); } };`
 	* **addLocalDelegate**
 		* Parameters: (Number) installation_id, (String) firstName, (String) lastName, (String) username, (String) password, (String) email, (Number) role
 		* Returns: void
 		* Throws: Delegate already exists, Installation doesn't exist, Unable to connect to db
+		* Callback contains:
+			* Error information. If callback is null, there is no error.
 	* **removeLocalDelegate**
 		* Parameters: (String) username, (Number) installation_id, (Number) delegate_id
 		* Returns: void
-		* Throws: User doesn't exist, Installation doesn't exist, Unable to connect to db
+		* Throws: Delegate doesn't exist, Installation doesn't exist, Unable to connect to db
+		* Callback contains:
+			* Error information. If callback is null, there is no error.
 		
 <a name="errorAPI"></a>
 

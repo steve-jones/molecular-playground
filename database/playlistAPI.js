@@ -9,7 +9,6 @@ module.exports = {
 	createPlaylist : function(playlistName, playlistCreator, installation){
 		parameters = [playlistName, playlistCreator, [0], installation, -1, -1, -1, -1, false];
 		dbReader.executeFunction('create_playlist', parameters, function(err){
-
 		});
 	},
 
@@ -103,7 +102,6 @@ module.exports = {
 		});	
 	},
 
-	// all of these parameters should have a value
 	scheduleContent : function(playlistID, startTime, endTime, startDate, endDate, callback){
 		parameters = [playlistID, startTime, endTime, startDate, endDate];
 		dbFunctions.playlistExists(playlistID, function(playlistExists) {

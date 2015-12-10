@@ -17,10 +17,7 @@ module.exports = {
 		parameters = [city, country, school_affiliation, local_admin_id, '{}', true, day,
 		GPS_location_x, GPS_location_y];
 		dbReader.executeFunction('add_installation', parameters, function(err){
-			var error = new DBError(13);
-			dbError.logError(error, function(err) {
-			});
-			callback(error);
+			callback(err);
 		});
 
 	},
