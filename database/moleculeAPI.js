@@ -10,6 +10,9 @@ module.exports = {
 		var month = date.getMonth();
 		var year = date.getFullYear();
 		parameters = [creatorUserID, moleculeName, filepath, day, month, year, approvalStatus];
+
+		
+
 		dbReader.executeFunction('create_molecule', parameters, function(moleculeID, err) {
 			callback(moleculeID[0].create_molecule, err);
 		});
