@@ -17,13 +17,14 @@ router.get('/', function(req, res) {
 });
 
 router.get('/add', function(req, res) {
+	var user = res.session.user;
 	if (user === undefined || user.role !=='global_admin') {
 			req.flash('auth', 'Not logged in!');
 			res.redirect('/login');
 	}
 	else {
 		// render add view. TODO: update this line when the view is implemented
-		res.render('users_template/user_page');
+		res.render('users_template/user_page', { userinfo   : user});
 	}
 });
 
@@ -58,13 +59,14 @@ router.post('/add', function(req,res) {
 });
 
 router.get('/edit/:id', function(req, res) {
+	var user = res.session.user;
 	if (user === undefined || user.role !=='global_admin') {
 		req.flash('auth', 'Not logged in!');
 		res.redirect('/login');
 	}
 	else {
 		// render add view. TODO: update this line when the view is implemented
-		res.render('users_template/user_page');
+		res.render('users_template/user_page', { userinfo   : user});
 	}
 });
 
