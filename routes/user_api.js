@@ -13,7 +13,11 @@ router.get('/', function(req, res) {
 	res.render('users_template/user_page', { userinfo   : user});
 });
 
-router.post('/createuser', function(req,res) {
+router.get('/add', function(req, res) {
+
+});
+
+router.post('/add', function(req,res) {
 	var user = req.session.user;
 	  	if (user === undefined || user.role !=='global_admin') {
 		    	req.flash('auth', 'Not logged in!');
