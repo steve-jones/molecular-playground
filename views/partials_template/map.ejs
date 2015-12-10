@@ -32,35 +32,48 @@ function initMap() {
   var OtterbeinMarker = {lat: 40.1255, lng: -82.9386};
 
   map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 20, lng: -20},
+    center: {lat: 20, lng: 10},
     zoom: 2,
     mapTypeControl: false,
     streetViewControl: false,
     mapTypeId: google.maps.MapTypeId.SATELLITE
   });
 
-  var pinColor = "FE7569";
-    var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
-        new google.maps.Size(21, 34),
-        new google.maps.Point(0,0),
-        new google.maps.Point(10, 34));
+  var pinColor = "00802B"; // GREEN
+  // var pinColor = "F85C37" // ORANGE
+
+  // var pinImage = {
+  //   url: '../../Documentation/Images/logo1.jpg',
+  //   size: new google.maps.Size(21, 34),
+  //   origin: new google.maps.Point(0,0),
+  //   anchor: new google.maps.Point(10, 34)
+  // };
+
+  var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
+      new google.maps.Size(21, 34),
+      new google.maps.Point(0,0),
+      new google.maps.Point(10, 34));
 
   var marker1 = new google.maps.Marker({
     map: map,
     position: UMassAmherstMarker,
-    title: 'UMass Amherst Integrated Sciences Building'
+    title: 'UMass Amherst Integrated Sciences Building',
+    icon: pinImage,
+    clickable: true
   });
 
   var marker2 = new google.maps.Marker({
     map: map,
     position: SpringfieldScienceMarker,
-    title: 'Springfield Science Museum'
+    title: 'Springfield Science Museum',
+    icon: pinImage
   });
 
   var marker3 = new google.maps.Marker({
     map: map,
     position: StOlafMarker,
-    title: 'St Olaf College'
+    title: 'St Olaf College',
+    icon: pinImage
   });
 
   var marker4 = new google.maps.Marker({
@@ -73,32 +86,36 @@ function initMap() {
   var marker5 = new google.maps.Marker({
     map: map,
     position: GileadSciencesMarker,
-    title: 'Gilead Sciences Inc.'
+    title: 'Gilead Sciences Inc.',
+    icon: pinImage
   });
 
   var marker6 = new google.maps.Marker({
     map: map,
     position: AlcalaMadridMarker,
-    title: 'Universidad de Alcalá, Madrid, Spain'
+    title: 'Universidad de Alcalá, Madrid, Spain',
+    icon: pinImage
   });
 
   var marker7 = new google.maps.Marker({
     map: map,
     position: KentuckyMarker,
     title: 'University of Eastern Kentucky',
-    fillColor: '#FF00CC'
+    icon: pinImage
   });
 
   var marker8 = new google.maps.Marker({
     map: map,
     position: ViaDomitiaMarker,
-    title: 'Université de Perpignan Via Domitia'
+    title: 'Université de Perpignan Via Domitia',
+    icon: pinImage
   });
 
   var marker9 = new google.maps.Marker({
     map: map,
     position: OtterbeinMarker,
-    title: 'Otterbein University (Chemistry)'
+    title: 'Otterbein University (Chemistry)',
+    icon: pinImage
   });
 
   }
