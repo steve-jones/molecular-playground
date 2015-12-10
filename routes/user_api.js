@@ -3,6 +3,9 @@ var router = express.Router();
 
 var m = require('../model/user_functions');
 
+//TODO: update a few of these 'render' calls when more views are added.
+// especially for add and edit
+
 router.get('/', function(req, res) {
 	var user = req.session.user;
 	if (user=== undefined) {
