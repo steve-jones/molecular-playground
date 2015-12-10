@@ -35,8 +35,8 @@ module.exports = {
 		});
    	},
 
-   	moleculeExists: function(moleculeID, callback) {
-		dbReader.executeFunction('molecule_exists', moleculeID, function(moleculeExists){
+   	moleculeExists: function(moleculePath, callback) {
+		dbReader.executeFunction('molecule_exists', moleculePath, function(moleculeExists, error) {
 			if(moleculeExists[0].molecule_exists === null){
 				callback('false');
 			}

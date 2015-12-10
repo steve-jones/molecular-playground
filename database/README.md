@@ -272,22 +272,23 @@ db.getUser(username, function(callback) {
 		```
 	* Error Code Table:
 	
-		| Error Code  | Description                     |
-		| ----------- | ------------------------------- |
-		| 0           | No response from database       |
-		| 1           | Invalid database credentials    |
-		| 2           | Unable to connect to database   |
-		| 3           | User does not exist             |
-		| 4           | User already exists             |
-		| 5           | Invalid Role                    |
-		| 6           | Molecule does not exist         |
-		| 7           | Playlist does not exist         |
-		| 8           | Installation does not exist     |
-		| 9           | Local admin does not exist      |
-		| 10          | Delegate already exists         |
-		| 11          | Error does not exist            |
-		| 12          | Invalid DBError Code            |
-		| 13          | Undefined Error                 |
-		| 14          | Molecule Already Exists         |
+		| Error Code  | Description                       |
+		| ----------- | ----------------------------------|
+		| 0           | No response from database         |
+		| 1           | Invalid database credentials      |
+		| 2           | Unable to connect to database     |
+		| 3           | User does not exist               |
+		| 4           | User already exists               |
+		| 5           | Invalid Role                      |
+		| 6           | Molecule does not exist           |
+		| 7           | Playlist does not exist           |
+		| 8           | Installation does not exist       |
+		| 9           | Local admin does not exist        |
+		| 10          | Delegate already exists           |
+		| 11          | Error does not exist              |
+		| 12          | Invalid DBError Code              |
+		| 13          | Undefined Error                   |
+		| 14          | DelegateID does not match userID  |
+		| 15          | Molecule Already Exists           |
 
 

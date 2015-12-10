@@ -1,6 +1,7 @@
 
 var dbReader = require('./Local/databaseReader.js');
 var dbFunctions = require('./Local/dbFunctions.js');
+var errorDB = require('./errorAPI.js');
 
 module.exports = {
 
@@ -11,11 +12,20 @@ module.exports = {
 		var year = date.getFullYear();
 		parameters = [creatorUserID, moleculeName, filepath, day, month, year, approvalStatus];
 
-		
-
-		dbReader.executeFunction('create_molecule', parameters, function(moleculeID, err) {
-			callback(moleculeID[0].create_molecule, err);
+		dbFunctions.moleculeExists(filepath, function(moleculeExists) {
+			if (moleculeExists === 'true') {
+				var error = new DBError(15);
+				errorDB.logError(error, function(error) {
+				});
+				callback(null, error);
+			}
+			else {
+				dbReader.executeFunction('create_molecule', parameters, function(moleculeID, err) {
+					callback(moleculeID[0].create_molecule, err);
+				});
+			}
 		});
+
 	},
 
 	getMolecule: function(moleculeID, callback) {

@@ -17,6 +17,7 @@ const errorCodeEnum = new Enum({
 
 	// Molecule error codes
 	'Molecule does not exist' : 6,
+	'Molecule already exists' : 15,
 
 	// Playlist error codes
 	'Playlist does not exist' : 7,
