@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var model = require('../model/auth');
+
 var db = require('../database/usersAPI.js');
 
 // Homepage
@@ -10,7 +10,7 @@ router.get('/', function(req, res) {
       			res.render('home_page', { userinfo   : user,message: req.flash('auth')});
 		}
 		else{
-      			res.render('loggedin_page', { userinfo   : user});
+      			res.render('control_panel', { userinfo   : user});
 		}
 });
 
@@ -34,7 +34,7 @@ router.get('/sso', function(req, res) {
 
   req.session.user = data;
 
-      	res.render('loggedin_page', { userinfo   : data});
+      	res.redirect('/');
 });
 
 //login
