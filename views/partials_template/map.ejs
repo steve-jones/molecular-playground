@@ -93,7 +93,7 @@ function initMap() {
   var marker6 = new google.maps.Marker({
     map: map,
     position: AlcalaMadridMarker,
-    title: 'Universidad de Alcalá, Madrid, Spain',
+    title: 'Universidad de Alcalá',
     icon: pinImage
   });
 
@@ -114,18 +114,172 @@ function initMap() {
   var marker9 = new google.maps.Marker({
     map: map,
     position: OtterbeinMarker,
-    title: 'Otterbein University (Chemistry)',
+    title: 'Otterbein University',
     icon: pinImage
   });
 
+  var infowindow1 = new google.maps.InfoWindow({
+    content: marker1.title,
+    maxwidth: 200
+  });
+
+  var infowindow2 = new google.maps.InfoWindow({
+    content: marker2.title,
+    maxwidth: 200
+  });
+
+  var infowindow3 = new google.maps.InfoWindow({
+    content: marker3.title,
+    maxwidth: 200
+  });
+
+  var infowindow4 = new google.maps.InfoWindow({
+    content: marker4.title,
+    maxwidth: 200
+  });
+
+  var infowindow5 = new google.maps.InfoWindow({
+    content: marker5.title,
+    maxwidth: 200
+  });
+
+  var infowindow6 = new google.maps.InfoWindow({
+    content: marker6.title,
+    maxwidth: 200
+  });
+
+  var infowindow7 = new google.maps.InfoWindow({
+    content: marker7.title,
+    maxwidth: 200
+  });
+
+  var infowindow8 = new google.maps.InfoWindow({
+    content: marker8.title,
+    maxwidth: 200
+  });
+
+  var infowindow9 = new google.maps.InfoWindow({
+    content: marker9.title,
+    maxwidth: 200
+  });
+
+  var zoom = 15;
+
   marker1.addListener('click', function() {
-    map.setZoom(8);
+    map.setZoom(zoom);
     map.setCenter(marker1.getPosition());
   });
 
   marker1.addListener('mouseover', function() {
-    map.setZoom(8);
-    map.setCenter(marker1.getPosition());
+    infowindow1.open(map,marker1);
+  });
+
+  marker1.addListener('mouseout', function() {
+    infowindow1.close(map,marker1);
+  });
+
+  marker2.addListener('click', function() {
+    map.setZoom(zoom);
+    map.setCenter(marker2.getPosition());
+  });
+
+  marker2.addListener('mouseover', function() {
+    infowindow2.open(map,marker2);
+  });
+
+  marker2.addListener('mouseout', function() {
+    infowindow2.close(map,marker2);
+  });
+
+  marker3.addListener('click', function() {
+    map.setZoom(zoom);
+    map.setCenter(marker3.getPosition());
+  });
+
+  marker3.addListener('mouseover', function() {
+    infowindow3.open(map,marker3);
+  });
+
+  marker3.addListener('mouseout', function() {
+    infowindow3.close(map,marker3);
+  });
+
+  marker4.addListener('click', function() {
+    map.setZoom(zoom);
+    map.setCenter(marker4.getPosition());
+  });
+
+  marker4.addListener('mouseover', function() {
+    infowindow4.open(map,marker4);
+  });
+
+  marker4.addListener('mouseout', function() {
+    infowindow4.close(map,marker4);
+  });
+
+  marker5.addListener('click', function() {
+    map.setZoom(zoom);
+    map.setCenter(marker5.getPosition());
+  });
+
+  marker5.addListener('mouseover', function() {
+    infowindow5.open(map,marker5);
+  });
+
+  marker5.addListener('mouseout', function() {
+    infowindow5.close(map,marker5);
+  });
+
+  marker6.addListener('click', function() {
+    map.setZoom(zoom);
+    map.setCenter(marker6.getPosition());
+  });
+
+  marker6.addListener('mouseover', function() {
+    infowindow6.open(map,marker6);
+  });
+
+  marker6.addListener('mouseout', function() {
+    infowindow6.close(map,marker6);
+  });
+
+  marker7.addListener('click', function() {
+    map.setZoom(zoom);
+    map.setCenter(marker7.getPosition());
+  });
+
+  marker7.addListener('mouseover', function() {
+    infowindow7.open(map,marker7);
+  });
+
+  marker7.addListener('mouseout', function() {
+    infowindow7.close(map,marker7);
+  });
+
+  marker8.addListener('click', function() {
+    map.setZoom(zoom);
+    map.setCenter(marker8.getPosition());
+  });
+
+  marker8.addListener('mouseover', function() {
+    infowindow8.open(map,marker8);
+  });
+
+  marker8.addListener('mouseout', function() {
+    infowindow8.close(map,marker8);
+  });
+
+  marker9.addListener('click', function() {
+    map.setZoom(zoom);
+    map.setCenter(marker9.getPosition());
+  });
+
+  marker9.addListener('mouseover', function() {
+    infowindow9.open(map,marker9);
+  });
+
+  marker9.addListener('mouseout', function() {
+    infowindow9.close(map,marker9);
   });
 
   }
