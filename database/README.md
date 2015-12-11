@@ -88,7 +88,8 @@ db.getUser(username, function(callback) {
 		* Throws: User doesn't exist, Unable to connect to db
 		* Callback contains:
 			* Error information. If null, there is no error.
-		* Example Usage: ```
+		* Example Usage:
+		```
 		db.updatePassword('jcalabro', 'newPassword', function(error) {
 			if (error != null) {
 				console.log(error.getDescription());
