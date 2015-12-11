@@ -50,7 +50,8 @@ router.post('/add', function(req,res) {
 			if(password.length < 6) {
 				console.log("Password isn't long enough.");
 				//res.flash <-- do this, similar to above
-				res.redirect('/login');
+				res.flash('auth', 'Password must be at least 6 characters');
+				res.redirect('/add');
 			}
 			var email = req.body.email;
 			var role = req.body.role;
