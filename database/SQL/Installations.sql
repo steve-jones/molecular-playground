@@ -23,6 +23,19 @@ BEGIN
 END;
 $all_installations$ LANGUAGE plpgsql;
 
+
+CREATE OR REPLACE FUNCTION public.installation_exists(installationCheck int)
+RETURNS int AS $installationID$
+DECLARE
+	installationID int;
+BEGIN
+	SELECT installation_id INTO installationID
+	FROM installations WHERE
+	installation_id=installationCheck;
+	RETURN installationID;
+END;
+$installationID$ LANGUAGE plpgsql;
+
 /*complete*/
 CREATE OR REPLACE FUNCTION public.add_installation(City TEXT, Country TEXT,
 	SchoolAffliation TEXT, LocalAdminId INT, DelegateList INT[], Online BOOLEAN,
