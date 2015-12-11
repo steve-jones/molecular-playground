@@ -9,22 +9,10 @@
 	</div>
 
 	<div class="container-fluid">
-		<div class="navbar-header">
-
-			<a class="navbar-brand" href="/sso">
-			Single-Sign-On
-			<br>User:
-						<% if (userinfo) {%>
-						<%= '#'+JSON.stringify(userinfo.id) + '-' +JSON.stringify(userinfo.firstname) %>
-						<% }else {%>
-						<%= 'undefined'%>
-						<%} %>
-						</a>
-		</div>
 
 			<div class="container">
 
-				<div class="row">
+				<div class="row" style="text-align:center">
 					<h1>Molecular Playground Admin Portal</h1>
 				</div>
 			</div>
