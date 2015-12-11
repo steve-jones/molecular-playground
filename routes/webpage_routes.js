@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var db = require('../database/usersAPI.js');
+var model = require('../model/UserRole.js');
 
 // Homepage
 router.get('/', function(req, res) {
@@ -54,8 +55,11 @@ router.post('/login', function (req, res) {
     }
     else{
       //success
-    req.session.user = data;
-    res.render('loggedin_page', {userinfo:data});
+    	req.session.user = data;
+  	//req.session.user.role_description= model.getDescription(user.role);
+    	res.render('control_panel', {userinfo:data});
+
+
     }
   });
 
