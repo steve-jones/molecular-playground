@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 
 var db = require('../database/usersAPI.js');
-var model = require('../model/UserRole.js');
 
 // Homepage
 router.get('/', function(req, res) {
@@ -31,7 +30,8 @@ router.get('/sso', function(req, res) {
   uname: 'superuser',
   password: '12345',
   email: 'superuser@umass.edu',
-  role: 1 }
+  role: 0,
+  role_description: "Global Admin"}
 
   req.session.user = data;
 
@@ -43,7 +43,7 @@ router.post('/login', function (req, res) {
  var post = req.body;
   //next step: get user from database if credentials are good
 
-  db.getUser(post.user, function (data) {
+  db.getUser(post.user, function (data, userRole) {
    console.log("user data :"+ data);
     if (data === undefined){
       req.flash('auth', 'User does not exist');
@@ -56,7 +56,7 @@ router.post('/login', function (req, res) {
     else{
       //success
     	req.session.user = data;
-  	//req.session.user.role_description= model.getDescription(user.role);
+  	req.session.user.role_description= userRole.getDescription();
     	res.render('control_panel', {userinfo:data});
 
 
