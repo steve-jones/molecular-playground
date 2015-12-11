@@ -40,7 +40,7 @@ module.exports = {
 				dbReader.executeFunction('get_user_by_username', [username], function(userData, err) {
 					userData[0].password = crypto.decrypt(userData[0].password);
 					callback(userData[0], new UserRole(userData[0].role), null);
-				});
+				})
 			}
 		});
 	},
