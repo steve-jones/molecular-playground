@@ -1,7 +1,6 @@
 
 var pgp = require('pg-promise')();
 var DBError = require('../DBError.js');
-var errorDB = require('../errorAPI.js');
 
 var cn = {
     host: 'ec2-54-83-201-196.compute-1.amazonaws.com',
