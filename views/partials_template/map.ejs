@@ -36,7 +36,7 @@ function initMap() {
     zoom: 2,
     mapTypeControl: false,
     streetViewControl: false,
-    mapTypeId: google.maps.MapTypeId.SATELLITE
+    mapTypeId: google.maps.MapTypeId.HYBRID
   });
 
   var pinColor = "00802B"; // GREEN
@@ -116,6 +116,16 @@ function initMap() {
     position: OtterbeinMarker,
     title: 'Otterbein University (Chemistry)',
     icon: pinImage
+  });
+
+  marker1.addListener('click', function() {
+    map.setZoom(8);
+    map.setCenter(marker1.getPosition());
+  });
+
+  marker1.addListener('mouseover', function() {
+    map.setZoom(8);
+    map.setCenter(marker1.getPosition());
   });
 
   }
