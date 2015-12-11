@@ -14,15 +14,3 @@
 	</nav>
 
 
-		<nav class="menu" id="menu2">
-
-			<a class="navbar-header" href="/sso" style="line-height: 1.5;">
-			<br>Single-Sign-On
-			<br>User:
-						<% if (userinfo) {%>
-						<%= '#'+JSON.stringify(userinfo.id) + '-' +JSON.stringify(userinfo.firstname) %>
-						<% }else {%>
-						<%= 'undefined'%>
-						<%} %>
-						</a>
-		</nav>
