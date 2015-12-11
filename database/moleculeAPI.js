@@ -1,6 +1,7 @@
 
 var dbReader = require('./Local/databaseReader.js');
 var dbFunctions = require('./Local/dbFunctions.js');
+var errorDB = require('./errorAPI.js');
 
 module.exports = {
 
@@ -10,21 +11,34 @@ module.exports = {
 		var month = date.getMonth();
 		var year = date.getFullYear();
 		parameters = [creatorUserID, moleculeName, filepath, day, month, year, approvalStatus];
-		dbReader.executeFunction('create_molecule', parameters, function(moleculeID, err) {
-			// log error
-			callback(moleculeID[0].create_molecule);
+
+		dbFunctions.moleculeExists(filepath, function(moleculeExists) {
+			if (moleculeExists === 'true') {
+				var error = new DBError(15);
+				errorDB.logError(error, function(error) {
+				});
+				callback(null, error);
+			}
+			else {
+				dbReader.executeFunction('create_molecule', parameters, function(moleculeID, err) {
+					callback(moleculeID[0].create_molecule, err);
+				});
+			}
 		});
+
 	},
 
 	getMolecule: function(moleculeID, callback) {
 		dbFunctions.moleculeExists(moleculeID, function(moleculeExists) {
 			if (moleculeExists === 'false') {
-				throw "Cannot get molecule because molecule with id: " + moleculeID + " does not exist.";
+				var error = new DBError(6);
+				dbError.logError(error, function(err) {
+				});
+				callback(null, error);
 			}
 			else {
 				dbReader.executeFunction('get_molecule', moleculeID, function(moleculeData, err) {
-					// log error
-					callback(moleculeData[0]);
+					callback(moleculeData[0], err);
 				});
 			}
 		})
@@ -32,58 +46,69 @@ module.exports = {
 	
 	getMolecules: function(callback) {
 		dbReader.executeFunction('get_molecules', '', function(moleculeData, err) {
-			// log error
-			callback(moleculeData);
+			callback(moleculeData, err);
 		});
 	},
 
-	renameMolecule: function(moleculeID, newName) {
+	renameMolecule: function(moleculeID, newName, callback) {
 		dbFunctions.moleculeExists(moleculeID, function(moleculeExists) {
 			if (moleculeExists === 'false') {
-				throw "Cannot rename molecule because molecule with id: " + moleculeID + " does not exist.";
+				var error = new DBError(6);
+				dbError.logError(error, function(err) {
+				});
+				callback(error);
 			}
 			else {
 				dbReader.executeFunction('rename_molecule', [moleculeID, newName], function(err) {
-					// log error
+					callback(err);
 				});
 			}
 		});
 	},
 
-	alterPath: function(moleculeID, newPath) {
+	alterPath: function(moleculeID, newPath, callback) {
 		dbFunctions.moleculeExists(moleculeID, function(moleculeExists) {
 			if (moleculeExists === 'false') {
-				throw "Cannot alter path because molecule with id: " + moleculeID + " does not exist.";
+				var error = new DBError(6);
+				dbError.logError(error, function(err) {
+				});
+				callback(error);
 			}
 			else {
 				dbReader.executeFunction('change_path', [moleculeID, newPath], function(err) {
-					// log error
+					callback(err);
 				});
 			}
 		});
 	},
 
-	setApprovalStatus: function(moleculeID, newApprovalStatus) {
+	setApprovalStatus: function(moleculeID, newApprovalStatus, callback) {
 		dbFunctions.moleculeExists(moleculeID, function(moleculeExists) {
 			if (moleculeExists === 'false') {
-				throw "Cannot set approval status because molecule with id: " + moleculeID + " does not exist.";
+				var error = new DBError(6);
+				dbError.logError(error, function(err) {
+				});
+				callback(error);
 			}
 			else {
 				dbReader.executeFunction('change_approval_status', [moleculeID, newApprovalStatus], function(err) {
-					// log error
+					callback(err);
 				});
 			}
 		});
 	},
 
-	deleteMolecule: function(moleculeID) {
+	deleteMolecule: function(moleculeID, callback) {
 		dbFunctions.moleculeExists(moleculeID, function(moleculeExists) {
 			if (moleculeExists === 'false') {
-				throw "Cannot delete molecule because molecule with id: " + moleculeID + " does not exist.";
+				var error = new DBError(6);
+				dbError.logError(error, function(err) {
+				});
+				callback(error);
 			}
 			else {
 				dbReader.executeFunction('delete_molecule', [moleculeID], function(err) {
-					// log error
+					callback(err);
 				});
 			}
 		});

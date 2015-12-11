@@ -5,7 +5,7 @@ CREATE TABLE Playlists (
 	name TEXT NOT NULL,
 	playlist_creator INT NOT NULL REFERENCES Users(id),
 	molecule_ids INT[] NOT NULL 
-	installation TEXT NOT NULL REFERENCES Installations(id),
+	installation_id INT NOT NULL REFERENCES Installations(id),
 	start_time INT NOT NULL,
 	start_date  INT NOT NULL,
 	stop_date INT NOT NULL,
@@ -17,9 +17,9 @@ CREATE TABLE Playlists (
 CREATE OR REPLACE FUNCTION public.get_playlist()
 RETURNS TABLE(id INT
 	,playlist_name TEXT
-	,playlist_creator TEXT
+	,playlist_creator INT
 	,molecule_scripts INT[]
-	,installation TEXT
+	,installation_id INT
 	,start_time INT
 	,start_date  INT
 	,stop_date INT
@@ -32,8 +32,16 @@ $all_playlists$ LANGUAGE plpgsql;
 
 /*complete*/
 CREATE OR REPLACE FUNCTION public.get_specific_playlist(playlistID INT)
-RETURNS TABLE(id INT, playlist_name TEXT, playlist_creator TEXT, molecule_scripts INT[], installation TEXT
-, start_time INT, start_date  INT, stop_date INT, end_time INT, is_playing BOOLEAN) 
+RETURNS TABLE(id INT 
+	,playlist_name TEXT
+	,playlist_creator INT
+	,molecule_scripts INT[]
+	,installation INT
+	,start_time INT
+	,start_date  INT
+	,stop_date INT
+	,end_time INT
+	,is_playing BOOLEAN) 
 AS $one_playlists$
 BEGIN
 	RETURN QUERY SELECT * FROM playlists WHERE playlist_id=playlistID;
@@ -43,8 +51,8 @@ $one_playlists$ LANGUAGE plpgsql;
 
 
 /*complete*/
-CREATE OR REPLACE FUNCTION public.create_playlist(playlist_name TEXT, playlist_creator TEXT 
-	,molecule_ids INT[], installation TEXT, start_time INT, start_date  INT, stop_date INT 
+CREATE OR REPLACE FUNCTION public.create_playlist(playlist_name TEXT, playlist_creator INT 
+	,molecule_ids INT[], installation INT, start_time INT, start_date  INT, stop_date INT 
 	,end_time INT, is_playing BOOLEAN)
 RETURNS void as $$
 BEGIN
@@ -109,4 +117,15 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-/*need to make isPlaying function*/
+
+CREATE OR REPLACE FUNCTION public.playlist_exists(playlistCheck int)
+RETURNS int AS $playlistID$
+DECLARE
+	playlistID int;
+BEGIN
+	SELECT playlist_id INTO playlistID
+	FROM playlists WHERE
+	playlist_id=playlistCheck;
+	RETURN playlistID;
+END;
+$playlistID$ LANGUAGE plpgsql;

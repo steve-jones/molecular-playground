@@ -32,14 +32,14 @@ BEGIN
 END;
 $molID$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION public.molecule_exists(moleculeID_check text)
+CREATE OR REPLACE FUNCTION public.molecule_exists(moleculePath_check text)
 RETURNS int AS $moleculeID$
 DECLARE
 	moleculeID int;
 BEGIN
 	SELECT id INTO moleculeID
 	FROM Molecules WHERE
-	id=moleculeID_check
+	filepath=moleculePath_check
 	;
 	RETURN moleculeID;
 END;
