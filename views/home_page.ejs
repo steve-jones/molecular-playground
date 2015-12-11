@@ -7,25 +7,15 @@
   <body data-spy="scroll" data-offset="0" data-target="#theMenu"   >
 
 	<% include ./partials_template/header %>
-  	<% include ./partials_template/menu_templates/menu_public %>
+  <% include ./partials_template/menu_templates/menu_public %>
 
 
 	<!-- ========== HEADER SECTION ========== -->
 	<section id="home" name="home"></section>
-	<div id="headerwrap" >
+  <iframe id="single" src="/map" style="width:100%" height=420px scrolling="no"></iframe>
+			<!-- <div class="row">
 
-		<div class="container">
-			<div class="row">
-			<h1>Molecular Playground Admin Portal</h1>
-				<div class="col-lg-6 col-lg-offset-3">
-				<h3>
-				<br>placeholder for googlemap
-				<br>
-				</h3>
-				</div>
-			</div>
-		</div><!-- /container -->
-	</div><!-- /headerwrap -->
+			</div> -->
 
 
 	<!-- ========== other scoll SECTION ========== -->
@@ -38,25 +28,25 @@
 			<div class="row">
 				<section class="container">
 
-    <div class="login">
-      <h1>Login to Web App</h1>
-      <p class="centered"><i class="icon icon-circle"></i><i class="icon icon-circle"></i><i class="icon icon-circle"></i></p>
-      	<% if (message && message.length>0) { %>
-   			<div class="alert alert-danger"><%= message %></div>
-		<% } %>
+			    <div class="login">
+			      <h1>Login to Web App</h1>
+			      <p class="centered"><i class="icon icon-circle"></i><i class="icon icon-circle"></i><i class="icon icon-circle"></i></p>
+			      	<% if (message && message.length>0) { %>
+			   			<div class="alert alert-danger"><%= message %></div>
+					<% } %>
 
-      <form method="post" action="login">
-        <p><input type="text" name="user" value="" placeholder="Username or Email"></p>
-        <p><input type="password" name="password" value="" placeholder="Password"></p>
-        <p class="remember_me">
-          <label>
-            <input type="checkbox" name="remember_me" id="remember_me">
-            Remember me on this computer
-          </label>
-        </p>
-        <p class="submit"><input type="submit" name="commit" value="Login"></p>
-      </form>
-    </div>
+			      <form method="post" action="login">
+			        <p><input type="text" name="user" value="" placeholder="Username or Email"></p>
+			        <p><input type="password" name="password" value="" placeholder="Password"></p>
+			        <p class="remember_me">
+			          <label>
+			            <input type="checkbox" name="remember_me" id="remember_me">
+			            Remember me on this computer
+			          </label>
+			        </p>
+			        <p class="submit"><input type="submit" name="commit" value="Login"></p>
+			      </form>
+			    </div>
 
 			</div>
 		</div><!-- /container -->
