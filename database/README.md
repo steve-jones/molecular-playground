@@ -62,76 +62,189 @@ db.getUser(username, function(callback) {
 				* (Number) role
 			* UserRole object
 			* Error information. If null, no error occured. Additionally, if an error occured, the other callback parameters will be null.
-		* Example Usage: `db.getUser('jcalabro', function(userData, userRole, error) { if (error == null) { console.log(userData.uname); } });`
+		* Example Usage:
+		```
+		db.getUser('jcalabro', function(userData, userRole, error) {
+			if (error == null) {
+				console.log(userData.uname);
+			}
+		});
+		```
 	* **updateEmail**
 		* Parameters: (String) username, (String) newEmail, (Function) callback[error]
 		* Returns: void
 		* Throws: User doesn't exist, Unable to connect to db
 		* Callback contains:
 			* Error information. If callback is null, there is no error.
-		* Example Usage: `db.updateEmail('jcalabro', 'newEmail@umass.edu', function(error) { console.log(error.getDescription()); });`
+		* Example Usage:
+		```
+		db.updateEmail('jcalabro', 'newEmail@umass.edu', function(error) {
+			console.log(error.getDescription());
+		});
+		```
 	* **updatePassword**
 		* Parameters: (String) username, (String) newPassword, (Function) callback[error]
 		* Returns: void
 		* Throws: User doesn't exist, Unable to connect to db
 		* Callback contains:
 			* Error information. If null, there is no error.
-		* Example Usage: `db.updatePassword('jcalabro', 'newPassword', function(error) { if (error != null) { console.log(error.getDescription()); } });`
+		* Example Usage: ```
+		db.updatePassword('jcalabro', 'newPassword', function(error) {
+			if (error != null) {
+				console.log(error.getDescription());
+			}
+		});
+		```
 	* **updateRole**
 		* Parameters: (String) username, (Number) newRole, (Function) callback[error]
 		* Returns: void
 		* Throws: User doesn't exist, Invalid role, Unable to connect to db
 		* Callback contains:
 			* Error information. If callback is null, there is no error.
-		* Example Usage: `db.updateRole('jcalabro', new UserRole(1), function(error) { if (error != null) { console.log(error.getDescription()); } });`
+		* Example Usage:
+		```
+		db.updateRole('jcalabro', new UserRole(1), function(error) {
+			if (error != null) {
+				console.log(error.getDescription());
+			}
+		});
+		```
 	* **deleteUser**
 		* Parameters: (String) username, (Function) callback[error]
 		* Returns: void
 		* Throws: User doesn't exist, Unable to connect to db
 		* Callback contains:
 			* Error information. If callback is null, there is no error.
-		* Example Usage: `db.deleteuser('jcalabro', function(error) { if (error != null) { console.log(error.getDescription()); } });`
+		* Example Usage:
+		```
+		db.deleteuser('jcalabro', function(error) {
+			if (error != null) {
+				console.log(error.getDescription()); 
+			}
+		});
+		```
 
 
 <a name="moleculeAPI"></a>
 
 * ***Molecule API*** (~/database/moleculeAPI.js)
 	* **createMolecule** 
-		* Parameters: (Number) creatorUserID, (String) moleculeName, (String) filepath, (Boolean) approvalStatus, (Function) callback
+		* Parameters: (Number) creatorUserID, (String) moleculeName, (String) filepath, (Boolean) approvalStatus, (Function) callback[moleculeID, error]
 		* Returns: void
 		* Throws: Unable to connect to db
-		* Callback contains moleculeID (Number)
-		* Example Usage: `db.createMolecule(3, 'New Molecule', '/path/to/file', false, function(moleculeID) { console.log(moleculeID); });`
+		* Callback contains:
+			* moleculeID (Number)
+			* Error information. If callback is null, there is no error.
+		* Example Usage:
+		```
+		db.createMolecule(3, 'New Molecule', '/path/to/file', false, function(moleculeID, error) {
+			if (error == null) {
+				console.log(moleculeID);
+			}
+		});
+		```
 	* **getMolecule**
-		* Parameters: (Number) moleculeID
+		* Parameters: (Number) moleculeID, (Function) callback[moleculeData, error]
 		* Returns: void
 		* Throws: Molecule doesn't exist, Unable to connect to db
-		* Callback contains jsonized molecule data with parameters (I'm sorry about the lower case, it is unavoidable):
-			* (Number) moleculeid
-			* (Number) creatorid
-			* (String) name
-			* (String) filepath
-			* (Number) day
-			* (Number) month
-			* (Number) year
-			* (Boolean) approvalstatus
-		* Example Usage: `db.getMolecule(12, function(molData) { console.log(molData); });`
+		* Callback contains:
+			* jsonized molecule data with parameters (I'm sorry about the lower case, it is unavoidable):
+				* (Number) moleculeid
+				* (Number) creatorid
+				* (String) name
+				* (String) filepath
+				* (Number) day
+				* (Number) month
+				* (Number) year
+				* (Boolean) approvalstatus
+			* Error information. If callback is null, there is no error.
+		* Example Usage: 
+		```
+		db.getMolecule(12, function(moleculeData, error) {
+			if (error == null) {
+				console.log(moleculeData);
+			}
+		});
+		```
+	* ***getMolecules***
+		* Parameters: (Function) callback[moleculeData, error]
+		* Returns: void
+		* Throws: Unable to connect to db
+		* Callback contains:
+			* jsonized molecule data array with parameters (I'm sorry about the lower case, it is unavoidable):
+				* (Number) moleculeid
+				* (Number) creatorid
+				* (String) name
+				* (String) filepath
+				* (Number) day
+				* (Number) month
+				* (Number) year
+				* (Boolean) approvalstatus
+			* Error information. If callback is null, there is no error.
+		* Example usage:
+		```
+		db.getMolecules(funtion (allMolecules) {
+			allMolecules.forEach(function(moleculeData) {
+				console.log(moleculeDate);
+			});
+		});
+		```
 	* **renameMolecule**
-		* Parameters: (Number) moleculeID, (String) newName
+		* Parameters: (Number) moleculeID, (String) newName, (Function) callback[error]
 		* Returns: void
 		* Throws: Molecule doesn't exist, Unable to connect to db
+		* Callback contains:
+			* Error information. If callback is null, there is no error.
+		* Example usage:
+		```
+		db.renameMolecule(123, 'New Name', function(error) {
+			if (error != null) {
+				// handle error
+			}
+		})
+		```
 	* **alterPath**
-		* Parameters: (Number) moleculeID, (String) newPath
+		* Parameters: (Number) moleculeID, (String) newPath, (Function) callback[error]
 		* Returns: void
 		* Throws: Molecule doesn't exist, Unable to connect to db
+		* Callback contains:
+			* Error information. If callback is null, there is no error.
+		* Example Usage:
+		```
+		db.alterPath(123, '/New/Path/', function(error) {
+			if (error != null) {
+				// handle error
+			}
+		})
+		```
 	* **setApprovalStatus**
-		* Parameters: (Number) moleculeID, (Boolean) newApprovalStatus
+		* Parameters: (Number) moleculeID, (Boolean) newApprovalStatus, (Function) callback[error]
 		* Returns: void
 		* Throws: Molecule doesn't exist, Unable to connect to db
+		* Callback contains:
+			* Error information. If callback is null, there is no error.
+		* Example Usage:
+		```
+		db.setApprovalStatus(123, true, function(error) {
+			if (error != null) {
+				// handle error
+			}
+		})
+		```
 	* **deleteMolecule**
-		* Parameters: (Number) moleculeID
+		* Parameters: (Number) moleculeID, (Function) callback
 		* Returns: void
 		* Throws: Molecule doesn't exist, Unable to connect to db
+		* Callback contains:
+			* Error information. If callback is null, there is no error.
+		* Example Usage:
+		```
+		db.deleteMolecule(123, function(error) {
+			if (error != null) {
+				// handle error
+			}
+		})
+		```
 
 
 <a name="playlistAPI"></a>
@@ -145,7 +258,8 @@ db.getUser(username, function(callback) {
 		* Parameters: (Function) callback
 		* Returns: void
 		* Throws: Playlist doesn't exist, Unable to connect to db
-		* Callback contains array of all playlists
+		* Callback contains:
+			* array of all playlists
 		* Example Useage: `db.getPlaylists(function(molecules) { for (var i = 0; i < molecules.length; ++i) { console.log(molecules[i]); } };`
 	* **getPlaylist**
 		* Parameters: (Number) playlistID, (Function) callback

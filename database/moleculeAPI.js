@@ -66,7 +66,7 @@ module.exports = {
 		});
 	},
 
-	alterPath: function(moleculeID, newPath) {
+	alterPath: function(moleculeID, newPath, callback) {
 		dbFunctions.moleculeExists(moleculeID, function(moleculeExists) {
 			if (moleculeExists === 'false') {
 				var error = new DBError(6);
@@ -82,7 +82,7 @@ module.exports = {
 		});
 	},
 
-	setApprovalStatus: function(moleculeID, newApprovalStatus) {
+	setApprovalStatus: function(moleculeID, newApprovalStatus, callback) {
 		dbFunctions.moleculeExists(moleculeID, function(moleculeExists) {
 			if (moleculeExists === 'false') {
 				var error = new DBError(6);
@@ -98,7 +98,7 @@ module.exports = {
 		});
 	},
 
-	deleteMolecule: function(moleculeID) {
+	deleteMolecule: function(moleculeID, callback) {
 		dbFunctions.moleculeExists(moleculeID, function(moleculeExists) {
 			if (moleculeExists === 'false') {
 				var error = new DBError(6);

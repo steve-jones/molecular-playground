@@ -11,6 +11,7 @@ module.exports = {
 	createUser: function(firstName, lastName, username, password, email, role, callback) {
 		var encryptedPassword = crypto.encrypt(password);
 		var userRole = new UserRole(role);
+		console.log(userRole.getDescription());
 		parameters = [firstName, lastName, username, encryptedPassword, email, userRole.getCode()];
 		dbFunctions.usernameExists(username, function(usernameExists) {
 			if(usernameExists === 'false') {
