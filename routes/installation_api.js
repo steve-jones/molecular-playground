@@ -63,18 +63,15 @@ router.post('/create', function(req,res) {
 	user_model.getUser(username, function(user, role, err) {
 		if (err) {
 			req.flash('create_installation_status', 'Unable to create installation.');
+			res.redirect(INSTALLATION_ROOT);
 		}
 		else {
 			installation_model.addInstallation(city, country, school_affiliation, user.id, location_x, location_y, function(err) {
-				if (err) {
-					req.flash('create_installation_status', 'Unable to create installation.');
-				}
-				else {
-					req.flash('create_installation_status', 'Installation created.');
-				}
+				if (err) req.flash('create_installation_status', 'Unable to create installation.');
+				else req.flash('create_installation_status', 'Installation created.');
+				res.redirect(INSTALLATION_ROOT);
 			});
 		}
-		res.redirect(INSTALLATION_ROOT);
 	});
 });
 
