@@ -30,7 +30,7 @@ router.get('/create', function(req,res) {
 	// testing route rendering //
 
 	// note: the code below is commented out only for testing the views,
-	// please uncomment whenever needed -- phil.	
+	// please uncomment whenever needed -- phil.
 
 	if (user=== undefined) {
       	req.flash('auth', 'Your session expired, please login to your account');
@@ -68,16 +68,24 @@ router.post('/installation_add', function(req,res) {
 });
 
 
+// begin here ==> templating =>
 // overview: this is the Edit Installation view.
 router.get('/edit', function(req, res){
+	var user = req.session.user;
+
 	if (user=== undefined) {
       	req.flash('auth', 'Your session expired, please login to your account');
 		res.redirect('/#login');
 	}
 	else
-	res.render('installation_templates/edit',{ userinfo   : user});
-});
 
+	model.getInstallations(function(data){
+
+		// overview: pass res.render an array of JSON
+		res.render('installation_templates/edit',{ userinfo   : user, insta:  data });
+
+});
+});
 
 router.post('/remove/:id', function(req,res) {
 	var user = req.session.user;
