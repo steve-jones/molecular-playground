@@ -5,7 +5,7 @@ var dbFunctions = require('./Local/dbFunctions.js');
 
 module.exports = {
 
-	logError: function(dbError) {
+	logError: function(dbError, callback) {
 		// log_error(error_code int, sec int, minu int, hr int, da int, mon int, yr int)
 		var date = new Date();
 		var seconds = date.getSeconds();
@@ -15,7 +15,7 @@ module.exports = {
 		var month = date.getMonth();
 		var year = date.getFullYear();
 		dbReader.executeFunction('log_error', [dbError.getErrorCode(), seconds, minute, hour, day, month, year], function(err) {
-			
+			callback(err);
 		});
 	},
 

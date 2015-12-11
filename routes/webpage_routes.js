@@ -74,9 +74,12 @@ router.get('/logout', function(req,res) {
 });
 
 // About page
-router.get('/signup', function(req, res) {
+router.post('/signup', function(req, res) {
 	var user_obj = req.session.user;
 	res.render('about', { userinfo   : user_obj});
+	
+        res.redirect('/');
+
 });
 
 

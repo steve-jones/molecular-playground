@@ -9,18 +9,10 @@
 	<% include ./partials_template/header %>
   <% include ./partials_template/menu_templates/menu_public %>
 
-
 	<!-- ========== HEADER SECTION ========== -->
 	<section id="home" name="home"></section>
-  <iframe id="single" src="/map" style="width:100%" height=420px scrolling="no"></iframe>
-			<!-- <div class="row">
-
-			</div> -->
-
-
+  <iframe id="single" src="/map" style="width:100%; height:420px; display:block; border:0px" scrolling="no"></iframe>
 	<!-- ========== other scoll SECTION ========== -->
-
-
 
 <section id="login" name="login"></section>
 <div id="f">
@@ -60,9 +52,9 @@
 				<h1>Signup</h1>
 				<p class="centered"><i class="icon icon-circle"></i><i class="icon icon-circle"></i><i class="icon icon-circle"></i></p>
 
-				<!-- INTRO INFORMATIO-->
-				<div class="col-lg-6 col-lg-offset-3">
-				</div>
+  				<% include ./partials_template/signup_user %>
+
+
 			</div>
 		</div><!-- /container -->
 	</div><!-- /f -->

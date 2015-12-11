@@ -22,6 +22,11 @@ function UserRole(roleCode) {
 	}
 }
 
+UserRole.prototype.GLOBAL_ADMIN = 0;
+UserRole.prototype.LOCAL_ADMIN = 1;
+UserRole.prototype.DELEGATE = 2;
+UserRole.prototype.AUTHOR = 3;
+
 UserRole.prototype.getCode = function(){
 	return code;
 }
