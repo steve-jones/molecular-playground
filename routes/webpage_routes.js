@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var model = require('../model/auth');
+
 var db = require('../database/usersAPI.js');
 
 // Homepage
@@ -10,11 +10,18 @@ router.get('/', function(req, res) {
       			res.render('home_page', { userinfo   : user,message: req.flash('auth')});
 		}
 		else{
-      			res.render('loggedin_page', { userinfo   : user});
+      			res.render('control_panel', { userinfo   : user});
 		}
 });
 
+// route to render the google map
+router.get('/map', function(req, res) {
+	var user = req.session.user;
+	res.render('partials_template/map')
+});
+
 //single sign on for testing
+//in the future use google/aws Oauth2
 router.get('/sso', function(req, res) {
 	var user = 'global_admin';
   var data ={ id: 1,
@@ -27,7 +34,7 @@ router.get('/sso', function(req, res) {
 
   req.session.user = data;
 
-      	res.render('loggedin_page', { userinfo   : data});
+      	res.redirect('/');
 });
 
 //login
@@ -63,7 +70,7 @@ router.get('/logout', function(req,res) {
 });
 
 // About page
-router.get('/about', function(req, res) {
+router.get('/signup', function(req, res) {
 	var user_obj = req.session.user;
 	res.render('about', { userinfo   : user_obj});
 });

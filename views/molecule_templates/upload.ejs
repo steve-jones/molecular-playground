@@ -1,29 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-  		<% include ./../partials_template/head %>
-  		<link rel="stylesheet" type="text/css" href="../css/upload.css" media="all" />
-  </head>
+<head>
+  <% include ./../partials_template/head %>
+  <link rel="stylesheet" type="text/css" href="../css/upload.css" media="all" />
+</head>
 
-  <body data-spy="scroll" data-offset="0" data-target="#theMenu"   >
+<body data-spy="scroll" data-offset="0" data-target="#theMenu"   >
 
 	<% include ./../partials_template/header %>
-  	<% include ./../partials_template/menu_templates/menu_sub_molecule %>
+ <% include ./../partials_template/menu_templates/menu_sub_molecule %>
 
-	<!-- ========== render partial SECTION ========== -->
-  <div id="headerwrap" style="background:white">
-	
-<div class="container">
- 
-      <br>
-      <div class="row" >
-        <h1 style="color:black">UPLOADING</h1>
-        
-<div class= "img1">    
-<img id = "mo1" src="../img/methane.png" align="right">
-</div>
+ <!-- ========== render partial SECTION ========== -->
+ <div id="headerwrap" style="background:white">
+
+  <div class="container">
+
+    
+    <div class="row" >
+      <h1 style="color:black">UPLOADING</h1>
+     <img id = "mo1" src="../img/methane.png" align="right">
+
+      <div class ="input" >
+       <div class="form-group" >
+        <label class="sr-only" for="form_mol">Molecule</label>
+        <input type="text" name="form_mol" placeholder="Molecule Name..." class="form_mol form-control" id="form_mol">
       </div>
-    </div><!-- /container -->
+
+      <div class="form-group" >
+        <label class="sr-only" for="form_author">Author</label>
+        <input type="text" name="form_author" placeholder="Author..." class="form_author form-control" id="form_author">
+      </div>
+
+      <div class="form-group" >
+        <label class="sr-only" for="form_school_affiliation">Description</label>
+        <input type="text" name="form_school_affiliation" placeholder="Description..." class="form_school_affiliation form-control" id="form_school_affiliation">
+      </div>
+
+      <button type="submit" class="btn" style="float: middle;">Submit</button>
+    
+  </div>
+
+
+</div>
+</div><!-- /container -->
 
 
 <div class="upload">
@@ -40,8 +59,8 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-   	<footer>
-		<% include ./../partials_template/footer %>
-	</footer>
-	</body>
-</html>
+    <footer>
+      <% include ./../partials_template/footer %>
+    </footer>
+  </body>
+  </html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+
+var map;
+function initMap() {
+  var UMassAmherstMarker = {lat: 42.3889, lng: -72.5278};
+  var SpringfieldScienceMarker = {lat: 42.1036, lng: -72.5853};
+  var StOlafMarker = {lat: 44.4594, lng: -93.1806};
+  var OkinawaMarker = {lat: 26.4619, lng: 127.8311};
+  var GileadSciencesMarker = {lat: 37.5669, lng: -122.2816};
+  var AlcalaMadridMarker = {lat: 40.4824, lng: -3.3651};
+  var KentuckyMarker = {lat: 37.7373, lng: -84.3089};
+  var ViaDomitiaMarker = {lat: 42.6820, lng: 2.8967};
+  var OtterbeinMarker = {lat: 40.1255, lng: -82.9386};
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 20, lng: 10},
+    zoom: 2,
+    mapTypeControl: false,
+    streetViewControl: false,
+    mapTypeId: google.maps.MapTypeId.HYBRID
+  });
+
+  var pinColor = "00802B"; // GREEN
+  // var pinColor = "F85C37" // ORANGE
+
+  // var pinImage = {
+  //   url: '../../Documentation/Images/logo1.jpg',
+  //   size: new google.maps.Size(21, 34),
+  //   origin: new google.maps.Point(0,0),
+  //   anchor: new google.maps.Point(10, 34)
+  // };
+
+  var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
+      new google.maps.Size(21, 34),
+      new google.maps.Point(0,0),
+      new google.maps.Point(10, 34));
+
+  var marker1 = new google.maps.Marker({
+    map: map,
+    position: UMassAmherstMarker,
+    title: 'UMass Amherst Integrated Sciences Building',
+    icon: pinImage,
+    clickable: true
+  });
+
+  var marker2 = new google.maps.Marker({
+    map: map,
+    position: SpringfieldScienceMarker,
+    title: 'Springfield Science Museum',
+    icon: pinImage
+  });
+
+  var marker3 = new google.maps.Marker({
+    map: map,
+    position: StOlafMarker,
+    title: 'St Olaf College',
+    icon: pinImage
+  });
+
+  var marker4 = new google.maps.Marker({
+    map: map,
+    position: OkinawaMarker,
+    title: 'Okinawa Institute of Science & Technology',
+    icon: pinImage
+  });
+
+  var marker5 = new google.maps.Marker({
+    map: map,
+    position: GileadSciencesMarker,
+    title: 'Gilead Sciences Inc.',
+    icon: pinImage
+  });
+
+  var marker6 = new google.maps.Marker({
+    map: map,
+    position: AlcalaMadridMarker,
+    title: 'Universidad de Alcalá, Madrid, Spain',
+    icon: pinImage
+  });
+
+  var marker7 = new google.maps.Marker({
+    map: map,
+    position: KentuckyMarker,
+    title: 'University of Eastern Kentucky',
+    icon: pinImage
+  });
+
+  var marker8 = new google.maps.Marker({
+    map: map,
+    position: ViaDomitiaMarker,
+    title: 'Université de Perpignan Via Domitia',
+    icon: pinImage
+  });
+
+  var marker9 = new google.maps.Marker({
+    map: map,
+    position: OtterbeinMarker,
+    title: 'Otterbein University (Chemistry)',
+    icon: pinImage
+  });
+
+  marker1.addListener('click', function() {
+    map.setZoom(8);
+    map.setCenter(marker1.getPosition());
+  });
+
+  marker1.addListener('mouseover', function() {
+    map.setZoom(8);
+    map.setCenter(marker1.getPosition());
+  });
+
+  }
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTdeav80CxRzqtWK7D8BbXSfEMkzDLV0Y&callback=initMap"
+        async defer></script>
+  </body>
+</html>
