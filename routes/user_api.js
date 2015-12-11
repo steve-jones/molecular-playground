@@ -3,6 +3,9 @@ var router = express.Router();
 
 var m = require('../model/user_functions');
 
+//TODO: update a few of these 'render' calls when more views are added.
+// especially for add and edit
+
 router.get('/', function(req, res) {
 	var user = req.session.user;
 	if (user=== undefined) {
@@ -13,17 +16,28 @@ router.get('/', function(req, res) {
 	res.render('users_template/user_page', { userinfo   : user});
 });
 
-router.post('/createuser', function(req,res) {
+router.get('/add', function(req, res) {
 	var user = req.session.user;
-	  	if (user === undefined || user.role !=='global_admin') {
-		    	req.flash('auth', 'Not logged in!');
-	    		res.redirect('/login');
+	if (user === undefined || user.role !=='global_admin') {
+			req.flash('auth', 'Not logged in!');
+			res.redirect('/login');
+	}
+	else {
+		// render add view. TODO: update this line when the view is implemented
+		res.render('users_template/user_page', { userinfo   : user});
+	}
+});
+
+router.post('/add', function(req,res) {
+	var user = req.session.user;
+	  if (user === undefined || user.role !=='global_admin') {
+			req.flash('auth', 'Not logged in!');
+	  	res.redirect('/login');
 		}
 		else {
 			// call db function for create user
 			// Parameters: (String) firstName, (String) lastName, (String) username,
 			// (String) password, (String) email, (Number) role
-			// TODO: verify password length and such
 			var firstName = req.body.firstName;
 			var lastName = req.body.lastName;
 			var username = req.body.username;
@@ -44,17 +58,32 @@ router.post('/createuser', function(req,res) {
 		}
 });
 
-router.post('/edit/:userid', function(req, res) {
+router.get('/edit/:id', function(req, res) {
+	var user = req.session.user;
+	if (user === undefined || user.role !=='global_admin') {
+		req.flash('auth', 'Not logged in!');
+		res.redirect('/login');
+	}
+	else {
+		// render add view. TODO: update this line when the view is implemented
+		res.render('users_template/user_page', { userinfo   : user});
+	}
+});
+
+router.post('/edit/:id', function(req, res) {
 	var user = req.session.user;
 	if (user=== undefined) {
       	req.flash('auth', 'Your session expired, please login to your account');
 		res.redirect('/#login');
 	}
 	else {
-		/** Check which field(s) of user info have changed, then call appropriate
-		* 	db functions to update that info. Verify password length and all that
-		*		too.
-		*/
+		// update email and password
+		db.updateEmail(req.body.username, req.body.email, function(error){
+			console.log(error);
+		});
+		db.updatePassword(req.body.username, req.body.password, function(error){
+			console.log(error);
+		});
 	}
 });
 
