@@ -30,7 +30,8 @@ router.get('/sso', function(req, res) {
   uname: 'superuser',
   password: '12345',
   email: 'superuser@umass.edu',
-  role: 1 }
+  role: 0,
+  role_description: "Global Admin"}
 
   req.session.user = data;
 
@@ -42,7 +43,7 @@ router.post('/login', function (req, res) {
  var post = req.body;
   //next step: get user from database if credentials are good
 
-  db.getUser(post.user, function (data) {
+  db.getUser(post.user, function (data, userRole) {
    console.log("user data :"+ data);
     if (data === undefined){
       req.flash('auth', 'User does not exist');
@@ -54,8 +55,11 @@ router.post('/login', function (req, res) {
     }
     else{
       //success
-    req.session.user = data;
-    res.render('loggedin_page', {userinfo:data});
+    	req.session.user = data;
+  	req.session.user.role_description= userRole.getDescription();
+    	res.render('control_panel', {userinfo:data});
+
+
     }
   });
 
