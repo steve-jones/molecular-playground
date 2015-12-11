@@ -3,7 +3,7 @@
 -->
 
 	<div class="container-fluid">
-		<div class="navbar-header" style="background-color:white">
+		<div class="navbar-header">
 				<br><a href="/"><img src="/img/logoblack.png"></a>
 		</div>
 	</div>
@@ -13,7 +13,7 @@
 
 			<a class="navbar-brand" href="/sso">
 			Single-Sign-On
-			<br>User: 
+			<br>User:
 						<% if (userinfo) {%>
 						<%= '#'+JSON.stringify(userinfo.id) + '-' +JSON.stringify(userinfo.firstname) %>
 						<% }else {%>
