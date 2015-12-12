@@ -12,7 +12,9 @@
 	<!-- ========== HEADER SECTION ========== -->
 	<section id="home" name="home"></section>
 	<div id="headerwrap" style="background:white">
-
+    <% if (create_installation_status) { %>
+      <h5><%=create_installation_status%></h5>
+    <% } %>
 		<div class="container">
 			<div class="row" >
         <h1 style="color:black">MANAGE INSTALLATIONS</h1>
