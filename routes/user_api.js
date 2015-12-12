@@ -18,13 +18,18 @@ router.get('/', function(req, res) {
 
 router.get('/add', function(req, res) {
 	var user = req.session.user;
-	if (user === undefined || user.role !=='global_admin') {
-			req.flash('auth', 'Not logged in!');
-			res.redirect('/login');
+	console.log(user);
+	if (user === undefined) {
+			req.flash('auth', 'You are not logged in.');
+			res.redirect('/#login');
+	}
+	else if (user.role === 2 || user.role === 3) {
+		req.flash('auth', 'You do not have permission.');
+		res.redirect('/#login');
 	}
 	else {
 		// render add view. TODO: update this line when the view is implemented
-		res.render('users_template/user_page', { userinfo   : user});
+		res.render('users_template/add_user', { userinfo   : user});
 	}
 });
 
