@@ -20,6 +20,17 @@ router.get('/', function(req, res) {
 	}
 });
 
+router.get('/moleculelist', function(req, res) {
+	var user = req.session.user;
+	if (!validRole(user)) {
+			res.redirect('/login');
+	    	req.flash('invalid_role', "Invalid permissions. Please log in to an account.");
+	    }
+		else {
+	res.render('molecule_templates/molecule_list', { userinfo   : user} );
+	}
+});
+
 router.get('/createmolecule', function(req, res) {
     var user = req.session.user;
 	if (!validRole(user)) {
