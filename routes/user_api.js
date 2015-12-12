@@ -16,6 +16,16 @@ router.get('/', function(req, res) {
 	res.render('users_template/user_page', { userinfo   : user});
 });
 
+router.get('/manage', function(req, res) {
+	var user = req.session.user;
+	if (user=== undefined) {
+      	req.flash('auth', 'Your session expired, please login to your account');
+		res.redirect('/#login');
+	}
+	else
+	res.render('users_template/user_list', { userinfo   : user});
+});
+
 router.get('/add', function(req, res) {
 	var user = req.session.user;
 	console.log(user);
