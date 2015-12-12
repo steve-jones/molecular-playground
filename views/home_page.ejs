@@ -28,7 +28,7 @@
 					<% } %>
 
 			      <form method="post" action="login">
-			        <p><input type="text" name="user" value="" placeholder="uer.na"></p>
+			        <p><input type="text" name="user" value="" placeholder="Username"></p>
 			        <p><input type="password" name="password" value="" placeholder="Password"></p>
 			        <p class="remember_me">
 			          <label>
@@ -36,7 +36,7 @@
 			            Remember me on this computer
 			          </label>
 			        </p>
-			        <p class="submit"><input type="submit" name="commit" value="Login"></p>
+			        <p class="submit"><input type="submit" name="commit" value="Login" class="btn"></p>
 			      </form>
 			    </div>
 
@@ -49,9 +49,8 @@
 <div id="f">
 		<div class="container">
 			<div class="row">
-				<h1>Signup</h1>
-				<p class="centered"><i class="icon icon-circle"></i><i class="icon icon-circle"></i><i class="icon icon-circle"></i></p>
-
+				<h1>Signup as Molecule Author</h1>
+				<br>
   				<% include ./partials_template/signup_user %>
 
 
