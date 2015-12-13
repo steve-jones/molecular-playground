@@ -33,7 +33,13 @@ router.get('/edit', function(req, res){
 		res.redirect('/');
 		console.log('invalid role');
 	}
-	else res.render('installation_templates/edit', {userinfo: user});
+	else {
+		installation_model.getInstallations(function(data){
+
+		// overview: pass res.render an array of JSON
+		res.render('installation_templates/edit',{ userinfo   : user, insta:  data });
+		});
+	}
 });
 
 router.get('/create', function(req,res) {

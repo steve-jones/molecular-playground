@@ -20,14 +20,26 @@ router.get('/', function(req, res) {
 	}
 });
 
+router.get('/moleculelist', function(req, res) {
+	var user = req.session.user;
+	if (!validRole(user)) {
+			res.redirect('/login');
+	    	req.flash('invalid_role', "Invalid permissions. Please log in to an account.");
+	    }
+		else {
+	res.render('molecule_templates/molecule_list', { userinfo   : user} );
+	}
+});
+
 router.get('/createmolecule', function(req, res) {
     var user = req.session.user;
 	if (!validRole(user)) {
 		res.redirect('/#login');
-	}
-	else if (!isGlobalAdmin(user)) {
+	
+	if (!isGlobalAdmin(user)) {
 		req.flash('invalid_role', "Invalid permissions. Please sign in.");
 		res.redirect('/#login');
+	}
 	}
 	else {
 		res.render('molecule_templates/upload', { userinfo   : user});
@@ -141,13 +153,13 @@ router.get('/pendingrequest', function(req, res) {
 		if (!validRole(user) ){
 			res.redirect('/#login');
 	    	req.flash('invalid_role', "Invalid permissions. Please log in to a global admin account.");
-	    }
-		else {
+	    
 			if (!validGlobalAdmin(user)){
-			res.redirect('/#login');
-	    	req.flash('invalid_role', "Invalid permissions. Please log in to a global admin account.");
+				res.redirect('/#login');
+		    	req.flash('invalid_role', "Invalid permissions. Please log in to a global admin account.");
 	    	}
-			/*
+		}
+		else{	/*
 			molDB.getMolecules(function(allMolecules) {
 				for (var i = 0; i < allMolecules.length; i++) {
 					if (allMolecules[i].approval_status == false) {

@@ -6,7 +6,7 @@
 
   <body data-spy="scroll" data-offset="0" data-target="#theMenu"   >
 
-	<% include ./../partials_template/header %>
+	<!-- <% include ./../partials_template/header %> -->
   	<% include ./../partials_template/menu_templates/menu_sub_installation %>
 
 	<!-- ========== HEADER SECTION ========== -->
@@ -27,40 +27,46 @@
         <h1 style="color:black; text-align:left;">EDIT INSTALLATION</h1>
 
 
-
         <!-- bootstrap table begin -->
         <div class="container">
         <h2>Current Installation(s)</h2>
-        <p>(The table schema may be subject to change)</p>
         <table class="table table-hover">
-          <thead>
+
+        <thead>
+          <tr>
+           <th style="text-align:center;">ID</th>
+           <th style="text-align:center;">City</th>
+           <th style="text-align:center;">Country</th>
+           <th style="text-align:center;">School Affliation</th>
+           <th style="text-align:center;">Local Admin ID</th>
+           <th style="text-align:center;">Delegate List</th>
+           <th style="text-align:center;">Online</th>
+           <th style="text-align:center;">Last Data Update</th>
+           <th style="text-align:center;">GPS Location x</th>
+           <th style="text-align:center;">GPS Location y</th>
+
+         </tr>
+        </thead>
+          <% insta.forEach(function(an_installation){ %>
+            <tbody>
             <tr>
-              <th style="text-align:center;">Firstname</th>
-              <th style="text-align:center;">Lastname</th>
-              <th style="text-align:center;">Email</th>
+              <th style="text-align:center;"> <%= an_installation.id %> </th>
+              <th style="text-align:center;"> <%= an_installation.city %> </th>
+              <th style="text-align:center;"> <%= an_installation.country %> </th>
+              <th style="text-align:center;"> <%= an_installation.schoolaffliation %> </th>
+              <th style="text-align:center;"> <%= an_installation.localadminid %> </th>
+              <th style="text-align:center;"> <%= an_installation.delegatelist %> </th>
+              <th style="text-align:center;"> <%= an_installation.online %> </th>
+              <th style="text-align:center;"> <%= an_installation.lastdataupdate %> </th>
+              <th style="text-align:center;"> <%= an_installation.gpslocationx %> </th>
+              <th style="text-align:center;"> <%= an_installation.gpslocationy %> </th>
             </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>John</td>
-              <td>Doe</td>
-              <td>john@example.com</td>
-            </tr>
-            </a>
-            <tr>
-              <td>Mary</td>
-              <td>Moe</td>
-              <td>mary@example.com</td>
-            </tr>
-            <tr>
-              <td>July</td>
-              <td>Dooley</td>
-              <td>july@example.com</td>
-            </tr>
-          </tbody>
+            </tbody>
+          <% }); %>
+
         </table>
-      </div>
-      <!-- bootstrap table END. -->
+        </div>
+        <!-- bootstrap table END. -->
 
 
 
@@ -76,29 +82,11 @@
 
 
 
-  <section id="add" name="add"></section>
-  <div id="f">
-  		<div class="container">
-  			<div class="row">
-  				<h3>Add Installation Form</h3>
-  				<p class="centered"><i class="icon icon-circle"></i><i class="icon icon-circle"></i><i class="icon icon-circle"></i></p>
-
-  				<!-- INTRO INFORMATIO-->
-  				<div class="col-lg-6 col-lg-offset-3">
-  				</div>
-  			</div>
-  		</div><!-- /container -->
-  	</div><!-- /f -->
-
-
-
-
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-	<script src="/js/classie.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/smoothscroll.js"></script>
-	<script src="/js/main.js"></script>
+  <footer>
+    <% include ../partials_template/footer %>
+  </footer>
 </body>
 </html>

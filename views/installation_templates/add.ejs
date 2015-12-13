@@ -16,41 +16,30 @@
 	<!-- ========== HEADER SECTION ========== -->
 	<section id="home" name="home"></section>
 	<div id="headerwrap" style="background:white">
-
 		<div class="container">
+    
 			<div class="row" >
-        <div class="col-xs-3 ">
-          <a href="/installation/add"><span class="glyphicon glyphicon-plus" style="font-size: 17em;"></span></a>
+        <div class="col-xs-4 ">
+          <a href="/installation/create"><span class="glyphicon glyphicon-plus" style="font-size: 12em;"></span></a>
 
         </div>
-        <div class="col-lg-3">
-
-          <p>
-          </p>
+        <div class="col-lg-4">
         </div>
         <h1 style="color:black; text-align:left;">+ NEW INSTALLATION</h1>
 
+        </div> <!--row -->
 
 
         <!-- begin form logic below -->
-        <!-- Top content -->
-        <div class="top-content">
-
-            <div class="inner-bg">
                 <div class="container">
-                  <div class="row">
-                    <div class="col-sm-6 book">
+                    <div class="col-sm-4 book">
                     </div>
+
                       <div class="col-sm-5 form-box">
-                        <div class="form-top">
                           <div class="form-top-left">
-                            <h3></h3>
                               <p>Fill in the form below to get instant access:</p>
                           </div>
-                          <div class="form-top-right">
-                            <i class="fa fa-pencil"></i>
-                          </div>
-                          </div>
+
                           <div class="form-bottom">
                         <form role="form" action="http://localhost:3000/installation/create" method="post" class="registration-form">
                           <div class="form-group">
@@ -86,20 +75,15 @@
 
                             <button type="submit" class="btn">Post</button>
                         </form>
-                      </div>
-                      </div>
-                  </div>
+                      </div><!-- formbottom-->
+                  </div><!-- form box-->
 
-                </div>
-            </div>
-
-        </div>
+                </div><!-- contanier-->
 
 
         <!-- end form logic here.-->
 
 
-			</div>
 		</div><!-- /container -->
 	</div><!-- /headerwrap -->
 
@@ -111,14 +95,15 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-	<script src="/js/classie.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/smoothscroll.js"></script>
-	<script src="/js/main.js"></script>
   <script src="/js/jquery-1.11.1.min.js"></script>
   <script src="/bootstrap/js/bootstrap.min.js"></script>
   <script src="/js/jquery.backstretch.min.js"></script>
   <script src="/js/retina-1.1.0.min.js"></script>
   <script src="/js/scripts.js"></script>
+
+      <footer>
+    <% include ../partials_template/footer %>
+  </footer>
+
 </body>
 </html>

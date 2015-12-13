@@ -1,18 +1,17 @@
-<!--  turn this whole thign off for production
-<nav class="navbar navbar-default" role="navigation">
--->
 
 	<div class="container-fluid">
-		<div class="navbar-header">
-				<br><a href="/"><img src="/img/logoblack.png"></a>
-		</div>
+			<div class="container" style="text-align:center;-webkit-margin-after: 0em;">
+
+				<a href="/">
+					<h1>Molecular Playground Admin Portal</h1>
+					</a>
+			</div>
 	</div>
 
-	<div class="container-fluid">
-		<div class="navbar-header">
 
-			<a class="navbar-brand" href="/sso">
-			Single-Sign-On
+		<nav class="menu" id="menu2">
+			<a class="navbar-header" href="/sso" style="line-height: 1.5;">
+			<br>Single-Sign-On
 			<br>User:
 						<% if (userinfo) {%>
 						<%= '#'+JSON.stringify(userinfo.id) + '-' +JSON.stringify(userinfo.firstname) %>
@@ -20,17 +19,4 @@
 						<%= 'undefined'%>
 						<%} %>
 						</a>
-		</div>
-
-			<div class="container">
-
-				<div class="row">
-					<h1>Molecular Playground Admin Portal</h1>
-				</div>
-			</div>
-	</div>
-
-
-<!--
-</nav>
--->
+		</nav>
