@@ -22,56 +22,19 @@
           <a href="/user/add"><span class="glyphicon glyphicon-plus" style="font-size: 8em;"></span> <br><h2>add users</h2></a>
         </div>
         <div class="col-lg-3">
-          <a href="#manage"><span class="glyphicon glyphicon-user" style="font-size: 8em;"></span> <br><h2>manage users</h2></a>
+          <a href="user/manage"><span class="glyphicon glyphicon-user" style="font-size: 8em;"></span> <br><h2>manage users</h2></a>
         </div>
 
       </div>
     </div><!-- /container -->
   </div><!-- /headerwrap -->
 
-<section id="manage" name="manage"></section>
-<div id="headerwrap">
-    <div class="container">
-        <h2>Current User(s)</h2>
-        <p>(The table schema may be subject to change)</p>
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th style="text-align:center;">Firstname</th>
-              <th style="text-align:center;">Lastname</th>
-              <th style="text-align:center;">Email</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>John</td>
-              <td>Doe</td>
-              <td>john@example.com</td>
-            </tr>
-            </a>
-            <tr>
-              <td>Mary</td>
-              <td>Moe</td>
-              <td>mary@example.com</td>
-            </tr>
-            <tr>
-              <td>July</td>
-              <td>Dooley</td>
-              <td>july@example.com</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-      <!-- bootstrap table END. -->
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-	<script src="/js/classie.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/smoothscroll.js"></script>
-	<script src="/js/main.js"></script>
+    <footer>
+    <% include ../partials_template/footer %>
+  </footer>
 </body>
 </html>

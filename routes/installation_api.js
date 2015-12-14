@@ -1,113 +1,156 @@
+// object which contains DB access functions
 var express = require('express');
 var router = express.Router();
 
-// object which contains DB access functions
-var model = require('../database/installationAPI');
+var installation_model = require('../database/installationAPI');
+var user_model = require('../database/usersAPI');
+var UserRole = require('../model/UserRole');
 
+var INSTALLATION_ROOT = '/installation'
 
-
-// overview: this is the landing page for Manage Installations
+//////////
+// Installation views rendering routes
+//////////
 router.get('/', function(req, res){
 	var user = req.session.user;
-	if (user=== undefined) {
-      	req.flash('auth', 'Your session expired, please login to your account');
-		res.redirect('/#login');
+	if (!user) res.redirect('/login');
+	else if (!isGlobalAdmin(user)) {
+		req.flash('invalid_role', "Invalid Role");
+		res.redirect('/');
+		console.log('invalid role: ' + user.role);
 	}
-	else
-	res.render('installation_templates/installation_page',{ userinfo   : user});
+	else res.render('installation_templates/installation_page', {
+		userinfo: user,
+		create_installation_status: req.flash('create_installation_status')
+	});
 });
 
+router.get('/edit', function(req, res){
+	var user = req.session.user;
+	if (!user) res.redirect('/login');
+	else if (!isGlobalAdmin(user)) {
+		req.flash('invalid_role', "Invalid Role");
+		res.redirect('/');
+		console.log('invalid role');
+	}
+	else {
+		installation_model.getInstallations(function(data){
 
+		// overview: pass res.render an array of JSON
+		res.render('installation_templates/edit',{ userinfo   : user, insta:  data });
+		});
+	}
+});
 
-
-// TODOs will be completed once DB API is ready.
-
-// note: 12/2. changed router method to GET.
-// the route will get the create installation view which will have a form, etc.
-// with the submit button on this form, a post request will be performed..
 router.get('/create', function(req,res) {
 	var user = req.session.user;
-	// testing route rendering //
-
-	// note: the code below is commented out only for testing the views,
-	// please uncomment whenever needed -- phil.	
-
-	if (user=== undefined) {
-      	req.flash('auth', 'Your session expired, please login to your account');
-		res.redirect('/#login');
+	if (!user) res.redirect('/login');
+	else if (!isGlobalAdmin(user)) {
+		req.flash('invalid_role', "Invalid Role");
+		res.redirect('/');
 	}
-	else
-	res.render('installation_templates/add',{ userinfo   : user});
-	//
-	// if (user===undefined) res.redirect('/login');
-	// else {
-	// 	// TODO: create installation row in DB.
-	// }
+	else {
+		res.render('installation_templates/add', {userinfo: user});
+	}
 });
 
+//////////
+// Backend API routes
+//////////
+router.post('/create', function(req,res) {
+	var city, country, school_affiliation, local_admin_id, GPS_location_x, GPS_location_y;
+	city = req.body.form_city;
+	country = req.body.form_country;
+	school_affiliation = req.body.form_school_affiliation;
+	username = req.body.form_username;
+	location_x = req.body.form_GPS_location_x;
+	location_y = req.body.form_GPS_location_y;
 
-// new route handler for post request (form logic for new installation for..)
-router.post('/installation_add', function(req,res) {
-	var user = req.session.user;
-
-	var form = req.body; // object of html form
-	console.log("this is our form: " +JSON.stringify(form))
-
-	model.addInstallation(form.form_city, form.form_country, form.form_school_affiliation, form.form_username, form.form_GPS_location_x, form.form_GPS_location_y, function(err){
-		console.log(err + " hello");
-			model.getInstallations(function(data){console.log("data: " + JSON.stringify(data))})
+	user_model.getUser(username, function(user, role, err) {
+		if (err) {
+			req.flash('create_installation_status', 'Unable to create installation.');
+			res.redirect(INSTALLATION_ROOT);
+		}
+		else {
+			installation_model.addInstallation(city, country, school_affiliation, user.id, location_x, location_y, function(err) {
+				if (err) req.flash('create_installation_status', 'Unable to create installation.');
+				else req.flash('create_installation_status', 'Installation created.');
+				res.redirect(INSTALLATION_ROOT);
+			});
+		}
 	});
-	if (user=== undefined) {
-      	req.flash('auth', 'Your session expired, please login to your account');
-		res.redirect('/#login');
-	}
-	else if (!req.params.id) res.sendStatus(400);
-	else {
-		// TODO: update local admin column by row ID in DB.
-	}
 });
 
-
-// overview: this is the Edit Installation view.
-router.get('/edit', function(req, res){
-	if (user=== undefined) {
-      	req.flash('auth', 'Your session expired, please login to your account');
-		res.redirect('/#login');
-	}
-	else
-	res.render('installation_templates/edit',{ userinfo   : user});
-});
-
-
-router.post('/remove/:id', function(req,res) {
+router.post('/remove/:installationId', function(req,res) {
 	var user = req.session.user;
-		if (user=== undefined) {
-      	req.flash('auth', 'Your session expired, please login to your account');
-		res.redirect('/#login');
+	if (!user) res.redirect('/login');
+	else if (!isGlobalAdmin(user)) {
+		req.flash('invalid_role', "Invalid Role");
+		res.redirect('/');
 	}
-	else if (!req.params.id) res.sendStatus(400);
+	else if (!req.params.installationId) res.sendStatus(400);
 	else {
-		// TODO: delete installation row from DB.
+		installation_model.deleteInstallation(req.params.installationId);
+		res.redirect(INSTALLATION_ROOT);
 	}
 });
 
-router.post('/update_local_admin/:id', function(req,res) {
+router.post('/update_local_admin', function(req,res) {
 	var user = req.session.user;
-		if (user=== undefined) {
-      	req.flash('auth', 'Your session expired, please login to your account');
-		res.redirect('/#login');
+	if (!user) res.redirect('/login');
+	else if (!isGlobalAdmin(user)) {
+		req.flash('invalid_role', "Invalid Role");
+		res.redirect('/');
 	}
-	else if (!req.params.id) res.sendStatus(400);
 	else {
-		// TODO: update local admin column by row ID in DB.
+		var installation_id, new_local_admin_id;
+		// TODO: figure out the data structure received from front end
+
+		installation_model.updateLocalAdmin(installation_id, new_local_admin_id);
+		res.redirect(INSTALLATION_ROOT);
+	}
+});
+
+router.post('/add_delegate/:installationId', function(req,res) {
+	var user = req.session.user;
+	if (!user) res.redirect('/login');
+	else if (!isLocalAdmin(user)) {
+		req.flash('invalid_role', "Invalid Role");
+		res.redirect('/');
+	}
+	else if (!req.params.userid) res.sendStatus(400);
+	else {
+		var installation_id, firstName, lastName, username, password, email, role;
+		installation_model.addLocalDelegate(installation_id, firstName, lastName, username, password, email, role);
+		res.redirect(INSTALLATION_ROOT);
+	}
+});
+
+router.post('/remove_delegate', function(req,res) {
+	var user = req.session.user;
+	if (!user) res.redirect('/login');
+	else if (!isLocalAdmin(user)) {
+		req.flash('invalid_role', "Invalid Role");
+		res.redirect('/');
+	}
+	else if (!req.params.userid) res.sendStatus(400);
+	else {
+		var installation_id, delegate_id, delegate_username;
+
+		installation_model.removeLocalDelegate(installation_id, delegate_id, delegate_username);
+		res.redirect(INSTALLATION_ROOT);
 	}
 });
 
 /////////
 // Utility Functions
 /////////
-function check(user) {
-	return user && user.role === 'global_admin';
+function isGlobalAdmin(user) {
+	return user.role === UserRole.prototype.GLOBAL_ADMIN;
+}
+
+function isLocalAdmin(user) {
+	return user.role <= UserRole.prototype.LOCAL_ADMIN;
 }
 
 module.exports = router;

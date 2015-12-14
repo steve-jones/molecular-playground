@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  		<% include ./../partials_template/head %>
+  </head>
+
+  <body data-spy="scroll" data-offset="0" data-target="#theMenu"   >
+
+	<% include ./../partials_template/header %>
+  	<% include ./../partials_template/menu_templates/menu_sub_user %>
+
+	<!-- ========== HEADER SECTION ========== -->
+	<section id="home" name="home"></section>
+<div id="headerwrap" style="background:white">
+
+    <div class="container">
+      <div class="row" >
+        <h1 style="color:black">User List</h1>
+
+        <div class="container">
+        <p>(The table schema may be subject to change)</p>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th style="text-align:center;">Firstname</th>
+              <th style="text-align:center;">Lastname</th>
+              <th style="text-align:center;">Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>John</td>
+              <td>Doe</td>
+              <td>john@example.com</td>
+            </tr>
+            </a>
+            <tr>
+              <td>Mary</td>
+              <td>Moe</td>
+              <td>mary@example.com</td>
+            </tr>
+            <tr>
+              <td>July</td>
+              <td>Dooley</td>
+              <td>july@example.com</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      </div>
+    </div><!-- /container -->
+  </div><!-- /headerwrap -->
+
+    
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <footer>
+    <% include ../partials_template/footer %>
+  </footer>
+</body>
+</html>
