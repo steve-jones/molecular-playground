@@ -72,7 +72,7 @@ router.post('/create', function(req,res) {
 			res.redirect(INSTALLATION_ROOT);
 		}
 		else {
-			installation_model.addInstallation(city, country, school_affiliation, user.id, location_x, location_y, function(err) {
+			installation_model.addInstallation(city, country, school_affiliation, user.id, location_x, location_y, function(data, err) {
 				if (err) req.flash('create_installation_status', 'Unable to create installation.');
 				else req.flash('create_installation_status', 'Installation created.');
 				res.redirect(INSTALLATION_ROOT);
