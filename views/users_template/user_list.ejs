@@ -27,24 +27,13 @@
               <th style="text-align:center;">Email</th>
             </tr>
           </thead>
+          <% users.forEach(function(a_user){ %>
           <tbody>
-            <tr>
-              <td>John</td>
-              <td>Doe</td>
-              <td>john@example.com</td>
-            </tr>
-            </a>
-            <tr>
-              <td>Mary</td>
-              <td>Moe</td>
-              <td>mary@example.com</td>
-            </tr>
-            <tr>
-              <td>July</td>
-              <td>Dooley</td>
-              <td>july@example.com</td>
-            </tr>
+            <th style="text-align:center;"> <% a_user.firstName %> </th>
+            <th style="text-align:center;"> <% a_user.lastName %> </th>
+            <th style="text-align:center;"> <% a_user.email %> </th>
           </tbody>
+          <% }); %>
         </table>
       </div>
 
@@ -52,7 +41,7 @@
     </div><!-- /container -->
   </div><!-- /headerwrap -->
 
-    
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

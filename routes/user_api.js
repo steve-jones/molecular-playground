@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+var db = require('../database/usersAPI');
 var m = require('../model/user_functions');
 
 //TODO: update a few of these 'render' calls when more views are added.
@@ -22,8 +22,10 @@ router.get('/manage', function(req, res) {
       	req.flash('auth', 'Your session expired, please login to your account');
 		res.redirect('/#login');
 	}
-	else
-	res.render('users_template/user_list', { userinfo   : user});
+	else {
+		// will need to call a db function here that returns the 'data' array of users
+		res.render('users_template/user_list', { userinfo : user});
+	}
 });
 
 router.get('/add', function(req, res) {
@@ -38,7 +40,6 @@ router.get('/add', function(req, res) {
 		res.redirect('/#login');
 	}
 	else {
-		// render add view. TODO: update this line when the view is implemented
 		res.render('users_template/add_user', { userinfo   : user});
 	}
 });
@@ -69,7 +70,9 @@ router.post('/add', function(req,res) {
 					if(err){
 						console.log(err.getDescription);
 					}
-					else{}
+					else{
+						console.log(user);
+					}
 				});
 		}
 });
