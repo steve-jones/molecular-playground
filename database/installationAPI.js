@@ -16,8 +16,8 @@ module.exports = {
 		var day = date.getDate();
 		parameters = [city, country, school_affiliation, local_admin_id, '{}', true, day,
 		GPS_location_x, GPS_location_y];
-		dbReader.executeFunction('add_installation', parameters, function(err){
-			callback(err);
+		dbReader.executeFunction('add_installation', parameters, function(data,err){
+			callback(data, err);
 		});
 
 	},
@@ -65,11 +65,11 @@ module.exports = {
 					callback(allDelegates, null);
 				});
 			}
-		});		
+		});
 	},
 
 	addLocalDelegate : function(installation_id, firstName, lastName, username, password, email, role, callback){
-		
+
 		dbFunctions.installationExists(installation_id, function(installationExists) {
 			if (installationExists === 'false') {
 				var error = new DBError(8);
@@ -92,7 +92,7 @@ module.exports = {
 					}
 				});
 			}
-		});		
+		});
 	},
 
 	removeLocalDelegate : function(installation_id, delegate_id, delegate_username, callback){
@@ -127,7 +127,7 @@ module.exports = {
 					});
 				});
 			}
-		});		
+		});
 	}
 
 }
