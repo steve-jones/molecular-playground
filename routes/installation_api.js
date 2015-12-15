@@ -14,30 +14,34 @@ var INSTALLATION_ROOT = '/installation'
 router.get('/', function(req, res){
 	var user = req.session.user;
 	if (!user) res.redirect('/login');
-	else if (!isGlobalAdmin(user)) {
-		req.flash('invalid_role', "Invalid Role");
+	else if (!isLocalAdmin(user)) {
 		res.redirect('/');
 		console.log('invalid role: ' + user.role);
 	}
 	else res.render('installation_templates/installation_page', {
 		userinfo: user,
-		create_installation_status: req.flash('create_installation_status')
+		installation_flash_message: req.flash('installation_flash_message')
 	});
 });
 
 router.get('/edit', function(req, res){
 	var user = req.session.user;
+	console.log(user);
 	if (!user) res.redirect('/login');
-	else if (!isGlobalAdmin(user)) {
+	else if (!isLocalAdmin(user)) {
 		req.flash('invalid_role', "Invalid Role");
 		res.redirect('/');
-		console.log('invalid role');
 	}
 	else {
 		installation_model.getInstallations(function(data){
-
-		// overview: pass res.render an array of JSON
-		res.render('installation_templates/edit',{ userinfo   : user, insta:  data });
+			var insta, localAdminId;
+			localAdminId = user.id;
+			if (isGlobalAdmin(user)) insta = data;
+			else insta = getInstallationByAdminId(localAdminId, data);
+			// overview: pass res.render an array of JSON
+			res.render('installation_templates/edit', {
+				userinfo: user, insta: insta
+			});
 		});
 	}
 });
@@ -46,8 +50,8 @@ router.get('/create', function(req,res) {
 	var user = req.session.user;
 	if (!user) res.redirect('/login');
 	else if (!isGlobalAdmin(user)) {
-		req.flash('invalid_role', "Invalid Role");
-		res.redirect('/');
+		req.flash('installation_flash_message', "Invalid Role");
+		res.redirect(INSTALLATION_ROOT);
 	}
 	else {
 		res.render('installation_templates/add', {userinfo: user});
@@ -68,13 +72,13 @@ router.post('/create', function(req,res) {
 
 	user_model.getUser(username, function(user, role, err) {
 		if (err) {
-			req.flash('create_installation_status', 'Unable to create installation.');
+			req.flash('installation_flash_message', 'Unable to create installation.');
 			res.redirect(INSTALLATION_ROOT);
 		}
 		else {
 			installation_model.addInstallation(city, country, school_affiliation, user.id, location_x, location_y, function(data, err) {
-				if (err) req.flash('create_installation_status', 'Unable to create installation.');
-				else req.flash('create_installation_status', 'Installation created.');
+				if (err) req.flash('installation_flash_message', 'Unable to create installation.');
+				else req.flash('installation_flash_message', 'Installation created.');
 				res.redirect(INSTALLATION_ROOT);
 			});
 		}
@@ -151,6 +155,15 @@ function isGlobalAdmin(user) {
 
 function isLocalAdmin(user) {
 	return user.role <= UserRole.prototype.LOCAL_ADMIN;
+}
+
+function getInstallationByAdminId(adminId, installations) {
+	var result = [];
+	for (var i = 0; i < installations.length; i++) {
+		var cur = installations[i];
+		if (cur.localadminid === adminId) result.push(cur);
+	}
+	return result;
 }
 
 module.exports = router;
