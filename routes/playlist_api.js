@@ -24,16 +24,40 @@ router.get('/list', function(req, res) {
 });
 
 
-router.post('/createplaylist', function(req,res) {
+router.get('/add', function(req,res) {
 	var user = req.session.user;
-	  	if (user === undefined || user.role !=='global_admin') {
+	  	if (user === undefined) {
 		    	req.flash('auth', 'Not logged in!');
 	    		res.redirect('/login');
 		}
-		else{}
+		else{
+
+	res.render('playlist_templates/add', { userinfo   : user});
+		}
+});
+router.post('/add', function(req,res) {
+	var user = req.session.user;
+	  	if (user === undefined) {
+		    	req.flash('auth', 'Not logged in!');
+	    		res.redirect('/login');
+		}
+		else{
+		//add
+		}
 });
 
+router.get('/edit', function(req,res) {
+	var user = req.session.user;
+	  	if (user === undefined) {
+		    	req.flash('auth', 'Not logged in!');
+	    		res.redirect('/login');
+		}
+		else{
 
+	res.render('playlist_templates/edit', { userinfo   : user, 
+					playlists: [{pname:'mol1'},{pname:'mo2'},{pname:'mo3'}]});
+		}
+});
 
 
 module.exports = router;

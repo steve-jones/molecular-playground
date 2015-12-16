@@ -39,17 +39,25 @@ router.get('/add', function(req, res) {
 	}
 	else {
 		// render add view. TODO: update this line when the view is implemented
-		res.render('users_template/add_user', { userinfo   : user});
+		res.render('users_template/add_user', { userinfo   : user,message: req.flash('signup')});
 	}
 });
 
 router.post('/add', function(req,res) {
 	var user = req.session.user;
-	  if (user === undefined || user.role !=='global_admin') {
-			req.flash('auth', 'Not logged in!');
-	  	res.redirect('/login');
+	var role = 4;
+	  	if (user === undefined) {
+		      	req.flash('auth', 'not logined');
+				res.redirect('/#login');
 		}
-		else {
+		else if (user.role ==1){ // global admin creates local
+	  		var role = 2;
+		}
+		else if (user.role ==2){ //local create delegates
+	  		var role = 3;
+		}
+
+
 			// call db function for create user
 			// Parameters: (String) firstName, (String) lastName, (String) username,
 			// (String) password, (String) email, (Number) role
@@ -60,22 +68,28 @@ router.post('/add', function(req,res) {
 			if(password.length < 6) {
 				console.log("Password isn't long enough.");
 				//res.flash <-- do this, similar to above
-				res.redirect('/login');
+		      	req.flash('signup', 'Password isn\'t long enough.');
+				res.redirect('back');
 			}
 			var email = req.body.email;
-			var role = req.body.role;
+			//var role = req.body.role;
+				console.log("before")
 				db.createUser(firstName, lastName, username, password, email, role, function(err){
+					console.log("heey")
 					if(err){
 						console.log(err.getDescription);
 					}
-					else{}
+					else{
+						console.log(err);
+		      			req.flash('signup', 'create success');
+						res.redirect('/back');
+					}
 				});
-		}
 });
 
 router.get('/edit/:id', function(req, res) {
 	var user = req.session.user;
-	if (user === undefined || user.role !=='global_admin') {
+	if (user === undefined || user.role !==1) {
 		req.flash('auth', 'Not logged in!');
 		res.redirect('/login');
 	}

@@ -49,6 +49,9 @@
 <div id="f">
 		<div class="container">
 			<div class="row">
+					<% if (message && message.length>0) { %>
+			   			<div class="alert alert-danger"><%= message %></div>
+					<% } %>
 				<h1>Signup as Molecule Author</h1>
 				<br>
   				<% include ./partials_template/signup_user %>
