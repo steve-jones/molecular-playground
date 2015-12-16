@@ -13,27 +13,24 @@
     <div id="headerwrap" style="background:white">
       <div class="container">
         <div class="row">
-          <h1 style="color:black">Add User</h1>
+          <h1 style="color:black">Add User - Local Admin/Delegates</h1>
+
+          <% if (message && message.length>0) { %>
+              <div class="alert alert-danger"><%= message %></div>
+          <% } %>
+          
         </div>
-        <div class="col-lg-3"></div>
-        <div class="col-lg-6">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
           <!-- form for entering user info -->
           <form class="" action="/user/add" method="post">
-            <p>
+            
               <input type="text" name="firstName" value="" placeholder="First Name">
-            </p>
-            <p>
               <input type="text" name="lastName" value="" placeholder="Last Name">
-            </p>
-            <p>
               <input type="text" name="username" value="" placeholder="username">
-            </p>
-            <p>
               <input type="text" name="email" value="" placeholder="email">
-            </p>
-            <p>
               <input type="password" name="password" value="" placeholder="password">
-            </p>
+            
             <p class="submit"><input type="submit" name="commit" value="Submit"></p>
           </form>
         </div>
