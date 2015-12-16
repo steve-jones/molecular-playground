@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  		<% include ./../partials_template/head %>
+      <link rel="stylesheet" href="/css/form-elements.css">
+      <link rel="stylesheet" href="/css/style.css">
+
+
+  </head>
+
+  <body data-spy="scroll" data-offset="0" data-target="#theMenu"   >
+
+	<% include ./../partials_template/header %>
+  	<% include ./../partials_template/menu_templates/menu_sub_playlist %>
+
+	<!-- ========== HEADER SECTION ========== -->
+	<section id="home" name="home"></section>
+	<div id="headerwrap" style="background:white">
+		<div class="container">
+
+			<div class="row" >
+        <div class="col-xs-4 ">
+          <a href="/playlist/create"><span class="glyphicon glyphicon-plus" style="font-size: 12em;"></span></a>
+
+        </div>
+        <div class="col-lg-4">
+        </div>
+        <h1 style="color:black; text-align:left;">+ NEW playlist</h1>
+
+        </div> <!--row -->
+
+
+
+		</div><!-- /container -->
+	</div><!-- /headerwrap -->
+
+
+
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  <script src="/js/jquery-1.11.1.min.js"></script>
+  <script src="/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/js/jquery.backstretch.min.js"></script>
+  <script src="/js/retina-1.1.0.min.js"></script>
+  <script src="/js/scripts.js"></script>
+
+      <footer>
+    <% include ../partials_template/footer %>
+  </footer>
+
+</body>
+</html>

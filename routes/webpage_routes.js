@@ -92,7 +92,7 @@ router.post('/signup', function(req, res) {
         res.redirect('back');
       }
       var email = req.body.email;
-      //var role = req.body.role;
+      var role = req.body.role;
         console.log("before")
         db.createUser(firstName, lastName, username, password, email, role, function(err){
           console.log("heey")
