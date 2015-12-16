@@ -6,12 +6,21 @@ var db = require('../database/usersAPI.js');
 // Homepage
 router.get('/', function(req, res) {
 	var user = req.session.user;
-	  	if (user === undefined) {
+	console.log(user);
+	  	if (user === undefined || user ===null) {
       			res.render('home_page', { userinfo   : user,message: req.flash('auth')});
 		}
 		else{
+			if (user.role ===0) {
       			res.render('control_panel', { userinfo   : user});
-		}
+			}
+			if (user.role ===3) {
+      			res.render('author_panel', { userinfo   : user});
+		  }
+      else{//others not implmeneted
+            res.render('control_panel', { userinfo   : user});
+      }
+    }
 });
 
 // route to render the google map
@@ -23,7 +32,7 @@ router.get('/map', function(req, res) {
 //single sign on for testing
 //in the future use google/aws Oauth2
 router.get('/sso', function(req, res) {
-	var user = 'global_admin';
+
   var data ={ id: 1,
   firstname: 'super user',
   lastname: 'person',
@@ -31,11 +40,11 @@ router.get('/sso', function(req, res) {
   password: '12345',
   email: 'superuser@umass.edu',
   role: 0,
-  role_description: "Global Admin"}
+  role_description: 'Global Admin'}
 
   req.session.user = data;
 
-      	res.redirect('/');
+  res.render('control_panel', { userinfo   : data});
 });
 
 //login
@@ -58,9 +67,6 @@ router.post('/login', function (req, res) {
       console.log(data)
     	req.session.user = data;
   	  req.session.user.role_description= userRole.getDescription();
-    	res.render('control_panel', {userinfo:data});
-
-
         res.redirect('/');
     }
   });

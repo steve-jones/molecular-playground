@@ -45,16 +45,16 @@ router.get('/add', function(req, res) {
 
 router.post('/add', function(req,res) {
 	var user = req.session.user;
-	var role = 4;
+	var role = 3;
 	  	if (user === undefined) {
 		      	req.flash('auth', 'not logined');
 				res.redirect('/#login');
 		}
-		else if (user.role ==1){ // global admin creates local
-	  		var role = 2;
+		else if (user.role ==0){ // global admin creates local
+	  		var role = 1;
 		}
-		else if (user.role ==2){ //local create delegates
-	  		var role = 3;
+		else if (user.role ==1){ //local create delegates
+	  		var role = 2;
 		}
 
 
