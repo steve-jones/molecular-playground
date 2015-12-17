@@ -82,7 +82,7 @@ router.post('/add', function(req,res) {
 					else{
 						console.log(err);
 		      			req.flash('signup', 'create success');
-						res.redirect('/back');
+						res.redirect('back');
 					}
 				});
 });

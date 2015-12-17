@@ -94,8 +94,8 @@ router.post('/signup', function(req, res) {
       if(password.length < 6) {
         console.log("Password isn't long enough.");
         //res.flash <-- do this, similar to above
-            req.flash('signup', 'Password isn\'t long enough.');
-        res.redirect('back');
+            req.flash('auth', 'Password isn\'t long enough.');
+        res.redirect('/#signup');
       }
       var email = req.body.email;
       var role = req.body.role;
@@ -107,8 +107,8 @@ router.post('/signup', function(req, res) {
           }
           else{
             console.log(err);
-                req.flash('signup', 'create success');
-            res.redirect('/back');
+                req.flash('auth', 'create success');
+            res.redirect('/#login');
           }
         });
 });
