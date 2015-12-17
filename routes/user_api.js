@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var db = require('../database/usersAPI');
+var USER_ROOT = '/user';
 
 //TODO: update a few of these 'render' calls when more views are added.
 // especially for add and edit
@@ -12,8 +13,12 @@ router.get('/', function(req, res) {
       	req.flash('auth', 'Your session expired, please login to your account');
 		res.redirect('/#login');
 	}
-	else
-	res.render('users_template/user_page', { userinfo   : user});
+	else {
+		res.render('users_template/user_page', {
+			userinfo   : user,
+			user_flash_message: req.flash('user_flash_message')
+		});
+	}
 });
 
 router.get('/manage', function(req, res) {
@@ -44,47 +49,41 @@ router.get('/add', function(req, res) {
 });
 
 router.post('/add', function(req,res) {
+	console.log(req.body);
 	var user = req.session.user;
 	var role = 4;
-	  	if (user === undefined) {
-		      	req.flash('auth', 'not logined');
-				res.redirect('/#login');
-		}
-		else if (user.role ==1){ // global admin creates local
-	  		var role = 2;
-		}
-		else if (user.role ==2){ //local create delegates
-	  		var role = 3;
-		}
+  	if (user === undefined) {
+      	req.flash('auth', 'not logined');
+		res.redirect('/#login');
+	}
+	else if (user.role == 0) role = 1;
+	else if (user.role == 1) role = 2;
 
 
-			// call db function for create user
-			// Parameters: (String) firstName, (String) lastName, (String) username,
-			// (String) password, (String) email, (Number) role
-			var firstName = req.body.firstName;
-			var lastName = req.body.lastName;
-			var username = req.body.username;
-			var password = req.body.password;
-			if(password.length < 6) {
-				console.log("Password isn't long enough.");
-				//res.flash <-- do this, similar to above
-		      	req.flash('signup', 'Password isn\'t long enough.');
-				res.redirect('back');
-			}
-			var email = req.body.email;
-			//var role = req.body.role;
-				console.log("before")
-				db.createUser(firstName, lastName, username, password, email, role, function(err){
-					console.log("heey")
-					if(err){
-						console.log(err.getDescription);
-					}
-					else{
-						console.log(err);
-		      			req.flash('signup', 'create success');
-						res.redirect('/back');
-					}
-				});
+	// call db function for create user
+	// Parameters: (String) firstName, (String) lastName, (String) username,
+	// (String) password, (String) email, (Number) role
+	var firstName = req.body.firstName;
+	var lastName = req.body.lastName;
+	var username = req.body.username;
+	var password = req.body.password;
+	if(password.length < 6) {
+		console.log("Password isn't long enough.");
+		//res.flash <-- do this, similar to above
+      	req.flash('signup', 'Password isn\'t long enough.');
+		res.redirect('back');
+	}
+	var email = req.body.email;
+	db.createUser(firstName, lastName, username, password, email, role, function(err) {
+		if(err) {
+			console.log(err);
+			req.flash('user_flash_message', 'Unable to create user');
+		}
+		else {
+  			req.flash('user_flash_message', 'User created');
+		}
+		res.redirect(USER_ROOT);
+	});
 });
 
 router.get('/edit/:id', function(req, res) {
