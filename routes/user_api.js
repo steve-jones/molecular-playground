@@ -51,6 +51,7 @@ router.get('/add', function(req, res) {
 router.post('/add', function(req,res) {
 	console.log(req.body);
 	var user = req.session.user;
+<<<<<<< HEAD
 	var role = 4;
   	if (user === undefined) {
       	req.flash('auth', 'not logined');
@@ -84,6 +85,48 @@ router.post('/add', function(req,res) {
 		}
 		res.redirect(USER_ROOT);
 	});
+=======
+	var role = 3;
+	  	if (user === undefined) {
+		      	req.flash('auth', 'not logined');
+				res.redirect('/#login');
+		}
+		else if (user.role ==0){ // global admin creates local
+	  		var role = 1;
+		}
+		else if (user.role ==1){ //local create delegates
+	  		var role = 2;
+		}
+
+
+			// call db function for create user
+			// Parameters: (String) firstName, (String) lastName, (String) username,
+			// (String) password, (String) email, (Number) role
+			var firstName = req.body.firstName;
+			var lastName = req.body.lastName;
+			var username = req.body.username;
+			var password = req.body.password;
+			if(password.length < 6) {
+				console.log("Password isn't long enough.");
+				//res.flash <-- do this, similar to above
+		      	req.flash('signup', 'Password isn\'t long enough.');
+				res.redirect('back');
+			}
+			var email = req.body.email;
+			//var role = req.body.role;
+				console.log("before")
+				db.createUser(firstName, lastName, username, password, email, role, function(err){
+					console.log("heey")
+					if(err){
+						console.log(err.getDescription);
+					}
+					else{
+						console.log(err);
+		      			req.flash('signup', 'create success');
+						res.redirect('back');
+					}
+				});
+>>>>>>> e6321d0e83de278b24385c7108827f165c664f67
 });
 
 router.get('/edit/:id', function(req, res) {

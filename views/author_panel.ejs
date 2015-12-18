@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  		<% include ./partials_template/head %>
+  </head>
+
+  <body data-spy="scroll" data-offset="0" data-target="#theMenu"   >
+
+	<% include ./partials_template/header %>
+  	<% include ./partials_template/menu_templates/menu_author %>
+
+
+	<!-- ========== HEADER SECTION ========== -->
+	<section id="home" name="home"></section>
+
+	<div id="headerwrap" style="background:white">
+
+		<div class="container">
+			<div class="row">
+
+				<h2>
+					<br>Welcome <%= userinfo.uname %> !
+					<br>Your current access is: <%= userinfo.role_description %>
+				</h2>
+
+
+			</div>
+
+		</div><!-- /container -->
+			      
+		<div class="container">
+			      <div class="row" >
+			        <div class="col-lg-3">
+			            <a href="/molecule/add"><span class="glyphicon glyphicon-certificate" style="font-size: 8em;"></span></a> <br><h2>Add Molecules</h2>
+			        </div>
+			   
+			      </div>
+		</div><!-- /container -->
+
+	</div><!-- /headerwrap -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+   	<footer>
+		<% include ./partials_template/footer %>
+	</footer>
+	</body>
+</html>
