@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <% include ./../partials_template/head %>
-      <link rel="stylesheet" type="text/css" href="../css/content-index.css" media="all" />
+      <!-- <link rel="stylesheet" type="text/css" href="../css/content-index.css" media="all" /> -->
 </head>
 
 <body data-spy="scroll" data-offset="0" data-target="#theMenu"   >
@@ -11,58 +11,50 @@
  <% include ./../partials_template/menu_templates/menu_sub_playlist %>
 
  <!-- ========== render partial SECTION ========== -->
- <div id="headerwrap" style="background:white">
+<!-- ========== HEADER SECTION ========== -->
+<section id="home" name="home"></section>
+<div id="headerwrap" style="background:white">
+
   <div class="container">
-
-
     <div class="row" >
       <h1 style="color:black">CURRENT PLAYLIST(S)</h1>
 
+      <div class="container">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th style="text-align:center;">Admin</th>
+            <th style="text-align:center;">Date</th>
+            <th style="text-align:center;">Playlist</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>John</td>
+            <td>2/1/2015</td>
+            <td><!--<a href="content.html">-->playlist_id 1<!--</a>--></td>
+          </tr>
+          </a>
+          <tr>
+            <td>Mary</td>
+            <td>2/1/2015</td>
+            <td><!--<a href="content.html">-->playlist_id 2<!--</a>--></td>
+          </tr>
+          <tr>
+            <td>July</td>
+            <td>2/1/2015</td>
+            <td><!--<a href="content.html">-->playlist_id 3<!--</a>--></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-      <section id="playlist" name="list"></section>
-<table id="ta1" border="1">
-    <thead>
-      <tr>
-        <th id ="num">Number</th>
-        <th id ="nam">Name</th>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td><a href="/playlist/content">playlist_id 1</a></td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td><a href="content.html">playlist_id 2</a></td>
-      </tr>
-       <tr>
-        <td>3</td>
-        <td><a href="content.html">playlist_id 3</a></td>
-      </tr> <tr>
-        <td>4</td>
-        <td><a href="content.html">playlist_id 4</a></td>
-      </tr> <tr>
-        <td>5</td>
-        <td><a href="content.html">playlist_id 5</a></td>
-      </tr>
-       <tr>
-        <td>6</td>
-        <td><a href="content.html">playlist_id 6</a></td>
-      </tr> <tr>
-        <td>7</td>
-        <td><a href="content.html">playlist_id 7</a></td>
-      </tr> <tr>
-        <td>8</td>
-        <td><a href="content.html">playlist_id 8</a></td>
-      </tr> <tr>
-        <td>9</td>
-        <td><a href="content.html">playlist_id 9</a></td>
-      </tr>
-    </thead>
-  </table>
+    </div>
+  </div><!-- /container -->
+</div><!-- /headerwrap -->
 
-</div>
-</div><!-- /container -->
-</div>
+
+
 
 
 

@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <% include ./../partials_template/head %>
-      <link rel="stylesheet" type="text/css" href="../css/content-index.css" media="all" />
 </head>
 
 <body data-spy="scroll" data-offset="0" data-target="#theMenu"   >
@@ -14,13 +13,43 @@
  <div id="headerwrap" style="background:white">
   <div class="container">
 
-    
+
     <div class="row" >
-      <h1 style="color:black">Current Molecule List</h1>
+      <h1 style="color:black">CURRENT MOLECULE(S)</h1>
 
 
       <section id="moleculelist" name="list"></section>
-<table id="ta1" border="1">
+      <div class="container">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th style="text-align:center;">ID</th>
+            <th style="text-align:center;">Play Count</th>
+            <th style="text-align:center;">Molecular Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>0134</td>
+            <td>83</td>
+            <td><!--<a href="content.html">-->ammonia (NH3)<!--</a>--></td>
+          </tr>
+          </a>
+          <tr>
+            <td>0224</td>
+            <td>2</td>
+            <td><!--<a href="content.html">-->
+chlorine (Cl2)<!--</a>--></td>
+          </tr>
+          <tr>
+            <td>0342</td>
+            <td>572</td>
+            <td><!--<a href="content.html">-->oxygen (O2)<!--</a>--></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- <table id="ta1" border="1">
     <thead>
       <tr>
         <th id ="num">Number</th>
@@ -35,7 +64,6 @@
       <tr>
         <td>2</td>
         <td><a href="/molecule/content">Molecule name 2</a></td>
-        <td>1673</td>
       </tr>
        <tr>
         <td>3</td>
@@ -56,7 +84,7 @@
         <td>347</td>
       </tr> <tr>
     </thead>
-  </table>
+  </table> -->
 
 </div>
 </div><!-- /container -->

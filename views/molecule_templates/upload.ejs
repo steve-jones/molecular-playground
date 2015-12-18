@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
   <% include ./../partials_template/head %>
-  <link rel="stylesheet" type="text/css" href="../css/upload.css" media="all" />
+  <!-- <link rel="stylesheet" type="text/css" href="../css/upload.css" media="all" /> -->
+  <link rel="stylesheet" href="/css/form-elements.css">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body data-spy="scroll" data-offset="0" data-target="#theMenu"   >
@@ -15,10 +17,11 @@
 
   <div class="container">
 
-    
+
     <div class="row" >
       <h1 style="color:black">UPLOADING</h1>
-     <img id = "mo1" src="../img/methane.png" align="right">
+
+      <div class="col-xs-4 ">
 
       <div class ="input" >
        <div class="form-group" >
@@ -37,12 +40,19 @@
       </div>
 
       <button type="submit" class="btn" style="float: middle;">Submit</button>
-    
-  </div>
 
+    </div>
+
+
+  </div><!-- end col. -->
+  <div class="col-xs-4 ">
+    <img id = "mo1" src="../img/methane.png" align="right">
+
+
+  </div><!-- end col. -->
 
 </div>
-</div><!-- /container -->
+</div> <!-- /container -->
 
 
 <div class="upload">
