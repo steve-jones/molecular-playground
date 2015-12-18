@@ -51,7 +51,6 @@ router.get('/add', function(req, res) {
 router.post('/add', function(req,res) {
 	console.log(req.body);
 	var user = req.session.user;
-<<<<<<< HEAD
 	var role = 4;
   	if (user === undefined) {
       	req.flash('auth', 'not logined');
@@ -85,7 +84,6 @@ router.post('/add', function(req,res) {
 		}
 		res.redirect(USER_ROOT);
 	});
-=======
 	var role = 3;
 	  	if (user === undefined) {
 		      	req.flash('auth', 'not logined');
@@ -126,7 +124,6 @@ router.post('/add', function(req,res) {
 						res.redirect('back');
 					}
 				});
->>>>>>> e6321d0e83de278b24385c7108827f165c664f67
 });
 
 router.get('/edit/:id', function(req, res) {
